@@ -89,30 +89,30 @@ class SizeList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig
-      .get("/getsizebyseller", {
-        headers: {
-          "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        },
-      })
-      .then((response) => {
-        const rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/deleteSize/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  // async componentDidMount() {
+  //   await axiosConfig
+  //     .get("/getsizebyseller", {
+  //       headers: {
+  //         "auth-adtoken": localStorage.getItem("auth-adtoken"),
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const rowData = response.data.data;
+  //       console.log(rowData);
+  //       this.setState({ rowData });
+  //     });
+  // }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/deleteSize/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

@@ -13,7 +13,7 @@ import "../../../assets/scss/pages/users-profile.scss";
 import CheckBoxesVuexy from "../../../components/@vuexy/checkbox/CheckboxesVuexy";
 import { Check } from "react-feather";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-// import axios from "axios";
+
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
 // import { Route } from "react-router-dom";
@@ -44,7 +44,7 @@ class Profile extends React.Component {
   componentDidMount() {
     // let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewoneadmin/62e125db337df218d9c152f9`)
+      .get(`admin/viewoneadmin/62e125db337df218d9c152f9`)
       .then((response) => {
         //console.log(response.data);
         console.log(response);
@@ -88,7 +88,7 @@ class Profile extends React.Component {
     }
     //  let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editAdmin/62e125db337df218d9c152f9`, data, {
+      .post(`admin/editAdmin/62e125db337df218d9c152f9`, data, {
         headers: {
           "ad-token": localStorage.getItem("ad-token"),
         },

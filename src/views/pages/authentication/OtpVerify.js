@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -10,64 +10,62 @@ import {
   Form,
   Input,
   Button,
-  Label
-} from "reactstrap"
-import { history } from "../../../history"
-import resetImg from "../../../assets/img/pages/reset-password.png"
-import "../../../assets/scss/pages/authentication.scss"
-import axios from "axios";
+  Label,
+} from "reactstrap";
+import { history } from "../../../history";
+import resetImg from "../../../assets/img/pages/reset-password.png";
+import "../../../assets/scss/pages/authentication.scss";
+import axiosConfig from "../../../axiosConfig";
 
 class OtpVerify extends React.Component {
+  state = {
+    otp: "",
+  };
 
-    state = {
-        otp:""
-      };
-    
-    handlechange = (e) => {
-        e.preventDefault();
-        this.setState({ [e.target.name]: e.target.value });
-      };
+  handlechange = (e) => {
+    e.preventDefault();
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-      SubmitOtp = async (e) => {
-        e.preventDefault();
-        const {otp} = this.state;
-        
-        var mobileUrl = '';
-        var idUrl = '';
-        const queryParams = new URLSearchParams(window.location.href);
-        mobileUrl = queryParams.get('mobile');
-        idUrl = queryParams.get('id');
+  SubmitOtp = async (e) => {
+    e.preventDefault();
+    const { otp } = this.state;
 
-        // var isValid = await this.validatePhone(otp)
-        // if(isValid === false){
-        //   this.setState({ isError: true });
-          
-        //    return true;
-        // }
+    var mobileUrl = "";
+    var idUrl = "";
+    const queryParams = new URLSearchParams(window.location.href);
+    mobileUrl = queryParams.get("mobile");
+    idUrl = queryParams.get("id");
 
-        var payload = {
-          mobile : mobileUrl,
-          otp:otp
-        }
-        axios
-        .post("http://15.206.122.110:4000/api//user/verifyotp", payload)
-        .then((response) => { 
-          console.log(response.data);
-          if(response.data.status === 'success'){
-            console.log(response.data.otp);
-            console.log(response.data._id);
-            this.props.history.push(`/pages/reset-password/`+idUrl);
-            // localStorage.setItem("auth", response.data.data?._id);
-            // window.location.replace("/#/");
-          }else{
-              alert(response.data.msg)
-          }
-          
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+    // var isValid = await this.validatePhone(otp)
+    // if(isValid === false){
+    //   this.setState({ isError: true });
+
+    //    return true;
+    // }
+
+    var payload = {
+      mobile: mobileUrl,
+      otp: otp,
     };
+    axiosConfig
+      .post("/api//user/verifyotp", payload)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          console.log(response.data.otp);
+          console.log(response.data._id);
+          this.props.history.push(`/pages/reset-password/` + idUrl);
+          // localStorage.setItem("auth", response.data.data?._id);
+          // window.location.replace("/#/");
+        } else {
+          alert(response.data.msg);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
   render() {
     return (
@@ -101,7 +99,13 @@ class OtpVerify extends React.Component {
                   <CardBody className="pt-1">
                     <Form>
                       <FormGroup className="form-label-group">
-                        <Input type="number" name="otp" onChange={this.handlechange} placeholder="OTP" required />
+                        <Input
+                          type="number"
+                          name="otp"
+                          onChange={this.handlechange}
+                          placeholder="OTP"
+                          required
+                        />
                         <Label>OTP</Label>
                       </FormGroup>
                       <div className="d-flex justify-content-between flex-wrap flex-sm-row flex-column">
@@ -110,9 +114,9 @@ class OtpVerify extends React.Component {
                           className="btn-block"
                           color="primary"
                           outline
-                          onClick={e => {
-                            e.preventDefault()
-                           // this.props.history.push("/pages/login")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // this.props.history.push("/pages/login")
                           }}
                         >
                           Go Back to Login
@@ -135,10 +139,10 @@ class OtpVerify extends React.Component {
           </Card>
         </Col>
       </Row>
-    )
+    );
   }
 }
-export default OtpVerify
+export default OtpVerify;
 
 // import React from "react"
 // import {
@@ -158,13 +162,12 @@ export default OtpVerify
 // import OtpInput from 'react-otp-input';
 // import axios from "axios";
 
-
 // class OtpVerify extends React.Component {
 
 //   state ={
-//      otp: '' 
+//      otp: ''
 //   };
-  
+
 //   handleChange = (otp) => {
 //     console.log(otp)
 //     this.setState({ otp })
@@ -179,7 +182,7 @@ export default OtpVerify
 //   SubmitOtp = async (e) => {
 //     e.preventDefault();
 //     const {otp} = this.state;
-    
+
 //     var mobileUrl = '';
 //     const queryParams = new URLSearchParams(window.location.href);
 //     mobileUrl = queryParams.get('mobile');
@@ -187,7 +190,7 @@ export default OtpVerify
 //     // var isValid = await this.validatePhone(otp)
 //     // if(isValid === false){
 //     //   this.setState({ isError: true });
-      
+
 //     //    return true;
 //     // }
 
@@ -197,7 +200,7 @@ export default OtpVerify
 //     }
 //     axios
 //     .post("http://3.108.185.7/nodejs/api/user/verifyotp", payload)
-//     .then((response) => { 
+//     .then((response) => {
 //       console.log(response.data);
 //       if(response.data.status === 'success'){
 //         console.log(response.data.otp);
@@ -207,13 +210,12 @@ export default OtpVerify
 //       }else{
 //           alert(response.data.msg)
 //       }
-      
+
 //     })
 //     .catch((error) => {
 //       console.log(error.response);
 //     });
 // };
-
 
 //   render() {
 
@@ -245,14 +247,14 @@ export default OtpVerify
 //                     <Form>
 //                     <OtpInput
 //                       //value={this.state.otp}
-//                       //type="number" 
+//                       //type="number"
 //                       onChange={otp => console.log(otp)}
 //                       numInputs={4}
 //                       //onChange={this.handlechange}
-                      
-//                       name="otp" 
-//                       //placeholder="OTP" 
-//                       //required 
+
+//                       name="otp"
+//                       //placeholder="OTP"
+//                       //required
 //                       separator={<span>-</span>}
 //                       inputStyle={{
 //                         width: "3rem",

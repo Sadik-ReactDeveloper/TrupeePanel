@@ -35,13 +35,13 @@ export default class AddFnIndex extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addFnoScript", this.state, {
+      .post("/admin/addFnoScript", this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data.scriptName);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/scripts/fnIndex");
       })

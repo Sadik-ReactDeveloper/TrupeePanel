@@ -1,119 +1,157 @@
-import React from "react"
-import { CardBody, FormGroup, Form, Input, Button, Label, Option,Em,Small } from "reactstrap"
-import { Link } from "react-router-dom"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import { Mail, Lock, Check, Facebook, Twitter, GitHub } from "react-feather"
-import { history } from "../../../../history"
-import googleSvg from "../../../../assets/img/svg/google.svg"
-import { connect } from "react-redux"
-import { submitLoginWithFireBase, loginWithFB, loginWithTwitter, loginWithGoogle, loginWithGithub }
-from "../../../../redux/actions/auth/loginActions"
+import React from "react";
+import {
+  CardBody,
+  FormGroup,
+  Form,
+  Input,
+  Button,
+  Label,
+  Option,
+  Em,
+  Small,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy";
+import { Mail, Lock, Check, Facebook, Twitter, GitHub } from "react-feather";
+import { history } from "../../../../history";
+import googleSvg from "../../../../assets/img/svg/google.svg";
+import { connect } from "react-redux";
+import {
+  submitLoginWithFireBase,
+  loginWithFB,
+  loginWithTwitter,
+  loginWithGoogle,
+  loginWithGithub,
+} from "../../../../redux/actions/auth/loginActions";
+import Select from "../../../forms/form-elements/select/Select";
 
 class SubsFirebase extends React.Component {
   state = {
-            email: "demo@demo.com",
-            password: "demodemo",
-            remember: false
-          }
+    email: "demo@demo.com",
+    password: "demodemo",
+    remember: false,
+  };
 
-  handleLogin = e => {
-    e.preventDefault()
+  handleLogin = (e) => {
+    e.preventDefault();
     this.props.submitLoginWithFireBase(
       this.state.email,
       this.state.password,
       this.state.remember
-    )
-  }
+    );
+  };
 
-  handleRemember = e => {
-    this.setState({remember: e.target.checked})
-  }
+  handleRemember = (e) => {
+    this.setState({ remember: e.target.checked });
+  };
 
   render() {
     return (
       <React.Fragment>
-       <CardBody className="pt-1">
-        <div class="container">
+        <CardBody className="pt-1">
+          <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+              <div class="col-md-6 col-md-offset-3">
                 <FormGroup>
                   <h2>
                     Subscribe for
-                     <Select class="frecuency">
-                         <Option value="0">daily</Option>
-                         <Option value="1" selected>weekly</Option>
-                         <Option value="2">monthly</Option>
-                     </Select>
-                    newsletter 
+                    <Select class="frecuency">
+                      <Option value="0">daily</Option>
+                      <Option value="1" selected>
+                        weekly
+                      </Option>
+                      <Option value="2">monthly</Option>
+                    </Select>
+                    newsletter
                   </h2>
                   <h1 class="free">For Free</h1>
-                 </FormGroup>
-                 <div class="well">
-                     <Form action="#">
-                      <div class="input-group">
-                         <Input class="btn btn-lg" name="email" id="email" type="email" placeholder="Your Email" required/>
-                         <Button class="btn btn-info btn-lg" type="submit">Submit</Button>
-                      </div>
-                     </Form>
-                 </div>
-                 <Small class="promise"><Em>We won't send spam.</Em></Small>
+                </FormGroup>
+                <div class="well">
+                  <Form action="#">
+                    <div class="input-group">
+                      <Input
+                        class="btn btn-lg"
+                        name="email"
+                        id="email"
+                        type="email"
+                        placeholder="Your Email"
+                        required
+                      />
+                      <Button class="btn btn-info btn-lg" type="submit">
+                        Submit
+                      </Button>
+                    </div>
+                  </Form>
                 </div>
+                <Small class="promise">
+                  <Em>We won't send spam.</Em>
+                </Small>
+              </div>
             </div>
-        </div>
+          </div>
         </CardBody>
-        
 
         <div className="auth-footer">
           <div className="divider">
             <div className="divider-text">OR</div>
           </div>
           <div className="footer-btn">
-            <Button.Ripple  className="btn-facebook"
-                            color=""
-                            onClick={() => {this.props.loginWithFB()}}>
+            <Button.Ripple
+              className="btn-facebook"
+              color=""
+              onClick={() => {
+                this.props.loginWithFB();
+              }}
+            >
               <Facebook size={14} />
             </Button.Ripple>
 
-            <Button.Ripple  className="btn-twitter"
-                            color=""
-                            onClick={this.props.loginWithTwitter}>
+            <Button.Ripple
+              className="btn-twitter"
+              color=""
+              onClick={this.props.loginWithTwitter}
+            >
               <Twitter size={14} stroke="white" />
             </Button.Ripple>
 
-            <Button.Ripple  className="btn-google"
-                            color=""
-                            onClick={this.props.loginWithGoogle}>
+            <Button.Ripple
+              className="btn-google"
+              color=""
+              onClick={this.props.loginWithGoogle}
+            >
               <img src={googleSvg} alt="google" height="15" width="15" />
             </Button.Ripple>
 
-            <Button.Ripple  className="btn-github"
-                            color=""
-                            onClick={this.props.loginWithGithub}>
+            <Button.Ripple
+              className="btn-github"
+              color=""
+              onClick={this.props.loginWithGithub}
+            >
               <GitHub size={14} stroke="white" />
             </Button.Ripple>
           </div>
         </div>
       </React.Fragment>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    values: state.auth.login
-  }
-}
+    values: state.auth.login,
+  };
+};
 
 export default connect(mapStateToProps, {
   submitLoginWithFireBase,
   loginWithFB,
   loginWithTwitter,
   loginWithGoogle,
-  loginWithGithub
-})(SubsFirebase)
+  loginWithGithub,
+})(SubsFirebase);
 
-
-{/* <CardBody className="pt-1">
+{
+  /* <CardBody className="pt-1">
 <Form action="/" onSubmit={this.handleLogin}>
   <FormGroup className="form-label-group position-relative has-icon-left">
     <Input  type="email"
@@ -162,4 +200,5 @@ export default connect(mapStateToProps, {
     </Button.Ripple>
   </div>
 </Form>
-</CardBody> */}
+</CardBody> */
+}

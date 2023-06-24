@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -10,21 +10,19 @@ import {
   Form,
   Input,
   Button,
-  Label
-} from "reactstrap"
-import { history } from "../../../history"
-import resetImg from "../../../assets/img/pages/reset-password.png"
-import "../../../assets/scss/pages/authentication.scss"
-import axios from "axios";
-import { tokenize } from "prismjs"
+  Label,
+} from "reactstrap";
+import { history } from "../../../history";
+import resetImg from "../../../assets/img/pages/reset-password.png";
+import "../../../assets/scss/pages/authentication.scss";
+import axiosConfig from "../../../axiosConfig";
+import { tokenize } from "prismjs";
 
 class ResetPassword extends React.Component {
-  
   state = {
     // email:"",
-    password:"",
-    confirm_password:""
-   
+    password: "",
+    confirm_password: "",
   };
 
   handlechange = (e) => {
@@ -42,8 +40,8 @@ class ResetPassword extends React.Component {
 
   handleResetPassword = async (e) => {
     e.preventDefault();
-    const {email,password,confirm_password} = this.state;
-    
+    const { email, password, confirm_password } = this.state;
+
     //var isValid = await this.validatePhone( email)
     // if(isValid === false){
     //   this.setState({ isError: true });
@@ -52,26 +50,24 @@ class ResetPassword extends React.Component {
 
     var payload = {
       // email : email,
-      password : password,
-      confirm_password :confirm_password,
-    }
-     let { id } = this.props.match.params;
+      password: password,
+      confirm_password: confirm_password,
+    };
+    let { id } = this.props.match.params;
 
-    axios
-    .post(`http://15.206.122.110:4000/api/user/changepassadmin/629b43e4b481821324ad3006`, payload)
-    .then((response) => {
-      console.log(response.data);
-      if(response.data.status === true){
-        console.log(response.data.otp);
-        this.props.history.push("/")
-      }
-
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
-};
-
+    axiosConfig
+      .post(`/user/changepassadmin/${id}`, payload)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === true) {
+          console.log(response.data.otp);
+          this.props.history.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
   render() {
     return (
@@ -136,9 +132,9 @@ class ResetPassword extends React.Component {
                           className="btn-block"
                           color="primary"
                           outline
-                          onClick={e => {
-                            e.preventDefault()
-                            this.props.history.push("/pages/login")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.props.history.push("/pages/login");
                           }}
                         >
                           Go Back to Login
@@ -161,7 +157,7 @@ class ResetPassword extends React.Component {
           </Card>
         </Col>
       </Row>
-    )
+    );
   }
 }
-export default ResetPassword
+export default ResetPassword;

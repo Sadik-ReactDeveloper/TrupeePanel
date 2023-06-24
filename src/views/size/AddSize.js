@@ -36,20 +36,20 @@ export default class AddSize extends Component {
   submitHandler = (e) => {
     e.preventDefault();
 
-    axiosConfig
-      .post("/addsize", this.state, {
-        headers: {
-          "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/size/sizeList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axiosConfig
+    //   .post("/addsize", this.state, {
+    //     headers: {
+    //       "auth-adtoken": localStorage.getItem("auth-adtoken"),
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     swal("Success!", "Submitted SuccessFull!", "success");
+    //     this.props.history.push("/app/size/sizeList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   render() {

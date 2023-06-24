@@ -70,7 +70,8 @@ class LoginJWT extends React.Component {
   handleLogin = (e) => {
     e.preventDefault();
     axiosConfig
-      .post("/adminlogin", this.state)
+      .post("/admin/adminlogin", this.state)
+
       .then((response) => {
         console.log(response.data);
 

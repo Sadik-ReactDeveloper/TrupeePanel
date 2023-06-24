@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -10,19 +10,20 @@ import {
   Form,
   Input,
   Button,
-  Label
-} from "reactstrap"
-import fgImg from "../../../assets/img/pages/forgot-password.png"
-import { history } from "../../../history"
-import "../../../assets/scss/pages/authentication.scss"
-import { Route } from 'react-router-dom'
-import axios from "axios";
+  Label,
+} from "reactstrap";
+import fgImg from "../../../assets/img/pages/forgot-password.png";
+import { history } from "../../../history";
+import "../../../assets/scss/pages/authentication.scss";
+import { Route } from "react-router-dom";
+
+import axiosConfig from "../../../axiosConfig";
 
 class ForgotPassword extends React.Component {
   state = {
-    mobile:"",
-    errorValidation:'please enter correct mobile number',
-    isError:false
+    mobile: "",
+    errorValidation: "please enter correct mobile number",
+    isError: false,
   };
 
   handlechange = (e) => {
@@ -31,8 +32,8 @@ class ForgotPassword extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-   validatePhone = (text) => {
-   if (/^[6789][0-9]{9}$/.test(text)) {
+  validatePhone = (text) => {
+    if (/^[6789][0-9]{9}$/.test(text)) {
       return true;
     }
     return false;
@@ -40,36 +41,35 @@ class ForgotPassword extends React.Component {
 
   handleOtp = async (e) => {
     e.preventDefault();
-    const {mobile} = this.state;
-    var isValid = await this.validatePhone(mobile)
-    if(isValid === false){
+    const { mobile } = this.state;
+    var isValid = await this.validatePhone(mobile);
+    if (isValid === false) {
       this.setState({ isError: true });
 
-       return true;
+      return true;
     }
-    var payload = {
-      mobile : mobile
-    }
-    axios
-    .post("http://15.206.122.110:4000/api/dealer/signupsendotp", payload)
-    .then((response) => {
-      console.log(response.data);
-      if(response.data.status === 'success'){
-        console.log('#@@@@@@@@@@@@@@@',response.data.otp);
-      this.props.history.push("/pages/otp-verify/?&mobile="+mobile+"&id="+response.data._id)
+    // var payload = {
+    //   mobile: mobile,
+    // };
+    // axiosConfig
+    //   .post("/api/dealer/signupsendotp", payload)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       console.log("#@@@@@@@@@@@@@@@", response.data.otp);
+    //       this.props.history.push(
+    //         "/pages/otp-verify/?&mobile=" + mobile + "&id=" + response.data._id
+    //       );
 
-        // localStorage.setItem("auth", response.data.data?._id);
-        // window.location.replace("/#/");
-      }
-
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
-};
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response);
+    //   });
+  };
 
   render() {
-    const {isError,errorValidation} = this.state;
+    const { isError, errorValidation } = this.state;
     return (
       <Row className="m-0 justify-content-center">
         <Col
@@ -95,31 +95,41 @@ class ForgotPassword extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <p className="px-2 auth-title">
-                    Please enter your  Mobile Number and we'll send you
-                    OTP,  for  reset your password.
+                    Please enter your Mobile Number and we'll send you OTP, for
+                    reset your password.
                   </p>
                   <CardBody className="pt-1 pb-0">
                     <Form>
                       <FormGroup className="form-label-group">
-                        <Input type="number" name="mobile"
-                         value={this.state.mobile}
-                         onChange={this.handlechange} placeholder="Mobile Number" required />
+                        <Input
+                          type="number"
+                          name="mobile"
+                          value={this.state.mobile}
+                          onChange={this.handlechange}
+                          placeholder="Mobile Number"
+                          required
+                        />
                         <Label>Mobile Number</Label>
-                        <span style={{color:'red'}}>{isError ? errorValidation: null}</span>
+                        <span style={{ color: "red" }}>
+                          {isError ? errorValidation : null}
+                        </span>
                       </FormGroup>
                       <div className="float-md-left d-block mb-1">
-                      <Route render={({ history}) => (
-                        <Button.Ripple
-                          color="primary"
-                          outline
-                          className="px-75 btn-block"
-                          onClick={() => this.props.history.push("/pages/login")}
-                          // onClick={() => history.push("/pages/login")}
-                        >
-                          Back to Login
-                        </Button.Ripple> 
-                        )}
-                     />
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              outline
+                              className="px-75 btn-block"
+                              onClick={() =>
+                                this.props.history.push("/pages/login")
+                              }
+                              // onClick={() => history.push("/pages/login")}
+                            >
+                              Back to Login
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                       <div className="float-md-right d-block mb-1">
                         <Button.Ripple
@@ -139,7 +149,7 @@ class ForgotPassword extends React.Component {
           </Card>
         </Col>
       </Row>
-    )
+    );
   }
 }
-export default ForgotPassword
+export default ForgotPassword;
