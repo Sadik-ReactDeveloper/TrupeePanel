@@ -53,9 +53,8 @@ export class AddFnoEquity extends Component {
   //Script//
   async componentDidMount() {
     axiosConfig
-      .get("/getEquityScript")
+      .get("/admin/getEquityScript")
       .then((response) => {
-        console.log(response);
         this.setState({
           // scriptT: response.data.data,
           scriptN: response.data.data,
@@ -66,9 +65,8 @@ export class AddFnoEquity extends Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
       .then((response) => {
-        console.log(response);
         this.setState({
           expdateI: response.data.data,
         });
@@ -84,17 +82,8 @@ export class AddFnoEquity extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post(
-        "/add_fnoEquity",
-        this.state
-        // {
-        //   headers: {
-        //     "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        //   },
-        // }
-      )
+      .post("/admin/add_fnoEquity", this.state)
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/fnoEquityList");
       })

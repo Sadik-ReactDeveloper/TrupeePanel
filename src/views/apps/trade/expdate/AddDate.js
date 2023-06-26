@@ -19,9 +19,7 @@ export default class AddFnIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        expDate: "",
-      
-     
+      expDate: "",
     };
   }
   changeHandler1 = (e) => {
@@ -35,13 +33,8 @@ export default class AddFnIndex extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addExpDate", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/admin/addExpDate", this.state, {})
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/expdate/expDateList");
       })
@@ -61,7 +54,7 @@ export default class AddFnIndex extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/trade/expdate/expDateList" tag="a">
-                 Expiry Date List
+                  Expiry Date List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Add Date</BreadcrumbItem>
               </Breadcrumb>
@@ -80,7 +73,9 @@ export default class AddFnIndex extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() => history.push("/app/trade/expdate/expDateList")}
+                    onClick={() =>
+                      history.push("/app/trade/expdate/expDateList")
+                    }
                   >
                     Back
                   </Button>
@@ -91,19 +86,17 @@ export default class AddFnIndex extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-        
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Expiry Date</Label>
                   <Input
                     required
-                    type="dd/mm/yyyy"
+                    type="date"
                     name="expDate"
                     placeholder="dd/mm/yyyy"
                     value={this.state.expDate}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                   
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">

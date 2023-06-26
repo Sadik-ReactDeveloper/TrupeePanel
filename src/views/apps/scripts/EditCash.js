@@ -27,13 +27,12 @@ export default class EditCash extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneCashScript/${id}`, {
+      .get(`/admin/getoneCashScript/${id}`, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
       })
       .then((response) => {
-        console.log(response);
         this.setState({
           status: response.data.data.status,
           scriptName: response.data.data.scriptName,
@@ -54,13 +53,12 @@ export default class EditCash extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editCashScript/${id}`, this.state, {
+      .post(`admin/editCashScript/${id}`, this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
       })
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/scripts/cashEquity");
       })

@@ -35,13 +35,12 @@ export default class AddCashEqutiy extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addCashScript", this.state, {
+      .post("/admin/addCashScript", this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
       })
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/scripts/cashEquity");
       })

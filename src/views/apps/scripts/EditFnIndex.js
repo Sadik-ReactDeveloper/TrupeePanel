@@ -27,7 +27,7 @@ export default class EditFnIndex extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneFnoScript/${id}`, {
+      .get(`/admin/getoneFnoScript/${id}`, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
@@ -54,7 +54,7 @@ export default class EditFnIndex extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editFnoScript/${id}`, this.state, {
+      .post(`/admin/editFnoScript/${id}`, this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },

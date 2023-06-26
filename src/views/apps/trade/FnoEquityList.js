@@ -431,7 +431,7 @@ class FnoEquityList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/fnoEquity_list`).then((response) => {
+    await axiosConfig.get(`admin/fnoEquity_list`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -439,7 +439,7 @@ class FnoEquityList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_alltrade/${id}`).then(
+    await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
       (response) => {
         console.log(response);
       },
@@ -476,7 +476,7 @@ class FnoEquityList extends React.Component {
       status: status,
     };
     await axiosConfig
-      .post(`/editalltrade/${id}`, payload)
+      .post(`admin/editalltrade/${id}`, payload)
       .then((response) => {
         console.log("sdjgsjdgjhgsdjh", response);
         swal("Success!", "Status " + status + " SuccessFull!", "success");

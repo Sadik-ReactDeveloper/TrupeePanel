@@ -53,11 +53,7 @@ class EditAllTrade extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getone_tradelist/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/getone_tradelist/${id}`, {})
       .then((response) => {
         console.log(response);
         this.setState({
@@ -319,7 +315,6 @@ class EditAllTrade extends React.Component {
                     // onChange={this.changeHandler}
                   />
                 </Col>
-      
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Quantity</Label>
                   <Input

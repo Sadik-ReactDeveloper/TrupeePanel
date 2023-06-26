@@ -408,7 +408,7 @@ class EquityCashList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/equityCash_list`).then((response) => {
+    await axiosConfig.get(`/admin/equityCash_list`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -454,7 +454,7 @@ class EquityCashList extends React.Component {
       status: status,
     };
     await axiosConfig
-      .post(`/editalltrade/${id}`, payload)
+      .post(`/admin/editalltrade/${id}`, payload)
       .then((response) => {
         console.log("sdjgsjdgjhgsdjh", response);
         swal("Success!", "Status " + status + " SuccessFull!", "success");
@@ -511,7 +511,7 @@ class EquityCashList extends React.Component {
                         className=" btn btn-success float-right"
                         onClick={() => history.push("/app/trade/AddEquityCash")}
                       >
-                        Add Equity Cash
+                        Add Equity Cashddd
                       </Button>
                     )}
                   />

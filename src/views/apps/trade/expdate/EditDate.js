@@ -20,22 +20,16 @@ export default class EditDate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        expDate: "",
-      
-     
+      expDate: "",
     };
   }
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneexpDate/${id}`, {
-      
-      })
+      .get(`/admin/getoneexpDate/${id}`, {})
       .then((response) => {
-        console.log(response);
         this.setState({
-            expDate: response.data.data.expDate,
-       
+          expDate: response.data.data.expDate,
         });
       })
       .catch((error) => {
@@ -53,7 +47,7 @@ export default class EditDate extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editDate/${id}`,this.state)
+      .post(`/admin/editDate/${id}`, this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -75,7 +69,7 @@ export default class EditDate extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/trade/expdate/expDateList" tag="a">
-                 Expiry Date List
+                  Expiry Date List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Edit Date</BreadcrumbItem>
               </Breadcrumb>
@@ -94,7 +88,9 @@ export default class EditDate extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() => history.push("/app/trade/expdate/expDateList")}
+                    onClick={() =>
+                      history.push("/app/trade/expdate/expDateList")
+                    }
                   >
                     Back
                   </Button>
@@ -105,7 +101,6 @@ export default class EditDate extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-        
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Expiry Date</Label>
                   <Input
@@ -117,7 +112,6 @@ export default class EditDate extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                   
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
@@ -126,7 +120,7 @@ export default class EditDate extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                   Update
+                    Update
                   </Button.Ripple>
                 </Col>
               </Row>

@@ -88,7 +88,7 @@ class FnoIndexList extends React.Component {
       {
         headerName: "Call Type",
         field: "call_type",
-        width: 140,
+        width: 100,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -100,7 +100,7 @@ class FnoIndexList extends React.Component {
       {
         headerName: "Active Value",
         field: "active_value",
-        width: 140,
+        width: 100,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -502,18 +502,16 @@ class FnoIndexList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/fnoIndexlist`).then((response) => {
+    await axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
       const rowData = response.data.data;
-      console.log(rowData);
+
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_alltrade/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
+    await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
+      (response) => {},
       (error) => {
         console.log(error);
       }
@@ -547,7 +545,7 @@ class FnoIndexList extends React.Component {
       status: status,
     };
     await axiosConfig
-      .post(`/editalltrade/${id}`, payload)
+      .post(`/admin/editalltrade/${id}`, payload)
       .then((response) => {
         console.log("sdjgsjdgjhgsdjh", response);
         swal("Success!", "Status " + status + " SuccessFull!", "success");

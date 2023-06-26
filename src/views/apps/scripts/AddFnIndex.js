@@ -36,9 +36,9 @@ export default class AddFnIndex extends Component {
 
     axiosConfig
       .post("/admin/addFnoScript", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
+        headers: {
+          "auth-adtoken": localStorage.getItem("auth-adtoken"),
+        },
       })
       .then((response) => {
         console.log(response.data.data.scriptName);

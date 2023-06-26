@@ -14,7 +14,7 @@ import {
 import axiosConfig from "../../../../axiosConfig";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../../utility/context/Layout";
-import { ChevronDown, Trash2,  Edit } from "react-feather";
+import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import { Route } from "react-router-dom";
 // import moment from "moment";
@@ -49,9 +49,7 @@ class ExpDateList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-                <span>{params.data.expDate}
-              
-              </span>
+              <span>{params.data.expDate}</span>
               {/* <span>{moment(params.data.expDate).format("dd/mm/yyyy")}
               
               </span> */}
@@ -59,7 +57,7 @@ class ExpDateList extends React.Component {
           );
         },
       },
-    
+
       {
         headerName: "Actions",
         field: "sortorder",
@@ -68,7 +66,6 @@ class ExpDateList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-          
               <Route
                 render={({ history }) => (
                   <Edit
@@ -76,12 +73,14 @@ class ExpDateList extends React.Component {
                     size="25px"
                     color="blue"
                     onClick={() =>
-                      history.push(`/app/trade/expdate/editDate/${params.data._id}`)
+                      history.push(
+                        `/app/trade/expdate/editDate/${params.data._id}`
+                      )
                     }
                   />
                 )}
               />
-               <Trash2
+              <Trash2
                 className="mr-50"
                 size="25px"
                 color="red"
@@ -90,7 +89,7 @@ class ExpDateList extends React.Component {
                   this.runthisfunction(params.data._id);
                   this.gridApi.updateRowData({ remove: selectedData });
                 }}
-              /> 
+              />
             </div>
           );
         },
@@ -98,16 +97,13 @@ class ExpDateList extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/datelist").then((response) => {
+    await axiosConfig.get("/admin/datelist").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dltDate/${id}`).then((response) => {
-      console.log(response);
-    });
+    await axiosConfig.get(`/admin/dltDate/${id}`).then((response) => {});
   }
 
   onGridReady = (params) => {
@@ -148,17 +144,17 @@ class ExpDateList extends React.Component {
                 </h1>
               </Col>
               <Col className="pt-4">
-                  <Route
-                    render={({ history }) => (
-                      <Button
-                        className=" btn btn-success float-right"
-                        onClick={() => history.push("/app/trade/expdate/addDate")}
-                      >
-                        Add Date
-                      </Button>
-                    )}
-                  />
-                </Col>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-success float-right"
+                      onClick={() => history.push("/app/trade/expdate/addDate")}
+                    >
+                      Add Date
+                    </Button>
+                  )}
+                />
+              </Col>
             </Row>
 
             <CardBody className="py-0">
@@ -258,5 +254,3 @@ class ExpDateList extends React.Component {
   }
 }
 export default ExpDateList;
-
-

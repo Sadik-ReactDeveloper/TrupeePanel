@@ -123,7 +123,7 @@ class FnIndex extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/getFnoScript`).then((response) => {
+    await axiosConfig.get(`/admin/getFnoScript`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -131,7 +131,7 @@ class FnIndex extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltFnoScript/${id}`).then(
+    await axiosConfig.get(`/admin/dltFnoScript/${id}`).then(
       (response) => {
         console.log(response);
       },

@@ -37,13 +37,8 @@ export default class AddSize extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addsize", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/addsize", this.state, {})
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/allTradeList");
       })
@@ -63,7 +58,7 @@ export default class AddSize extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/trade/allTradeList" tag="a">
-                All Active Trade List
+                  All Active Trade List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Add All Active Trade </BreadcrumbItem>
               </Breadcrumb>
@@ -74,7 +69,7 @@ export default class AddSize extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add All Active Trade 
+                Add All Active Trade
               </h1>
             </Col>
             <Col>
@@ -88,8 +83,10 @@ export default class AddSize extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-              <Row>      <Col lg="6" md="6" className="mb-2">
-              <Label>Type Of Scripts</Label>
+              <Row>
+                {" "}
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Type Of Scripts</Label>
                   <Input
                     id="exampleSelect"
                     name="script_type"
@@ -117,7 +114,7 @@ export default class AddSize extends Component {
                     // onChange={this.changeHandler}
                   ></Input>
                 </Col>
-              <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Trade</Label>
                   <Input
                     required
@@ -128,7 +125,7 @@ export default class AddSize extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                   <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Message</Label>
                   <Input
                     required
@@ -138,8 +135,7 @@ export default class AddSize extends Component {
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   ></Input>
-                </Col> 
-
+                </Col>
                 {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
                   <div

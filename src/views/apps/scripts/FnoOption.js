@@ -118,7 +118,7 @@ class FnoOptionList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/getEquityScript`).then((response) => {
+    await axiosConfig.get(`/admin/getEquityScript`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -126,7 +126,7 @@ class FnoOptionList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltEquityScript/${id}`).then(
+    await axiosConfig.get(`/admin/dltEquityScript/${id}`).then(
       (response) => {
         console.log(response);
       },

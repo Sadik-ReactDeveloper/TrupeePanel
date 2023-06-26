@@ -111,16 +111,13 @@ class CashEquityList extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/getCashScript").then((response) => {
+    await axiosConfig.get("admin/getCashScript").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dltCashScript/${id}`).then((response) => {
-      console.log(response);
-    });
+    await axiosConfig.get(`/dltCashScript/${id}`).then((response) => {});
   }
   onGridReady = (params) => {
     this.gridApi = params.api;

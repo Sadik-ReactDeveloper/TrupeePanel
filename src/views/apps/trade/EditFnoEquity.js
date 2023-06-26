@@ -59,11 +59,7 @@ class EditFnoEquity extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewonetrades/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -105,7 +101,7 @@ class EditFnoEquity extends React.Component {
 
     //Script//
     axiosConfig
-      .get("/getEquityScript")
+      .get("/admin/getEquityScript")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -118,7 +114,7 @@ class EditFnoEquity extends React.Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -197,11 +193,7 @@ class EditFnoEquity extends React.Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editfnoOption/${id}`, this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post(`/admin/editfnoOption/${id}`, this.state, {})
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");

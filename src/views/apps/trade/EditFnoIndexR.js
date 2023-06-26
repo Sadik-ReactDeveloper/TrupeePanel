@@ -51,11 +51,7 @@ class EditFnoIndex extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewonetrades/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/viewonetrades/${id}`)
       .then((response) => {
         console.log(response.data.data.FT1_type);
         this.setState({

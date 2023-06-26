@@ -47,7 +47,6 @@ class EditFnoIndex extends React.Component {
       t5: "",
       FT4: "",
       FT5: "",
-      FT4: "",
       FT6: "",
       FT7: "",
       status: "",
@@ -61,11 +60,7 @@ class EditFnoIndex extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewonetrades/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
         console.log("sl_type response", response.data.data.sl_type);
         this.setState({
@@ -105,7 +100,7 @@ class EditFnoIndex extends React.Component {
       });
     //Script//
     axiosConfig
-      .get("/getFnoScript")
+      .get("/admin/getFnoScript")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -117,7 +112,7 @@ class EditFnoIndex extends React.Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -204,15 +199,10 @@ class EditFnoIndex extends React.Component {
     let { id } = this.props.match.params;
 
     axiosConfig
-      .post(`/editFnoindex/${id}`, this.state)
-      // , {
-      //   // headers: {
-      //   //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-      //   // },
-      // }
-      // )
+      .post(`/admin/editFnoindex/${id}`, this.state)
+
       .then((response) => {
-        console.log("sdjgsjdgjhgsdjh", response);
+        console.log("EditFNOIndex", response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/fnoIndexList");
       })

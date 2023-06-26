@@ -35,7 +35,7 @@ export default class AddFnoOption extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addEquityScript", this.state, {
+      .post("/admin/addEquityScript", this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },

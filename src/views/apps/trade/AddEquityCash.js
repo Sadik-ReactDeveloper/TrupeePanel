@@ -22,7 +22,7 @@ export class AddEquityCash extends Component {
     super(props);
     this.state = {
       script_type: "",
-      cash_scrpt_name: "",
+      scriptName: "",
       active_value: "",
       active_value2: "",
       call_type: "",
@@ -39,12 +39,12 @@ export class AddEquityCash extends Component {
       t5: "",
       t5_type: false,
       qty: "",
-      investment_amt: "",
+      investment_amt: null,
       no_of_lots: "",
       pl_type: "",
       profit_loss_amt: "",
       expiryDate: "",
-      type: "Cash",
+      type: "",
       cstmMsg: "",
     };
     this.state = {
@@ -56,11 +56,9 @@ export class AddEquityCash extends Component {
     //Script//
 
     axiosConfig
-      .get("/getCashScript")
+      .get("/admin/getCashScript")
       .then((response) => {
-        console.log(response);
         this.setState({
-          // scriptT: response.data.data,
           scriptN: response.data.data,
         });
       })
@@ -69,9 +67,10 @@ export class AddEquityCash extends Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
+
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data[0]._id);
         this.setState({
           expdateI: response.data.data,
         });
@@ -92,17 +91,36 @@ export class AddEquityCash extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-
+    let obj = {
+      script_type: this.state.script_type,
+      scriptName: this.state.allScript,
+      active_value: this.state.active_value,
+      active_value2: this.state.active_value2,
+      call_type: this.state.call_type,
+      SL: this.state.SL,
+      sl_type: false,
+      T1: this.state.T1,
+      t1_type: false,
+      T2: this.state.T2,
+      t2_type: false,
+      T3: this.state.T3,
+      t3_type: false,
+      T4: this.state.T4,
+      t4_type: false,
+      // t5: "",
+      t5_type: false,
+      qty: this.state.qty,
+      investment_amt: this.state.investment_amt,
+      // no_of_lots: this.state.no_of_lots,
+      // pl_type: this.state.pl_type,
+      // profit_loss_amt: this.state.profit_loss_amt,
+      expiryDate: this.state.expdateI,
+      type: this.state.type,
+      cstmMsg: this.state.cstmMsg,
+    };
+    console.log(obj);
     axiosConfig
-      .post(
-        "/add_equityCash",
-        this.state
-        // {
-        //   headers: {
-        //     "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        //   },
-        // }
-      )
+      .post("/admin/add_equityCash", obj)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -143,7 +161,7 @@ export class AddEquityCash extends Component {
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
-                    value={this.state.scriptName}
+                    value={this.state.allScript}
                     onChange={this.changeHandler}
                   >
                     <option>select script</option>
@@ -159,7 +177,7 @@ export class AddEquityCash extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
-                    value={this.state.expDate}
+                    value={this.state.expdateI}
                     onChange={this.changeHandler}
                   >
                     <option>Expiry Date</option>
@@ -308,7 +326,7 @@ export class AddEquityCash extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
+                <Col lg="6" md="6" className="mb-2">
                   <Label>Investment Amount</Label>
                   <Input
                     name="investment_amt"
@@ -317,7 +335,7 @@ export class AddEquityCash extends Component {
                     value={this.state.investment_amt}
                     onChange={this.changeHandler}
                   />
-                </Col> */}
+                </Col>
                 {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Per Lot Price</Label>
                   <Input

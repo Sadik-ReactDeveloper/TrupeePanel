@@ -42,9 +42,8 @@ export class AddFnoIndex extends Component {
   }
 
   componentDidMount() {
-    //Script//
     axiosConfig
-      .get("/getFnoScript")
+      .get("/admin/getFnoScript")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -56,9 +55,8 @@ export class AddFnoIndex extends Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
       .then((response) => {
-        console.log(response);
         this.setState({
           expdateI: response.data.data,
         });
@@ -77,15 +75,7 @@ export class AddFnoIndex extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post(
-        "/add_fnoIndex",
-        this.state
-        // {
-        //   headers: {
-        //     "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        //   },
-        // }
-      )
+      .post("/admin/add_fnoIndex", this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");

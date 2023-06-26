@@ -28,7 +28,7 @@ export default class EditOption extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneEquityScript/${id}`, {
+      .get(`/admin/getoneEquityScript/${id}`, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
@@ -55,7 +55,7 @@ export default class EditOption extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editEquityScript/${id}`, this.state, {
+      .post(`/admin/editEquityScript/${id}`, this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
