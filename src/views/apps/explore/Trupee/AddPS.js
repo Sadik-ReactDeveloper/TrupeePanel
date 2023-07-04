@@ -30,7 +30,6 @@ export default class AddPS extends Component {
       year: "",
       dst_price: "",
       mrp: "",
-     
     };
   }
   changeHandler2 = (e) => {};
@@ -46,7 +45,7 @@ export default class AddPS extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addper_Sheet", this.state, {
+      .post("/admin/addper_Sheet", this.state, {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
@@ -176,6 +175,7 @@ export default class AddPS extends Component {
                     max="2099"
                     step="1"
                     name="year"
+                    placeholder="Enter Year"
                     value={this.state.year}
                     onChange={this.changeHandler}
                   />
@@ -200,9 +200,9 @@ export default class AddPS extends Component {
                   <Label>Discount Price</Label>
                   <Input
                     required
-                    type="text"
+                    type="number"
                     name="dst_price"
-                    placeholder=""
+                    placeholder="Discount Price"
                     value={this.state.dst_price}
                     onChange={this.changeHandler}
                   ></Input>
@@ -211,14 +211,13 @@ export default class AddPS extends Component {
                   <Label>MRP Price</Label>
                   <Input
                     required
-                    type="text"
+                    type="number"
                     name="mrp"
-                    placeholder=""
+                    placeholder="MRP Price"
                     value={this.state.mrp}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                
 
                 {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>

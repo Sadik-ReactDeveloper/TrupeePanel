@@ -36,7 +36,7 @@ class AddPaidServeice extends React.Component {
   componentDidMount() {
     //plan//
     axiosConfig
-      .get("/plan_list")
+      .get("/admin/plan_list")
       .then((response) => {
         console.log(response);
         this.setState({
@@ -63,7 +63,7 @@ class AddPaidServeice extends React.Component {
     // data.append("desc", this.state.desc);
 
     axiosConfig
-      .post("/addPrmiumSrvc", this.state)
+      .post("/admin/addPrmiumSrvc", this.state)
       .then((response) => {
         console.log(response);
         this.props.history.push("/app/premium/paidServeiceList");

@@ -143,21 +143,15 @@ class StartUp extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("/get_startup", {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
-      .then((response) => {
-        const rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/admin/get_startup").then((response) => {
+      const rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_startup/${id}`).then(
+    await axiosConfig.get(`/admin/dlt_startup/${id}`).then(
       (response) => {
         console.log(response);
       },

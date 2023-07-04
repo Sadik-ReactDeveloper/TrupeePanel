@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import {
   Card,
@@ -25,7 +23,7 @@ export default class AddOppor extends Component {
       title: "",
       desc: "",
       img: "",
-      
+
       selectedName: "",
       selectedFile: null,
     };
@@ -51,15 +49,8 @@ export default class AddOppor extends Component {
     data.append("desc", this.state.desc);
     data.append("img", this.state.selectedFile, this.state.selectedName);
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     axiosConfig
-      .post("/addOportunity", data)
+      .post("/admin/addOportunity", data)
 
       .then((response) => {
         console.log(response.data);
@@ -83,7 +74,7 @@ export default class AddOppor extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/explore/Trupee/opportunity" tag="a">
-                Opportunity List
+                  Opportunity List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Add Opportunity</BreadcrumbItem>
               </Breadcrumb>
@@ -102,7 +93,9 @@ export default class AddOppor extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() => history.push("/app/explore/Trupee/opportunity")}
+                    onClick={() =>
+                      history.push("/app/explore/Trupee/opportunity")
+                    }
                   >
                     Back
                   </Button>
@@ -124,7 +117,7 @@ export default class AddOppor extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-            
+
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
@@ -134,7 +127,7 @@ export default class AddOppor extends Component {
                     onChange={this.onChangeHandler}
                   />
                 </Col>
-         
+
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Descripition</Label>
                   <Input

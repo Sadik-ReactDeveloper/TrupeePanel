@@ -507,7 +507,7 @@ class AllTradeList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/tradelist`).then((response) => {
+    await axiosConfig.get(`/admin/tradelist`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -515,7 +515,7 @@ class AllTradeList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_alltrade/${id}`).then(
+    await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
       (response) => {
         console.log(response);
       },

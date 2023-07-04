@@ -50,19 +50,9 @@ export class AddTVC extends Component {
     data.append("desc", this.state.desc);
     data.append("chart_type", this.state.chart_type);
     data.append("image", this.state.selectedFile, this.state.selectedName);
-    for (var value of data.values()) {
-      console.log(value);
-    }
 
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     axiosConfig
-      .post("/addTrending_chart", data)
-      // headers: {
-      //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-      // },
-
+      .post("/admin/addTrending_chart", data)
       .then((response) => {
         console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");

@@ -32,7 +32,7 @@ export default class EditTVC extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getonePersheet/${id}`)
+      .get(`/admin/getonePersheet/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -64,17 +64,10 @@ export default class EditTVC extends Component {
     data.append("dst_price", this.state.dst_price);
     data.append("mrp", this.state.mrp);
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     let { id } = this.props.match.params;
     axiosConfig
       // .post(`/editsize/${id}`, this.state)
-      .post(`/editPersheet/${id}`, this.state)
+      .post(`/admin/editPersheet/${id}`, this.state)
 
       .then((response) => {
         console.log(response.data);
@@ -132,7 +125,7 @@ export default class EditTVC extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-            <Row>
+              <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Month</Label>
                   <Input
@@ -244,7 +237,6 @@ export default class EditTVC extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                
 
                 {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>

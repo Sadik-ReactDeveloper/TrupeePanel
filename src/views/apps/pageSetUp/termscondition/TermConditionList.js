@@ -113,7 +113,7 @@ class termscondition extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/get_term_cond").then((response) => {
+    await axiosConfig.get("/admin/get_term_cond").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });

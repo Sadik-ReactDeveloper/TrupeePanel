@@ -43,7 +43,7 @@ class Opportunity extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-    
+
       {
         headerName: "Title",
         field: "title",
@@ -58,7 +58,7 @@ class Opportunity extends React.Component {
           );
         },
       },
-    
+
       {
         headerName: "Upload Image",
         field: "img",
@@ -87,7 +87,7 @@ class Opportunity extends React.Component {
           );
         },
       },
-      
+
       {
         headerName: "Actions",
         field: "sortorder",
@@ -130,7 +130,7 @@ class Opportunity extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/getOportunity`)
+      .get(`/admin/getOportunity`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
@@ -142,11 +142,9 @@ class Opportunity extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig
-      .get(`/dltOportunity/${id}`)
-      .then((response) => {
-        console.log(response);
-      });
+    await axiosConfig.get(`/admin/dltOportunity/${id}`).then((response) => {
+      console.log(response);
+    });
   }
 
   onGridReady = (params) => {
@@ -184,7 +182,7 @@ class Opportunity extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                  Opportunity List
+                    Opportunity List
                   </h1>
                 </Col>
                 <Col>

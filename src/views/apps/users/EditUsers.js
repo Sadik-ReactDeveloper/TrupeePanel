@@ -33,24 +33,13 @@ export default class EditSize extends Component {
       date: "",
       expdate: "",
       status: "",
-      // firstnameU: [],
-      // mobileU: [],
-      // emailU: [],
-      // lastnameU: [],
-      // dobU: [],
-      // genderU: [],
-      // pack_nameM: [],
     };
   }
 
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneuser/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/getoneuser/${id}`, {})
       .then((response) => {
         console.log(response);
         this.setState({
@@ -69,26 +58,9 @@ export default class EditSize extends Component {
       .catch((error) => {
         console.log(error);
       });
-    // //Script//
-    // axiosConfig
-    //   .get("/getuser")
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.setState({
-    //       firstnameU: response.data.data,
-    //       mobileU: response.data.data,
-    //       emailU: response.data.data,
-    //       genderU: response.data.data,
-    //       dobU: response.data.data,
-    //       lastnameU: response.data.data,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    //plan//
+
     axiosConfig
-      .get("/plan_list")
+      .get("/admin/plan_list")
       .then((response) => {
         console.log(response);
         this.setState({

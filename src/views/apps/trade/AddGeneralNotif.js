@@ -32,7 +32,7 @@ export default class AddStartUp extends Component {
   }
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
+    // this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
   changeHandler1 = (e) => {
@@ -49,15 +49,9 @@ export default class AddStartUp extends Component {
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
     data.append("img", this.state.selectedFile, this.state.selectedName);
-    for (var value of data.values()) {
-      console.log(value);
-    }
 
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     axiosConfig
-      .post("/add_notification", data)
+      .post("/admin/add_notification", data)
 
       .then((response) => {
         console.log(response.data);

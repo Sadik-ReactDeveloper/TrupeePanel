@@ -208,11 +208,12 @@ class TransctionHistory extends React.Component {
   };
   async componentDidMount() {
     axiosConfig
-      .get(`/membershipPayment`)
+      .get(`/admin/membershipPayment`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
         this.setState({ rowData });
+        console.log(rowData);
       })
       .catch((error) => {
         console.log(error.response);

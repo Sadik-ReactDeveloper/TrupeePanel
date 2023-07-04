@@ -23,10 +23,8 @@ export default class AddMembership extends Component {
       mrp_price: "",
       desc: "",
       des_price: "",
-     
+
       status: "",
-      
-   
     };
   }
   changeHandler1 = (e) => {
@@ -40,11 +38,7 @@ export default class AddMembership extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/addPlan", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/admin/addPlan", this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -66,7 +60,7 @@ export default class AddMembership extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/package/PackagePlanList" tag="a">
-                Membership List
+                  Membership List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Add Membership</BreadcrumbItem>
               </Breadcrumb>
@@ -95,7 +89,7 @@ export default class AddMembership extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-            <Row className="mb-2">
+              <Row className="mb-2">
                 {/* <Col lg="6" md="6" className="mb-2">
                   <Label>User ID</Label>
                   <Input
@@ -129,7 +123,7 @@ export default class AddMembership extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label>MRP Price</Label>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Enter MRP Price"
                     name="mrp_price"
                     value={this.state.mrp_price}
@@ -139,7 +133,7 @@ export default class AddMembership extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Discount Price</Label>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Enter Discount Price"
                     name="des_price"
                     value={this.state.des_price}
@@ -149,7 +143,7 @@ export default class AddMembership extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Discount </Label>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Enter Discount "
                     name="desc"
                     value={this.state.desc}

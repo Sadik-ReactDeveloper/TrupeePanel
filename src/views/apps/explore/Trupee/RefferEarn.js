@@ -204,14 +204,15 @@ class RefferEarn extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/referearn_list").then((response) => {
+    await axiosConfig.get("/admin/referearn_list").then((response) => {
       let rowData = response.data.data;
+      console.log(rowData);
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltReferEarn/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dltReferEarn/${id}`).then((response) => {
       console.log(response);
     });
   }

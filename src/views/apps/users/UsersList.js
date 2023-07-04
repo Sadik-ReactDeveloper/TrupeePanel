@@ -41,20 +41,15 @@ class UsersList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
-        headerName: "Name",
-        field: "firstname",
+        headerName: "Reffrel Code",
+        field: "refral_Code",
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>
-                {params.data.firstname} {params.data.lastname}
-              </span>
+              <span>{params.data.refral_Code}</span>
             </div>
           );
         },
@@ -73,38 +68,38 @@ class UsersList extends React.Component {
       },
 
       {
-        headerName: "Email ID",
-        field: "email",
+        headerName: "WaslletID",
+        field: "walletid",
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
+              <span>{params.data.walletId}</span>
             </div>
           );
         },
       },
 
+      // {
+      //   headerName: "Verification",
+      //   field: "userverified",
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data.userverified}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
-        headerName: "Gender",
-        field: "gender",
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.gender}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Date Of Birth",
-        field: "dob",
+        headerName: "Amount",
+        field: "amount",
         width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.dob}</span>
+              <span>{params.data.amount}</span>
             </div>
           );
         },
@@ -135,23 +130,23 @@ class UsersList extends React.Component {
       //   },
       // },
 
-      // {
-      //   headerName: "Status",
-      //   field: "status",
-      //   filter: true,
-      //   width: 150,
-      //   cellRendererFramework: (params) => {
-      //     return params.value === "Active" ? (
-      //       <div className="badge badge-pill badge-success">
-      //         {params.data.status}
-      //       </div>
-      //     ) : params.value === "Inactive" ? (
-      //       <div className="badge badge-pill badge-warning">
-      //         {params.data.status}
-      //       </div>
-      //     ) : null;
-      //   },
-      // },
+      {
+        headerName: "Status",
+        field: "status",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "Active" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.status}
+            </div>
+          ) : params.value === "Deactive" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.status}
+            </div>
+          ) : null;
+        },
+      },
       {
         headerName: "Actions",
         field: "sortorder",
@@ -202,14 +197,15 @@ class UsersList extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/getuser").then((response) => {
+    await axiosConfig.get("/admin/getuser").then((response) => {
       let rowData = response.data.data;
+      console.log(rowData);
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletuser/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/deletuser/${id}`).then((response) => {
       console.log(response);
     });
   }

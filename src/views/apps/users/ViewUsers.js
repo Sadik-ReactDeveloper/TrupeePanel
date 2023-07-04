@@ -25,10 +25,9 @@ class ViewUsers extends React.Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneuser/${id}`)
+      .get(`/admin/getoneuser/${id}`)
 
       .then((response) => {
-        // console.log(response.data);
         console.log(response.data.data);
         this.setState({ data: response.data.data });
       })
@@ -81,14 +80,14 @@ class ViewUsers extends React.Component {
                 <Col sm="9" md="12" lg="12">
                   <div className="users-page-view-table">
                     <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
+                      {/* <div className="user-info-title font-weight-bold">
                         Users Name
                       </div>
                       <div className="text-truncate">
                         <span>
                           {this.state.data.firstname} {this.state.data.lastname}
                         </span>
-                      </div>
+                      </div> */}
 
                       {/* </div>
                     <div className="d-flex user-info">
@@ -107,30 +106,30 @@ class ViewUsers extends React.Component {
                         <span>{this.state.data.mobile}</span>
                       </div>
                     </div>
-                    <div className="d-flex user-info">
+                    {/* <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Email
                       </div>
                       <div className="text-truncate">
                         <span>{this.state.data.email}</span>
                       </div>
-                    </div>
-                    <div className="d-flex user-info">
+                    </div> */}
+                    {/* <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Date Of Birth
                       </div>
                       <div className="text-truncate">
                         <span>{this.state.data.dob}</span>
                       </div>
-                    </div>
-                    <div className="d-flex user-info">
+                    </div> */}
+                    {/* <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Gender
                       </div>
                       <div className="text-truncate">
                         <span>{this.state.data.gender}</span>
                       </div>
-                    </div>
+                    </div> */}
                     {/* <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Membership Plan

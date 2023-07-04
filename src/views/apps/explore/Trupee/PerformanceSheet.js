@@ -158,7 +158,7 @@ class PerformanceSheet extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/getPerSheet`)
+      .get(`/admin/getPerSheet`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);

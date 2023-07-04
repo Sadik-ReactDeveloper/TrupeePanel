@@ -39,9 +39,6 @@ class PackagePlanList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Package Plan",
@@ -150,7 +147,7 @@ class PackagePlanList extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/plan_list").then((response) => {
+    await axiosConfig.get("/admin/plan_list").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
@@ -158,7 +155,7 @@ class PackagePlanList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deleteplan/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/deleteplan/${id}`).then((response) => {
       console.log(response);
     });
   }

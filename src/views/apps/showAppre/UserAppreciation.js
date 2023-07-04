@@ -43,8 +43,8 @@ class UserAppreciation extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-     
-          {
+
+      {
         headerName: "User Name",
         field: "firstname",
         // filter: true,
@@ -82,7 +82,6 @@ class UserAppreciation extends React.Component {
           );
         },
       },
-   
 
       {
         headerName: "Donate",
@@ -134,9 +133,10 @@ class UserAppreciation extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/appriciation_list`)
+      .get(`/admin/appriciation_list`)
       .then((response) => {
         let rowData = response.data.data;
+        console.log(rowData);
         JSON.stringify(rowData);
         this.setState({ rowData });
       })
@@ -147,7 +147,7 @@ class UserAppreciation extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_appriciation/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dlt_appriciation/${id}`).then((response) => {
       console.log(response);
     });
   }

@@ -53,15 +53,8 @@ export default class AddStartUp extends Component {
     data.append("video_link", this.state.video_link);
     data.append("image", this.state.selectedFile, this.state.selectedName);
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     axiosConfig
-      .post("/addStartup", data)
+      .post("/admin/addStartup", data)
 
       .then((response) => {
         console.log(response.data);

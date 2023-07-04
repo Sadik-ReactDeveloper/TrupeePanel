@@ -43,17 +43,12 @@ class PnLSheetList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
         headerName: "P&L Image",
         field: "pnlimg",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -119,17 +114,17 @@ class PnLSheetList extends React.Component {
       //       ) : null;
       //     },
       //   },
-        {
-          headerName: "Actions",
-          field: "sortorder",
-          // field: "transactions",
-          width: 150,
-          pinned: window.innerWidth > 992 ? "right" : false,
+      {
+        headerName: "Actions",
+        field: "sortorder",
+        // field: "transactions",
+        width: 150,
+        pinned: window.innerWidth > 992 ? "right" : false,
 
-          cellRendererFramework: (params) => {
-            return (
-              <div className="actions cursor-pointer">
-                {/* <Smartphone
+        cellRendererFramework: (params) => {
+          return (
+            <div className="actions cursor-pointer">
+              {/* <Smartphone
       //             className="mr-50"
       //             size="25px"
       //             color={params.data.status === "Active" ? "green" : "red"}
@@ -138,7 +133,7 @@ class PnLSheetList extends React.Component {
       //               this.runthisfunctionEdit(params.data._id, selectedData);
       //             }}
       //           /> */}
-                 {/* <Route
+              {/* <Route
       //             render={({ history }) => (
       //               <Edit
       //                 className="mr-50"
@@ -153,40 +148,40 @@ class PnLSheetList extends React.Component {
       //             )}
       //           /> */}
 
-                <Trash2
-                  size={20}
-                  color="red"
-                  onClick={() => {
-                    let selectedData = this.gridApi.getSelectedRows();
-                    this.runthisfunction(params.data._id);
-                    this.gridApi.updateRowData({ remove: selectedData });
-                  }}
-                />
-              </div>
-            );
-          },
+              <Trash2
+                size={20}
+                color="red"
+                onClick={() => {
+                  let selectedData = this.gridApi.getSelectedRows();
+                  this.runthisfunction(params.data._id);
+                  this.gridApi.updateRowData({ remove: selectedData });
+                }}
+              />
+            </div>
+          );
         },
+      },
     ],
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/getPnlSheet`).then((response) => {
+    await axiosConfig.get(`/admin/getPnlSheet`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
   }
-    async runthisfunction(id) {
-      console.log(id);
-      await axiosConfig.get(`/dltPnlsheet/${id}`).then(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig.get(`/dltPnlsheet/${id}`).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   onGridReady = (params) => {
     this.gridApi = params.api;
@@ -224,10 +219,9 @@ class PnLSheetList extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                  P&L Screenshort List
+                    P&L Screenshort List
                   </h1>
                 </Col>
-               
               </Row>
               <CardBody>
                 {this.state.rowData === null ? null : (

@@ -40,7 +40,7 @@ class AddTermsCondition extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     axiosConfig
-      .post("/add_term_cond", this.state)
+      .post("/admin/add_term_cond", this.state)
       .then((response) => {
         console.log(response);
         this.props.history.push(

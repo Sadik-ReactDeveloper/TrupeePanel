@@ -156,7 +156,7 @@ class TrupeeUnivercity extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/get_Tuniversity`)
+      .get(`/admin/get_Tuniversity`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
@@ -209,7 +209,7 @@ class TrupeeUnivercity extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    Trupee Univercity List
+                    Trupee University List
                   </h1>
                 </Col>
 

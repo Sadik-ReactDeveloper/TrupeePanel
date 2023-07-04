@@ -123,7 +123,7 @@ class FeedBackList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/getFeedback").then((response) => {
+    await axiosConfig.get("/admin/getFeedback").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -131,7 +131,7 @@ class FeedBackList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltFeedback/${id}`).then(
+    await axiosConfig.get(`/admin/dltFeedback/${id}`).then(
       (response) => {
         console.log(response);
       },

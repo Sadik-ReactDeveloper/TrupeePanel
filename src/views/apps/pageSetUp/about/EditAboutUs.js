@@ -28,7 +28,7 @@ export default class EditAboutUs extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getone_aboutus/${id}`)
+      .get(`/admin/getone_aboutus/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -49,7 +49,7 @@ export default class EditAboutUs extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/edit_aboutus/${id}`, this.state)
+      .post(`/admin/edit_aboutus/${id}`, this.state)
       .then((response) => {
         console.log(response);
         // swal("Success!", "Submitted SuccessFull!", "success");

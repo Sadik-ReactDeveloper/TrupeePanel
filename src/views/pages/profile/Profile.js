@@ -43,11 +43,11 @@ class Profile extends React.Component {
 
   componentDidMount() {
     // let { id } = this.props.match.params;
+
     axiosConfig
-      .get(`admin/viewoneadmin/62e125db337df218d9c152f9`)
+      .get(`/admin/viewoneadmin/64a29c3f4af1c51350645a96`)
       .then((response) => {
-        //console.log(response.data);
-        console.log(response);
+        console.log(response.data);
         this.setState({
           data: response.data.data,
           name: response.data.data.name,
@@ -79,16 +79,9 @@ class Profile extends React.Component {
       data.append("adminimg", this.state.selectedFile, this.state.selectedName);
     }
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     //  let { id } = this.props.match.params;
     axiosConfig
-      .post(`admin/editAdmin/62e125db337df218d9c152f9`, data, {
+      .post(`admin/editAdmin/64a29c3f4af1c51350645a96`, data, {
         headers: {
           "ad-token": localStorage.getItem("ad-token"),
         },

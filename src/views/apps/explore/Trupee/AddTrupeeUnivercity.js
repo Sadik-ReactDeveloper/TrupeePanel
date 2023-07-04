@@ -43,11 +43,7 @@ export default class AddTU extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/add_Tuniversity", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/admin/add_Tuniversity", this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -69,12 +65,12 @@ export default class AddTU extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem
-                  href="/app/explore/Trupee/trupeeUnivercity"
+                  href="/app/explore/Trupee/trupeeUniversity"
                   tag="a"
                 >
-                  Trupee Univercity List
+                  Trupee University List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Add Trupee Univercity</BreadcrumbItem>
+                <BreadcrumbItem active>Add Trupee University</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -83,7 +79,7 @@ export default class AddTU extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Trupee Univercity
+                Add Trupee University
               </h1>
             </Col>
             <Col>

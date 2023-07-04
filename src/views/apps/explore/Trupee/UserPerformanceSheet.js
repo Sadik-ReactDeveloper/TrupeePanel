@@ -190,9 +190,10 @@ class UserPerformanceSheet extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/get_userPerSheet`)
+      .get(`/admin/get_userPerSheet`)
       .then((response) => {
         let rowData = response.data.data;
+        console.log(rowData);
         JSON.stringify(rowData);
         this.setState({ rowData });
       })
@@ -202,7 +203,7 @@ class UserPerformanceSheet extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_userPerSheet/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dlt_userPerSheet/${id}`).then((response) => {
       console.log(response);
     });
   }

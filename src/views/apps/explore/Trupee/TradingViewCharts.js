@@ -142,7 +142,7 @@ class TradingViewCharts extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/getAllChart`)
+      .get(`/admin/getAllChart`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
@@ -154,7 +154,7 @@ class TradingViewCharts extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_Chart/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dlt_Chart/${id}`).then((response) => {
       console.log(response);
     });
   }

@@ -115,7 +115,7 @@ class FaqList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig
-      .get("/faq_list", {
+      .get("/admin/faq_list", {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },

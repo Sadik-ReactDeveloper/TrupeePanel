@@ -127,10 +127,11 @@ class PaidServeiceList extends React.Component {
   };
   componentDidMount() {
     axiosConfig
-      .get(`/serviceslist`)
+      .get(`/admin/serviceslist`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
+        console.log(rowData);
         this.setState({ rowData });
       })
       .catch((error) => {
@@ -139,7 +140,7 @@ class PaidServeiceList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltPsrvc/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dltPsrvc/${id}`).then((response) => {
       console.log(response);
     });
   }

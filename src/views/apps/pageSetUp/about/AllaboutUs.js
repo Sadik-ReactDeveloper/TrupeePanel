@@ -113,7 +113,7 @@ class AllaboutUs extends React.Component {
     ],
   };
   async componentDidMount() {
-    await axiosConfig.get("/getAbout_us").then((response) => {
+    await axiosConfig.get("/admin/getAbout_us").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -121,7 +121,7 @@ class AllaboutUs extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dlt_abtus/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dlt_abtus/${id}`).then((response) => {
       console.log(response);
     });
   }
