@@ -170,7 +170,7 @@ class PerformanceSheet extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltPerSheet/${id}`).then((response) => {
+    await axiosConfig.get(`/admin/dltPerSheet/${id}`).then((response) => {
       console.log(response);
     });
   }

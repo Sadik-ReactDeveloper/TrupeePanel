@@ -95,7 +95,7 @@ export class AddTVC extends Component {
                   <Label>Title</Label>
                   <Input
                     type="text"
-                    placeholder="Enter MRP Price"
+                    placeholder="Enter Title"
                     name="title"
                     value={this.state.title}
                     onChange={this.changeHandler}
@@ -105,7 +105,7 @@ export class AddTVC extends Component {
                   <Label>Descripiton</Label>
                   <Input
                     type="text"
-                    placeholder="Enter Discount Price"
+                    placeholder="Enter Descripiton"
                     name="desc"
                     value={this.state.desc}
                     onChange={this.changeHandler}
