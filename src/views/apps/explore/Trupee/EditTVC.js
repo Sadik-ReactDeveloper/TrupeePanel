@@ -34,7 +34,7 @@ export default class EditTVC extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getone_charts/${id}`)
+      .get(`/admin/getone_charts/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -70,17 +70,10 @@ export default class EditTVC extends Component {
     data.append("chart_type", this.state.chart_type);
     data.append("image", this.state.selectedFile, this.state.selectedName);
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     let { id } = this.props.match.params;
     axiosConfig
       // .post(`/editsize/${id}`, this.state)
-      .post(`/edit_trendingChart/${id}`, data)
+      .post(`/admin/edit_trendingChart/${id}`, data)
 
       .then((response) => {
         console.log(response.data);
