@@ -154,23 +154,11 @@ export default class AddPS extends Component {
                       December
                     </option>
                   </Input>
-                  {/* <Label>Month</Label>
-                  <Input
-                    required
-                    name="month"
-                    placeholder=""
-                    value={this.state.month}
-                    onChange={this.changeHandler}
-                  >
-                    <select placeholder="MM">
-                     
-                    </select>
-                  </Input> */}
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Year</Label>
                   <Input
-                    type="text"
+                    type="number"
                     min="1900-2099"
                     max="2099"
                     step="1"
