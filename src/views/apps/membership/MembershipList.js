@@ -37,10 +37,6 @@ class MembershipList extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 80,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "User Name",
@@ -60,7 +56,7 @@ class MembershipList extends React.Component {
         headerName: "Mobile",
         field: "mobile",
         width: 120,
-        // pinned: window.innerWidth > 992 ? "left" : false,
+
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -74,7 +70,6 @@ class MembershipList extends React.Component {
         headerName: "Email",
         field: "email",
         width: 120,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -138,7 +133,6 @@ class MembershipList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <span>{moment(this.state.data?.expdate).format("DD-MM-YYYY")}</span> */}
               <span>{params.data.userid?.expdate}</span>
             </div>
           );
@@ -148,7 +142,6 @@ class MembershipList extends React.Component {
       {
         headerName: "Status",
         field: "status",
-        // filter: true,
         width: 130,
         cellRendererFramework: (params) => {
           return params.value === "Active" ? (

@@ -1,29 +1,9 @@
 import React from "react";
 import { Row, Col, Card, CardTitle, CardText } from "reactstrap";
 import SalesCard from "./SalesCard";
-// import SuberscribersGained from "../../ui-elements/cards/statistics/SubscriberGained"
-// import OrdersReceived from "../../ui-elements/cards/statistics/OrdersReceived"
-// import AvgSession from "../../ui-elements/cards/analytics/AvgSessions"
-// import SupportTracker from "../../ui-elements/cards/analytics/SupportTracker"
-// import ProductOrders from "../../ui-elements/cards/analytics/ProductOrders"
-// import SalesStat from "../../ui-elements/cards/analytics/Sales"
-// import ActivityTimeline from "./ActivityTimeline"
-// import DispatchedOrders from "./DispatchedOrders";
-// import Notification from "./Notification";
+
 import axiosConfig from "../../../axiosConfig";
 import "../../../assets/scss/pages/dashboard-analytics.scss";
-// import axios from "axios";
-// let $primary = "#7367F0",
-//   $danger = "#EA5455",
-//   $warning = "#FF9F43",
-//   $info = "#00cfe8",
-//   $primary_light = "#9c8cfc",
-//   $warning_light = "#FFC085",
-//   $danger_light = "#f29292",
-//   $info_light = "#1edec5",
-//   $stroke_color = "#e8e8e8",
-//   $label_color = "#e7eef7",
-//   $white = "#fff"
 
 class AnalyticsDashboard extends React.Component {
   constructor(props) {
@@ -46,7 +26,7 @@ class AnalyticsDashboard extends React.Component {
   componentDidMount() {
     // //end dealer //
     axiosConfig
-      .get("/totlactivetrade")
+      .get("/admin/totlactivetrade")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -57,7 +37,7 @@ class AnalyticsDashboard extends React.Component {
       });
 
     axiosConfig
-      .get("/ttlCompletetrade")
+      .get("/admin/ttlCompletetrade")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -68,7 +48,7 @@ class AnalyticsDashboard extends React.Component {
       });
 
     axiosConfig
-      .get("/ttlfreeusers")
+      .get("/admin/ttlfreeusers")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -78,7 +58,7 @@ class AnalyticsDashboard extends React.Component {
         console.log(error);
       });
     axiosConfig
-      .get("/today_profit_loss")
+      .get("/admin/today_profit_loss")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -89,7 +69,7 @@ class AnalyticsDashboard extends React.Component {
       });
 
     axiosConfig
-      .get("/weekely_profit_loss")
+      .get("/admin/weekely_profit_loss")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -99,7 +79,7 @@ class AnalyticsDashboard extends React.Component {
         console.log(error);
       });
     axiosConfig
-      .get("/monthly_profit_loss")
+      .get("/admin/monthly_profit_loss")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
@@ -130,7 +110,7 @@ class AnalyticsDashboard extends React.Component {
     //     console.log(error);
     //   });
     axiosConfig
-      .get("/ttlActiveuser")
+      .get("/admin/ttlActiveuser")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
