@@ -18,8 +18,6 @@ import axiosConfig from "../../../../axiosConfig";
 import { history } from "../../../../history";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
-// import Datetime from "react-datetime";
-// import DatePicker from "react-flatpickr";
 
 export default class AddTU extends Component {
   constructor(props) {
@@ -47,7 +45,7 @@ export default class AddTU extends Component {
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/explore/Trupee/trupeeUnivercity");
+        this.props.history.push("/app/explore/Trupee/trupeeUniversity");
       })
       .catch((error) => {
         console.log(error);
@@ -88,7 +86,7 @@ export default class AddTU extends Component {
                   <Button
                     className=" btn btn-danger float-right"
                     onClick={() =>
-                      history.push("/app/explore/Trupee/trupeeUnivercity")
+                      history.push("/app/explore/Trupee/trupeeUniversity")
                     }
                   >
                     Back
@@ -106,7 +104,7 @@ export default class AddTU extends Component {
                     required
                     type="text"
                     name="title"
-                    placeholder=""
+                    placeholder="Enter Title"
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
@@ -137,7 +135,7 @@ export default class AddTU extends Component {
                     required
                     type="text"
                     name="video_link"
-                    placeholder=""
+                    placeholder="Video Link"
                     value={this.state.video_link}
                     onChange={this.changeHandler}
                   ></Input>
@@ -148,35 +146,11 @@ export default class AddTU extends Component {
                     required
                     type="textarea"
                     name="desc"
-                    placeholder=""
+                    placeholder="Descripition"
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col>  */}
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
@@ -185,7 +159,7 @@ export default class AddTU extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add University
                   </Button.Ripple>
                 </Col>
               </Row>

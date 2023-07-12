@@ -41,9 +41,6 @@ class FnoEquityList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Script Name",
@@ -178,18 +175,6 @@ class FnoEquityList extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "P&L ",
-      //   field: "profit_loss_amt",
-      //   width: 140,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         <span>{params.data.profit_loss_amt}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         headerName: "P&L ",
         field: "pl",
@@ -347,25 +332,8 @@ class FnoEquityList extends React.Component {
           ) : null;
         },
       },
-      // {
-      //   headerName: "T5 Type",
-      //   field: "t5_type",
-      //   filter: true,
-      //   width: 150,
-      //   cellRendererFramework: (params) => {
-      //     return params.value === "true" ? (
-      //       <div className="badge badge-pill badge-success">
-      //         {params.data.t5_type}
-      //       </div>
-      //     ) : params.value === "false" ? (
-      //       <div className="badge badge-pill badge-warning">
-      //         {params.data.t5_type}
-      //       </div>
-      //     ) : null;
-      //   },
-      // },
       {
-        headerName: "status ",
+        headerName: "Status ",
         field: "status",
         filter: true,
         width: 150,
@@ -378,13 +346,16 @@ class FnoEquityList extends React.Component {
             <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
-          ) : null;
+          ) : (
+            <div className="badge badge-pill badge-danger">
+              {params.data.status}
+            </div>
+          );
         },
       },
       {
         headerName: "Actions",
         field: "sortorder",
-        // field: "transactions",
         width: 150,
         pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
@@ -418,9 +389,7 @@ class FnoEquityList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -430,24 +399,45 @@ class FnoEquityList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`admin/fnoEquity_list`).then((response) => {
+  componentDidMount() {
+    this.fnoEquity();
+  }
+  fnoEquity = () => {
+    axiosConfig.get(`admin/fnoEquity_list`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.fnoEquity();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
+
   async runthisfunctionEdit(id, selectedData) {
     console.log("@@selectedData", id, selectedData[0].t1);
     //

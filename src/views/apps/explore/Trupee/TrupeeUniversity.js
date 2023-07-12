@@ -20,8 +20,9 @@ import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
+import swal from "sweetalert";
 
-class TrupeeUnivercity extends React.Component {
+class TrupeeUniversity extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -41,16 +42,11 @@ class TrupeeUnivercity extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Title",
         field: "title",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -62,9 +58,7 @@ class TrupeeUnivercity extends React.Component {
       {
         headerName: "Descripiton",
         field: "desc",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -76,9 +70,7 @@ class TrupeeUnivercity extends React.Component {
       {
         headerName: "Upload Video",
         field: "video_link",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -143,9 +135,7 @@ class TrupeeUnivercity extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -155,6 +145,9 @@ class TrupeeUnivercity extends React.Component {
     ],
   };
   componentDidMount() {
+    this.truppeuniversity();
+  }
+  truppeuniversity = () => {
     axiosConfig
       .get(`/admin/get_Tuniversity`)
       .then((response) => {
@@ -165,14 +158,32 @@ class TrupeeUnivercity extends React.Component {
       .catch((error) => {
         console.log(error.response);
       });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dlt_Tuniversity/${id}`).then((response) => {
-      console.log(response);
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_Tuniversity/${id}`).then((response) => {
+            this.truppeuniversity();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -220,11 +231,11 @@ class TrupeeUnivercity extends React.Component {
                         className=" btn btn-success float-right"
                         onClick={() =>
                           history.push(
-                            "/app/explore/Trupee/addTrupeeUnivercity"
+                            "/app/explore/Trupee/addTrupeeUniversity"
                           )
                         }
                       >
-                        Add
+                        Add University
                       </Button>
                     )}
                   />
@@ -329,4 +340,4 @@ class TrupeeUnivercity extends React.Component {
     );
   }
 }
-export default TrupeeUnivercity;
+export default TrupeeUniversity;

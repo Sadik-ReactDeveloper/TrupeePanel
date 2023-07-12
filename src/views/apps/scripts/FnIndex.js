@@ -11,6 +11,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
+import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -110,9 +111,9 @@ class FnIndex extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
+                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
+                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -122,24 +123,45 @@ class FnIndex extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`/admin/getFnoScript`).then((response) => {
+  componentDidMount() {
+    this.getFnoList();
+  }
+  getFnoList = () => {
+    axiosConfig.get(`/admin/getFnoScript`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dltFnoScript/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltFnoScript/${id}`).then((response) => {
+            this.getFnoList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
+
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -176,7 +198,7 @@ class FnIndex extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    FNO Index script List
+                    FNO Index Script List
                   </h1>
                 </Col>
                 <Col className="pt-4">

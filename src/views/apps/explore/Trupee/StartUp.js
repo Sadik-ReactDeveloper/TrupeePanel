@@ -20,6 +20,7 @@ import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
+import swal from "sweetalert";
 class StartUp extends React.Component {
   state = {
     rowData: [],
@@ -130,9 +131,7 @@ class StartUp extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -142,24 +141,52 @@ class StartUp extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get("/admin/get_startup").then((response) => {
+  componentDidMount() {
+    this.startupList();
+  }
+  startupList = () => {
+    axiosConfig.get("/admin/get_startup").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_startup/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_startup/${id}`).then((response) => {
+            this.startupList();
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/admin/dlt_startup/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

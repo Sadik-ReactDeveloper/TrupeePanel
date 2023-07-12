@@ -83,11 +83,7 @@ export default class EditSize extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/editprofile/${id}`, this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post(`/admin/editprofile/${id}`, this.state, {})
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -138,7 +134,7 @@ export default class EditSize extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>User Name</Label>
                   <Input
                     type="text"
@@ -221,7 +217,7 @@ export default class EditSize extends Component {
                     value={this.state.expdate}
                     onChange={this.changeHandler}
                   ></Input>
-                </Col>
+                </Col> */}
 
                 <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
                   <Label className="mb-1">Status</Label>

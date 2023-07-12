@@ -35,14 +35,11 @@ export default class AddCashEqutiy extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/admin/addCashScript", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/admin/addCashScript", this.state)
       .then((response) => {
+        this.setState({ scriptName: "" });
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/scripts/cashEquity");
+        // this.props.history.push("/app/scripts/cashEquity");
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +68,7 @@ export default class AddCashEqutiy extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                ADD CASH EQUTIY SCRIT LIST
+                ADD CASH EQUTIY SCRITP
               </h1>
             </Col>
             <Col>
@@ -96,7 +93,7 @@ export default class AddCashEqutiy extends Component {
                     required
                     type="text"
                     name="scriptName"
-                    placeholder=""
+                    placeholder="Script Name"
                     value={this.state.scriptName}
                     onChange={this.changeHandler}
                   ></Input>
@@ -132,7 +129,7 @@ export default class AddCashEqutiy extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    ADD CASH EQUTIY
                   </Button.Ripple>
                 </Col>
               </Row>

@@ -41,9 +41,9 @@ export default class AddFnoOption extends Component {
         // },
       })
       .then((response) => {
-        console.log(response);
+        this.setState({ scriptName: "" });
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/scripts/fnoOption");
+        // this.props.history.push("/app/scripts/fnoOption");
       })
       .catch((error) => {
         console.log(error);
@@ -114,7 +114,7 @@ export default class AddFnoOption extends Component {
                     required
                     type="text"
                     name="scriptName"
-                    placeholder=""
+                    placeholder="Script Name"
                     value={this.state.scriptName}
                     onChange={this.changeHandler}
                   ></Input>
@@ -150,7 +150,7 @@ export default class AddFnoOption extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    ADD FNO OPTIONS SCRIPT
                   </Button.Ripple>
                 </Col>
               </Row>

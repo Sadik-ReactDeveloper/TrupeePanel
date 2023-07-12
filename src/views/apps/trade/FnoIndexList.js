@@ -12,7 +12,6 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-import moment from "moment";
 
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -42,9 +41,6 @@ class FnoIndexList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
@@ -418,40 +414,43 @@ class FnoIndexList extends React.Component {
       // },
 
       {
-        headerName: "status ",
+        headerName: "Status ",
         field: "status",
         filter: true,
         width: 150,
 
         cellRendererFramework: (params) => {
-          // return params.value === "Active" ? (
-
-          //   <div className="badge badge-pill badge-success">
-          //     {params.data.status}
-          //   </div>
-          // ) : params.value === "NA" ? (
-          //   <div className="badge badge-pill badge-danger">
-          //     {params.data.status}
-          //   </div>
-          // ) : null;
-
-          return params?.data?.FT1_type == "true" ||
-            params?.data?.FT2_type == "true" ||
-            params?.data?.FT3_type == "true" ||
-            params?.data?.FT5_type == "true" ||
-            params?.data?.trl_type == "true" ? (
+          return params.value === "Active" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
             </div>
-          ) : params?.data?.sl_type == "true" ? (
-            <div className="badge badge-pill badge-danger">
+          ) : params.value === "Deactive" ? (
+            <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
           ) : (
-            <div className="badge badge-pill badge-secondary">
+            <div className="badge badge-pill badge-danger">
               {params.data.status}
             </div>
           );
+
+          // return params?.data?.FT1_type == "true" ||
+          //   params?.data?.FT2_type == "true" ||
+          //   params?.data?.FT3_type == "true" ||
+          //   params?.data?.FT5_type == "true" ||
+          //   params?.data?.trl_type == "true" ? (
+          //   <div className="badge badge-pill badge-success">
+          //     {params.data.status}
+          //   </div>
+          // ) : params?.data?.sl_type == "true" ? (
+          //   <div className="badge badge-pill badge-danger">
+          //     {params.data.status}
+          //   </div>
+          // ) : (
+          //   <div className="badge badge-pill badge-secondary">
+          //     {params.data.status}
+          //   </div>
+          // );
         },
       },
       {
@@ -489,9 +488,9 @@ class FnoIndexList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
+                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
+                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -501,21 +500,40 @@ class FnoIndexList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
-      const rowData = response.data.data;
+  componentDidMount() {
+    this.fnoindexList();
+  }
 
+  fnoindexList = () => {
+    axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
+      const rowData = response.data.data;
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
-      (response) => {},
-      (error) => {
-        console.log(error);
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.fnoindexList();
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   async runthisfunctionEdit(id, selectedData) {
@@ -549,7 +567,6 @@ class FnoIndexList extends React.Component {
       .then((response) => {
         console.log("sdjgsjdgjhgsdjh", response);
         swal("Success!", "Status " + status + " SuccessFull!", "success");
-        // this.props.history.push("/app/trade/fnoIndexList");
         window.location.reload();
       })
       .catch((error) => {

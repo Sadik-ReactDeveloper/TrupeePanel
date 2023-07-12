@@ -237,7 +237,7 @@ class PurchaseOrderList extends React.Component {
                           type="date"
                           placeholder="Created At From"
                           onChange={(e) =>
-                          this.updateSearchQuery(e.target.value)
+                            this.updateSearchQuery(e.target.value)
                           }
                           value={this.state.value}
                         />

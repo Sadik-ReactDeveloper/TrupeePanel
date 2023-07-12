@@ -10,15 +10,13 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
-import { ChevronDown, Trash2, Edit } from "react-feather";
+import { ChevronDown, Trash2, Eye, Edit } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
-// import moment from "moment";
-
+import swal from "sweetalert";
 class MembershipList extends React.Component {
   state = {
     rowData: [],
@@ -163,6 +161,18 @@ class MembershipList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
+              {/* <Route
+                render={({ history }) => (
+                  <Eye
+                    className="mr-50"
+                    color="green"
+                    size={20}
+                    onClick={() =>
+                      history.push(`/app/users/viewUsers/${params.data._id}`)
+                    }
+                  />
+                )}
+              /> */}
               <Route
                 render={({ history }) => (
                   <Edit
@@ -183,9 +193,7 @@ class MembershipList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -194,19 +202,43 @@ class MembershipList extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/allmembership").then((response) => {
+  componentDidMount() {
+    this.membershipDataList();
+  }
+  membershipDataList = () => {
+    axiosConfig.get("/admin/allmembership").then((response) => {
       const rowData = response.data.data;
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_membership/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_membership/${id}`).then((response) => {
+            this.membershipDataList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

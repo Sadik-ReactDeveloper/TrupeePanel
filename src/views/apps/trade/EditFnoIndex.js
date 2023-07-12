@@ -62,7 +62,6 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
-        console.log("sl_type response", response.data.data.sl_type);
         this.setState({
           expiryDate: response.data.data.expiryDate,
           script_type: response.data.data.script_type,
@@ -102,7 +101,6 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get("/admin/getFnoScript")
       .then((response) => {
-        console.log(response);
         this.setState({
           scriptN: response.data.data,
         });
@@ -114,7 +112,6 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get("/admin/datelist")
       .then((response) => {
-        console.log(response);
         this.setState({
           expdateI: response.data.data,
         });
@@ -197,14 +194,13 @@ class EditFnoIndex extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
-
+    console.log("object", id);
     axiosConfig
       .post(`/admin/editFnoindex/${id}`, this.state)
 
       .then((response) => {
         console.log("EditFNOIndex", response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/trade/fnoIndexList");
       })
       .catch((error) => {
         console.log(error);

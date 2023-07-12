@@ -15,7 +15,7 @@ import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
+import swal from "sweetalert";
 import { history } from "../../../history";
 import { Route } from "react-router-dom";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
@@ -40,9 +40,6 @@ class FaqList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Title",
@@ -101,9 +98,7 @@ class FaqList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -113,29 +108,61 @@ class FaqList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig
-      .get("/admin/faq_list", {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
-      .then((response) => {
-        const rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+  // async componentDidMount() {
+  //   await axiosConfig.get("/admin/faq_list", {}).then((response) => {
+  //     const rowData = response.data.data;
+  //     console.log(rowData);
+  //     this.setState({ rowData });
+  //   });
+  // }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/dltFaq/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+  componentDidMount() {
+    this.fnoEquity();
   }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dltFaq/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  fnoEquity = () => {
+    axiosConfig.get(`/admin/faq_list`).then((response) => {
+      const rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltFaq/${id}`).then((response) => {
+            this.fnoEquity();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
   onGridReady = (params) => {
     this.gridApi = params.api;

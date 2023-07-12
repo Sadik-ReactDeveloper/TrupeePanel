@@ -28,11 +28,7 @@ export default class EditOption extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/getoneEquityScript/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/getoneEquityScript/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -55,15 +51,10 @@ export default class EditOption extends Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/admin/editEquityScript/${id}`, this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post(`/admin/editEquityScript/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        this.setState({ scriptName: "" });
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/scripts/fnoOption");
       })
       .catch((error) => {
         console.log(error);
@@ -116,7 +107,7 @@ export default class EditOption extends Component {
                     required
                     type="text"
                     name="scriptName"
-                    placeholder=""
+                    placeholder="Script Name"
                     value={this.state.scriptName}
                     onChange={this.changeHandler}
                   ></Input>

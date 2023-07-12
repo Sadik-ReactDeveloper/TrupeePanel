@@ -8,11 +8,9 @@ import {
   Input,
   Label,
   Button,
-  // FormGroup,
   CustomInput,
 } from "reactstrap";
 import { Route } from "react-router-dom";
-// import Select from "react-select";
 // import { history } from "../../../history";
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
@@ -31,11 +29,11 @@ export class AddFnoIndex extends Component {
       no_of_lots: "",
       trade_type: "",
       t5: "",
-      type: "Index",
       status: "",
       cstmMsg: "",
     };
     this.state = {
+      type: "Index",
       scriptN: [],
       expdateI: [],
     };
@@ -73,11 +71,11 @@ export class AddFnoIndex extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-
+    console.log("type", this.state);
     axiosConfig
       .post("/admin/add_fnoIndex", this.state)
       .then((response) => {
-        console.log(response);
+        console.log("add Data", response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/fnoIndexList");
       })
@@ -127,10 +125,11 @@ export class AddFnoIndex extends Component {
                   <CustomInput
                     type="select"
                     name="fnoindex_scrpt_name"
-                    value={this.state.scriptName}
+                    required
+                    value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>select script</option>
+                    <option>Select Script</option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -143,6 +142,7 @@ export class AddFnoIndex extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    required
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -157,15 +157,13 @@ export class AddFnoIndex extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Equity Script</Label>
                   <Input
-                    id="exampleSelect"
+                    // id="exampleSelect"
                     name="script_type"
                     type="select"
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
                     <option>Select Script</option>
-                    {/* <option>CE</option>
-                    <option>PF</option> */}
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -267,7 +265,7 @@ export class AddFnoIndex extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Quantity</Label>
                   <Input
                     type="number"
@@ -276,7 +274,7 @@ export class AddFnoIndex extends Component {
                     value={this.state.qty}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Number Of Lots</Label>
                   <Input
@@ -288,7 +286,7 @@ export class AddFnoIndex extends Component {
                   />
                 </Col>
 
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label> Type </Label>
                   <Input
                     type="select"
@@ -300,7 +298,7 @@ export class AddFnoIndex extends Component {
                     <option>Select type</option>
                     <option>Index</option>
                   </Input>
-                </Col>
+                </Col> */}
                 {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
@@ -311,7 +309,7 @@ export class AddFnoIndex extends Component {
                     onChange={this.changeHandler}
                   /> 
                    </Col>*/}
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
                   <div
                     className="form-label-group"
@@ -333,7 +331,7 @@ export class AddFnoIndex extends Component {
                     />
                     <span style={{ marginRight: "3px" }}>Inactive</span>
                   </div>
-                </Col>
+                </Col> */}
                 {/* <span>
                     <b> We will type 210+ Keep booking or trailing stop loss</b>
                   </span> */}

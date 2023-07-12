@@ -11,16 +11,13 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import axios from "axios";
+import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { ChevronDown, Trash2, Eye, Edit } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
-import moment from "moment";
 
 class UsersList extends React.Component {
   state = {
@@ -185,9 +182,7 @@ class UsersList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -196,20 +191,44 @@ class UsersList extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/getuser").then((response) => {
+  componentDidMount() {
+    this.allUserLis();
+  }
+  allUserLis = () => {
+    axiosConfig.get("/admin/getuser").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/deletuser/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/deletuser/${id}`).then((response) => {
+            this.allUserLis();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -244,7 +263,7 @@ class UsersList extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Users List
+                  All Users List
                 </h1>
               </Col>
             </Row>

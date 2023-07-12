@@ -111,7 +111,7 @@ export default class AddStartUp extends Component {
                     required
                     type="text"
                     name="title"
-                    placeholder=""
+                    placeholder="Title"
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
@@ -132,7 +132,7 @@ export default class AddStartUp extends Component {
                     required
                     type="textarea"
                     name="desc"
-                    placeholder=""
+                    placeholder="Descripition"
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   ></Input>
@@ -168,7 +168,7 @@ export default class AddStartUp extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add General Notification
                   </Button.Ripple>
                 </Col>
               </Row>

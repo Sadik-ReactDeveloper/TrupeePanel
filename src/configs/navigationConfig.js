@@ -163,12 +163,12 @@ const navigationConfig = [
   },
 
   {
-    id: "paidServeiceList",
+    id: "paidServiceList",
     title: "Premium Service ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/premium/paidServeiceList",
+    navLink: "/app/premium/paidServiceList",
   },
   // {
   //   id: "userSpreedSheet",
@@ -242,12 +242,12 @@ const navigationConfig = [
     navLink: "/app/explore/Trupee/startUp",
   },
   {
-    id: "trupeeUnivercity",
-    title: "Trupee Univercity List ",
+    id: "trupeeUniversity",
+    title: "Trupee University List ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/explore/Trupee/trupeeUnivercity",
+    navLink: "/app/explore/Trupee/trupeeUniversity",
   },
   {
     id: "performanceSheet",

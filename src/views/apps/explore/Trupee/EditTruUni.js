@@ -27,14 +27,12 @@ export default class EditTruUni extends Component {
       desc: "",
       //   image: "",
       video_link: "",
-      //   selectedName: "",
-      //   selectedFile: null,
     };
   }
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getone_Tuniversity/${id}`)
+      .get(`/admin/getone_Tuniversity/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -65,17 +63,9 @@ export default class EditTruUni extends Component {
     data.append("desc", this.state.desc);
     data.append("video_link", this.state.video_link);
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     let { id } = this.props.match.params;
     axiosConfig
-      // .post(`/editsize/${id}`, this.state)
-      .post(`/edit_Tuniversity/${id}`, this.state)
+      .post(`/admin/edit_Tuniversity/${id}`, this.state)
 
       .then((response) => {
         console.log(response.data);
@@ -99,7 +89,7 @@ export default class EditTruUni extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/explore/Trupee/startUp" tag="a">
-                  Trupee Univercity List
+                  Trupee University List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Edit StartUp</BreadcrumbItem>
               </Breadcrumb>
@@ -110,7 +100,7 @@ export default class EditTruUni extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Edit Trupee Univercity
+                Edit Trupee University
               </h1>
             </Col>
             <Col>
@@ -119,7 +109,7 @@ export default class EditTruUni extends Component {
                   <Button
                     className=" btn btn-danger float-right"
                     onClick={() =>
-                      history.push("/app/explore/Trupee/trupeeUnivercity")
+                      history.push("/app/explore/Trupee/trupeeUniversity")
                     }
                   >
                     Back
@@ -137,7 +127,7 @@ export default class EditTruUni extends Component {
                     required
                     type="text"
                     name="title"
-                    placeholder=""
+                    placeholder="Enter Title"
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
@@ -149,7 +139,7 @@ export default class EditTruUni extends Component {
                     required
                     type="text"
                     name="video_link"
-                    placeholder=""
+                    placeholder="Video Link"
                     value={this.state.video_link}
                     onChange={this.changeHandler}
                   ></Input>
@@ -160,7 +150,7 @@ export default class EditTruUni extends Component {
                     required
                     type="textarea"
                     name="desc"
-                    placeholder=""
+                    placeholder="Descripition"
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   ></Input>

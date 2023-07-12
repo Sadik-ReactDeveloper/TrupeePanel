@@ -18,7 +18,7 @@ import { Edit, Trash2, ChevronDown } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
-
+import swal from "sweetalert";
 class CashEquityList extends React.Component {
   state = {
     rowData: [],
@@ -39,9 +39,6 @@ class CashEquityList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Script Name",
@@ -99,9 +96,7 @@ class CashEquityList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -110,15 +105,44 @@ class CashEquityList extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("admin/getCashScript").then((response) => {
+  componentDidMount() {
+    this.getCashList();
+  }
+  getCashList = () => {
+    axiosConfig.get("admin/getCashScript").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltCashScript/${id}`).then((response) => {
+            this.getCashList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
-  async runthisfunction(id) {
-    await axiosConfig.get(`/dltCashScript/${id}`).then((response) => {});
-  }
+
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -155,7 +179,7 @@ class CashEquityList extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    Cash Equity script List
+                    Cash Equity Script List
                   </h1>
                 </Col>
                 <Col className="pt-4">

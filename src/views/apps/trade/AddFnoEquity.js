@@ -23,6 +23,7 @@ export class AddFnoEquity extends Component {
     this.state = {
       script_type: "",
       fnoequty_scrpt_name: "",
+      script_name: "",
       active_value: "",
       active_value2: "",
       call_type: "",
@@ -41,11 +42,12 @@ export class AddFnoEquity extends Component {
       qty: "",
       no_of_lots: "",
       expiryDate: "",
-      type: "Equity",
+
       cstmMsg: "",
     };
     this.state = {
       // scriptT: [],
+      type: "Equity",
       scriptN: [],
       expdateI: [],
     };
@@ -56,7 +58,6 @@ export class AddFnoEquity extends Component {
       .get("/admin/getEquityScript")
       .then((response) => {
         this.setState({
-          // scriptT: response.data.data,
           scriptN: response.data.data,
         });
       })
@@ -84,6 +85,7 @@ export class AddFnoEquity extends Component {
     axiosConfig
       .post("/admin/add_fnoEquity", this.state)
       .then((response) => {
+        console.log("option", response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/fnoEquityList");
       })
@@ -123,10 +125,10 @@ export class AddFnoEquity extends Component {
                   <CustomInput
                     type="select"
                     name="fnoequty_scrpt_name"
-                    value={this.state.scriptName}
+                    value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>select script</option>
+                    <option>Select Script</option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -160,8 +162,6 @@ export class AddFnoEquity extends Component {
                     onChange={this.changeHandler}
                   >
                     <option>Select Script</option>
-                    {/* <option>CE</option>
-                    <option>PF</option> */}
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -297,7 +297,7 @@ export class AddFnoEquity extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Type</Label>
                   <Input
                     type="select"
@@ -309,7 +309,7 @@ export class AddFnoEquity extends Component {
                     <option>Select type</option>
                     <option>Equity</option>
                   </Input>
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input

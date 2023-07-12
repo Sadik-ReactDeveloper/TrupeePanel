@@ -19,6 +19,7 @@ import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import swal from "sweetalert";
 class FeedBackList extends React.Component {
   state = {
     rowData: [],
@@ -110,9 +111,7 @@ class FeedBackList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -122,23 +121,41 @@ class FeedBackList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get("/admin/getFeedback").then((response) => {
+  componentDidMount() {
+    this.feedback();
+  }
+  feedback = () => {
+    axiosConfig.get("/admin/getFeedback").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dltFeedback/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltFeedback/${id}`).then((response) => {
+            this.feedback();
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
   onGridReady = (params) => {
     this.gridApi = params.api;

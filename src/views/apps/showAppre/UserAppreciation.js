@@ -20,6 +20,7 @@ import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 // import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
+import swal from "sweetalert";
 class UserAppreciation extends React.Component {
   state = {
     rowData: [],
@@ -120,9 +121,7 @@ class UserAppreciation extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -132,6 +131,9 @@ class UserAppreciation extends React.Component {
     ],
   };
   componentDidMount() {
+    this.userAppeciation();
+  }
+  userAppeciation = () => {
     axiosConfig
       .get(`/admin/appriciation_list`)
       .then((response) => {
@@ -143,15 +145,38 @@ class UserAppreciation extends React.Component {
       .catch((error) => {
         console.log(error.response);
       });
-  }
+  };
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/admin/dlt_appriciation/${id}`).then((response) => {
+  //     console.log(response);
+  //   });
+  // }
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
 
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_appriciation/${id}`).then((response) => {
-      console.log(response);
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_appriciation/${id}`).then((response) => {
+            this.feedback();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

@@ -9,11 +9,7 @@ import {
   Button,
 } from "reactstrap";
 import { history } from "../../../../history";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 import "../../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../../axiosConfig";
 import Swiper from "react-id-swiper";

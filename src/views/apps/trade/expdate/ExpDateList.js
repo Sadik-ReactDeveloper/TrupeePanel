@@ -18,7 +18,7 @@ import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import { Route } from "react-router-dom";
 // import moment from "moment";
-
+import swal from "sweetalert";
 class ExpDateList extends React.Component {
   state = {
     rowData: [],
@@ -85,9 +85,9 @@ class ExpDateList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
+                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
+                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -96,16 +96,42 @@ class ExpDateList extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/datelist").then((response) => {
+  componentDidMount() {
+    this.updateList();
+  }
+  updateList = () => {
+    axiosConfig.get("/admin/datelist").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    await axiosConfig.get(`/admin/dltDate/${id}`).then((response) => {});
-  }
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
 
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltDate/${id}`).then((response) => {
+            this.updateList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
+  }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

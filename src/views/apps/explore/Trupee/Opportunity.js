@@ -17,6 +17,7 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2 } from "react-feather";
 import axiosConfig from "../../../../axiosConfig";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
+import swal from "sweetalert";
 // import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 
 class Opportunity extends React.Component {
@@ -117,9 +118,7 @@ class Opportunity extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -129,6 +128,9 @@ class Opportunity extends React.Component {
     ],
   };
   componentDidMount() {
+    this.Opportunity();
+  }
+  Opportunity = () => {
     axiosConfig
       .get(`/admin/getOportunity`)
       .then((response) => {
@@ -139,14 +141,33 @@ class Opportunity extends React.Component {
       .catch((error) => {
         console.log(error.response);
       });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dltOportunity/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`admin/dltOportunity/${id}`).then((response) => {
+            this.Opportunity();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

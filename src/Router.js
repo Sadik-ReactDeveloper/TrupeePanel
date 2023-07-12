@@ -167,11 +167,11 @@ const FaqList = lazy(() => import("./views/apps/faq/FaqList"));
 const AddFaq = lazy(() => import("./views/apps/faq/AddFaq"));
 
 //Premium//
-const AddPaidServeice = lazy(() =>
-  import("./views/apps/premium/AddPaidServeice")
+const AddPaidService = lazy(() =>
+  import("./views/apps/premium/AddPaidService")
 );
-const PaidServeiceList = lazy(() =>
-  import("./views/apps/premium/PaidServeiceList")
+const PaidServiceList = lazy(() =>
+  import("./views/apps/premium/PaidServiceList")
 );
 
 // Appreciation//
@@ -188,11 +188,11 @@ const UserAppreciation = lazy(() =>
   import("./views/apps/showAppre/UserAppreciation")
 );
 // Explore//
-const TrupeeUnivercity = lazy(() =>
-  import("./views/apps/explore/Trupee/TrupeeUnivercity")
+const TrupeeUniversity = lazy(() =>
+  import("./views/apps/explore/Trupee/TrupeeUniversity")
 );
-const AddTrupeeUnivercity = lazy(() =>
-  import("./views/apps/explore/Trupee/AddTrupeeUnivercity")
+const AddTrupeeUniversity = lazy(() =>
+  import("./views/apps/explore/Trupee/AddTrupeeUniversity")
 );
 const EditTruUni = lazy(() => import("./views/apps/explore/Trupee/EditTruUni"));
 
@@ -516,12 +516,12 @@ class AppRouter extends React.Component {
             />
             {/* Premium */}
             <AppRoute
-              path="/app/premium/paidServeiceList"
-              component={PaidServeiceList}
+              path="/app/premium/paidServiceList"
+              component={PaidServiceList}
             />
             <AppRoute
-              path="/app/premium/addPaidServeice"
-              component={AddPaidServeice}
+              path="/app/premium/addPaidService"
+              component={AddPaidService}
             />
             {/* scripts */}
             <AppRoute path="/app/scripts/fnIndex" component={FnIndex} />
@@ -657,12 +657,12 @@ class AppRouter extends React.Component {
             />
             {/* Explore */}
             <AppRoute
-              path="/app/explore/Trupee/trupeeUnivercity"
-              component={TrupeeUnivercity}
+              path="/app/explore/Trupee/trupeeUniversity"
+              component={TrupeeUniversity}
             />
             <AppRoute
-              path="/app/explore/Trupee/addTrupeeUnivercity"
-              component={AddTrupeeUnivercity}
+              path="/app/explore/Trupee/addTrupeeUniversity"
+              component={AddTrupeeUniversity}
             />
             <AppRoute
               path="/app/explore/Trupee/editTruUni/:id"

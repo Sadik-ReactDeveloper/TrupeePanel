@@ -23,13 +23,12 @@ export default class AddMembership extends Component {
       mrp_price: "",
       desc: "",
       des_price: "",
-
-      status: "",
+      // status: "",
     };
   }
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
+  // changeHandler1 = (e) => {
+  //   this.setState({ status: e.target.value });
+  // };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -60,9 +59,9 @@ export default class AddMembership extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/package/PackagePlanList" tag="a">
-                  Membership List
+                  Package Plan List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Add Membership</BreadcrumbItem>
+                <BreadcrumbItem active>Add Package Plan</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -71,7 +70,7 @@ export default class AddMembership extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Membership
+                Add Package Plan
               </h1>
             </Col>
             <Col>
@@ -114,10 +113,10 @@ export default class AddMembership extends Component {
                   >
                     <option>Select Plan</option>
                     <option>FREE</option>
-                    <option>1 Month</option>
-                    <option>3 Month</option>
-                    <option>6 Month</option>
-                    <option>1 Year</option>
+                    <option>30 Days</option>
+                    <option>90 Days</option>
+                    <option>180 Days</option>
+                    <option>365 Days</option>
                   </Input>
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
@@ -141,38 +140,14 @@ export default class AddMembership extends Component {
                   />
                 </Col>{" "}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Discount </Label>
+                  <Label>Offer % </Label>
                   <Input
                     type="number"
-                    placeholder="Enter Discount "
+                    placeholder="Offer %"
                     name="desc"
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   />
-                </Col>{" "}
-                <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
                 </Col>
               </Row>
               <Row>
@@ -182,7 +157,7 @@ export default class AddMembership extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add Package Plan
                   </Button.Ripple>
                 </Col>
               </Row>

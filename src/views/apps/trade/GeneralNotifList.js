@@ -12,6 +12,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
+import swal from "sweetalert";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -40,9 +41,6 @@ class GeneralNotifList extends React.Component {
         field: "node.rowIndex + 1",
         width: 150,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Title ",
@@ -74,7 +72,6 @@ class GeneralNotifList extends React.Component {
       {
         headerName: "Upload Image",
         field: "img",
-        // filter: true,
         width: 200,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
@@ -89,7 +86,6 @@ class GeneralNotifList extends React.Component {
       {
         headerName: "Actions",
         field: "sortorder",
-        // field: "transactions",
         width: 200,
         cellRendererFramework: (params) => {
           return (
@@ -106,9 +102,7 @@ class GeneralNotifList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -118,23 +112,57 @@ class GeneralNotifList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get("/admin/get_notification").then((response) => {
+  // async componentDidMount() {
+  //   await axiosConfig.get("/admin/get_notification").then((response) => {
+  //     const rowData = response.data.data;
+  //     console.log(rowData);
+  //     this.setState({ rowData });
+  //   });
+  // }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/dlt_notification/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+  alltradeList = () => {
+    axiosConfig.get(`/admin/get_notification`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dlt_notification/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.alltradeList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
   onGridReady = (params) => {
     this.gridApi = params.api;

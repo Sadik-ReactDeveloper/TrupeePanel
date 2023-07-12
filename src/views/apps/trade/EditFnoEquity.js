@@ -38,7 +38,7 @@ class EditFnoEquity extends React.Component {
       T5: "",
       t5_type: false,
       qty: "",
-      investment_amt: "",
+      // investment_amt: "",
       no_of_lots: "",
       pl_type: "",
       profit_loss_amt: "",
@@ -80,7 +80,7 @@ class EditFnoEquity extends React.Component {
           T6: response.data.data.T6,
           T7: response.data.data.T7,
           qty: response.data.data.qty,
-          investment_amt: response.data.data.investment_amt,
+          // investment_amt: response.data.data.investment_amt,
           no_of_lots: response.data.data.no_of_lots,
           sl_type: response.data.data.sl_type,
           t1_type: response.data.data.t1_type,
@@ -197,7 +197,6 @@ class EditFnoEquity extends React.Component {
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/trade/fnoEquityList");
       })
       .catch((error) => {
         console.log(error);
@@ -243,7 +242,7 @@ class EditFnoEquity extends React.Component {
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>select script</option>
+                    {/* <option>select script</option> */}
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -259,7 +258,7 @@ class EditFnoEquity extends React.Component {
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    <option>Expiry Date</option>
+                    {/* <option>Expiry Date</option> */}
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}

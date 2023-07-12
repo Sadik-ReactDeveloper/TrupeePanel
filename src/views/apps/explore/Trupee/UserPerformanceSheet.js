@@ -17,6 +17,7 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import axiosConfig from "../../../../axiosConfig";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
+import swal from "sweetalert";
 // import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 
 class UserPerformanceSheet extends React.Component {
@@ -177,9 +178,7 @@ class UserPerformanceSheet extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -189,6 +188,9 @@ class UserPerformanceSheet extends React.Component {
     ],
   };
   componentDidMount() {
+    this.userperformance();
+  }
+  userperformance = () => {
     axiosConfig
       .get(`/admin/get_userPerSheet`)
       .then((response) => {
@@ -200,14 +202,38 @@ class UserPerformanceSheet extends React.Component {
       .catch((error) => {
         console.log(error.response);
       });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_userPerSheet/${id}`).then((response) => {
-      console.log(response);
+  };
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/admin/dlt_userPerSheet/${id}`).then((response) => {
+  //     console.log(response);
+  //   });
+  // }
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_userPerSheet/${id}`).then((response) => {
+            this.userperformance();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -245,20 +271,6 @@ class UserPerformanceSheet extends React.Component {
                   User Performance Sheet List
                 </h1>
               </Col>
-              {/* <Col>
-              <Route
-                render={({ history }) => (
-                  <Button
-                    className=" btn btn-danger float-right"
-                    onClick={() =>
-                      history.push("/app/notification/Addnotification")
-                    }
-                  >
-                    Add Notification
-                  </Button>
-                )}
-              />
-            </Col> */}
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (

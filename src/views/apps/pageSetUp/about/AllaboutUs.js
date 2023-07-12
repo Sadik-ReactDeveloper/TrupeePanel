@@ -20,7 +20,7 @@ import { ChevronDown, Edit, Trash2 } from "react-feather";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 // import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-
+import swal from "sweetalert";
 class AllaboutUs extends React.Component {
   state = {
     rowData: [],
@@ -101,9 +101,7 @@ class AllaboutUs extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -112,20 +110,44 @@ class AllaboutUs extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/getAbout_us").then((response) => {
+  componentDidMount() {
+    this.allAboutList();
+  }
+  allAboutList = () => {
+    axiosConfig.get("/admin/getAbout_us").then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_abtus/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_abtus/${id}`).then((response) => {
+            this.allAboutList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -154,11 +176,6 @@ class AllaboutUs extends React.Component {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       <React.Fragment>
-        {/* <Breadcrumbs
-          breadCrumbTitle="AboutUs List"
-          breadCrumbParent="Home"
-          breadCrumbActive="AboutUs List"
-        /> */}
         <Card className="overflow-hidden agGrid-card">
           <Row className="m-1">
             <Col>

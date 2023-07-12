@@ -242,18 +242,18 @@ class EquityCashList extends React.Component {
           );
         },
       },
-      {
-        headerName: "Expiry Date ",
-        field: "expDate",
-        width: 140,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.expiryDate?.expDate}</span>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Expiry Date ",
+      //   field: "expDate",
+      //   width: 140,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data.expiryDate?.expDate}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         headerName: "SL Type",
         field: "sl_type",
@@ -341,7 +341,7 @@ class EquityCashList extends React.Component {
       },
 
       {
-        headerName: "status ",
+        headerName: "Status ",
         field: "status",
         filter: true,
         width: 150,
@@ -354,13 +354,16 @@ class EquityCashList extends React.Component {
             <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
-          ) : null;
+          ) : (
+            <div className="badge badge-pill badge-danger px-2">
+              {params.data.status}
+            </div>
+          );
         },
       },
       {
         headerName: "Actions",
         field: "sortorder",
-        // field: "transactions",
         width: 150,
         pinned: window.innerWidth > 992 ? "right" : false,
 
@@ -395,9 +398,7 @@ class EquityCashList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -407,23 +408,53 @@ class EquityCashList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`/admin/equityCash_list`).then((response) => {
+  componentDidMount() {
+    this.equitycashData();
+  }
+  equitycashData = () => {
+    axiosConfig.get(`/admin/equityCash_list`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dlt_alltrade/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/dlt_alltrade/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.equitycashData();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
   async runthisfunctionEdit(id, selectedData) {
     console.log("@@selectedData", id, selectedData[0].t1);
@@ -458,7 +489,6 @@ class EquityCashList extends React.Component {
       .then((response) => {
         console.log("sdjgsjdgjhgsdjh", response);
         swal("Success!", "Status " + status + " SuccessFull!", "success");
-        // this.props.history.push("/app/trade/fnoIndexList");
         window.location.reload();
       })
       .catch((error) => {
@@ -511,7 +541,7 @@ class EquityCashList extends React.Component {
                         className=" btn btn-success float-right"
                         onClick={() => history.push("/app/trade/AddEquityCash")}
                       >
-                        Add Equity Cashddd
+                        Add Equity Cash
                       </Button>
                     )}
                   />

@@ -18,7 +18,7 @@ import { Edit, Trash2, ChevronDown } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
-
+import swal from "sweetalert";
 class FnoOptionList extends React.Component {
   state = {
     rowData: [],
@@ -105,9 +105,9 @@ class FnoOptionList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
+                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
+                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -117,23 +117,43 @@ class FnoOptionList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`/admin/getEquityScript`).then((response) => {
+  componentDidMount() {
+    this.getOptionDataList();
+  }
+
+  getOptionDataList = () => {
+    axiosConfig.get(`/admin/getEquityScript`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dltEquityScript/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
       }
-    );
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltEquityScript/${id}`).then((response) => {
+            this.getOptionDataList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
+    });
   }
   onGridReady = (params) => {
     this.gridApi = params.api;
@@ -171,7 +191,7 @@ class FnoOptionList extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    FNO Option script List
+                    FNO Option Script List
                   </h1>
                 </Col>
                 <Col className="pt-4">

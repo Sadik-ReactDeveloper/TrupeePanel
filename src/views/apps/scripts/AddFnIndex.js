@@ -43,7 +43,8 @@ export default class AddFnIndex extends Component {
       .then((response) => {
         console.log(response.data.data.scriptName);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/scripts/fnIndex");
+        this.setState({ scriptName: "" });
+        // this.props.history.push("/app/scripts/fnIndex");
       })
       .catch((error) => {
         console.log(error);
@@ -97,7 +98,7 @@ export default class AddFnIndex extends Component {
                     required
                     type="text"
                     name="scriptName"
-                    placeholder=""
+                    placeholder="Script Name"
                     value={this.state.scriptName}
                     onChange={this.changeHandler}
                   ></Input>
@@ -133,7 +134,7 @@ export default class AddFnIndex extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    ADD FNO INDEX SCRIPT
                   </Button.Ripple>
                 </Col>
               </Row>

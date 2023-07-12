@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Form,
   Col,
   Row,
   Card,
@@ -11,17 +12,24 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
+import swal from "sweetalert";
 import { Route } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
+import ReactHtmlParser from "react-html-parser";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import axiosConfig from "../../../axiosConfig";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-
+import { EditorState, convertToRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../assets/scss/plugins/extensions/editor.scss";
 class PaidServeiceList extends React.Component {
   state = {
     rowData: [],
+    desc: "",
+    editorState: EditorState.createEmpty(),
     paginationPageSize: 20,
     currenPageSize: "",
     getPageSize: "",
@@ -38,85 +46,32 @@ class PaidServeiceList extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 100,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
-      {
-        headerName: "Title",
-        field: "title",
-        // filter: true,
-        width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.title}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "MemberShip",
-        field: "pack_name",
-        // filter: true,
-        width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.planId?.pack_name}</span>
-            </div>
-          );
-        },
-      },
+
       {
         headerName: "Descripiton",
         field: "desc",
-        // filter: true,
         width: 300,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
       },
       {
         headerName: "Actions",
-        // field: "sortorder",
         width: 200,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
-                render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(
-                        
-                        `/app/premium/EditAboutUs/${params.data._id}`
-                      )
-                    }
-                  />
-                )}
-              /> */}
-
               <Trash2
                 className="mr-50"
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -125,26 +80,74 @@ class PaidServeiceList extends React.Component {
       },
     ],
   };
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    });
+  };
+  changeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  submitHandler = (e) => {
+    e.preventDefault();
+    let payload = {
+      desc: this.state.desc,
+    };
+    console.log(this.state.desc);
+    axiosConfig
+      .post("/admin/addPrmiumSrvc", payload)
+      .then((response) => {
+        console.log(response.data.data);
+        swal("Good job!", "You clicked the button!", "success");
+        this.setState({ editorState: "" });
+        this.getServiceData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   componentDidMount() {
+    this.getServiceData();
+  }
+  getServiceData = () => {
     axiosConfig
       .get(`/admin/serviceslist`)
       .then((response) => {
         let rowData = response.data.data;
         JSON.stringify(rowData);
-        console.log(rowData);
         this.setState({ rowData });
       })
       .catch((error) => {
         console.log(error.response);
       });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dltPsrvc/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dltPsrvc/${id}`).then((response) => {
+            this.getServiceData();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -173,29 +176,64 @@ class PaidServeiceList extends React.Component {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       <React.Fragment>
-        {/* <Breadcrumbs
-          breadCrumbTitle="Notification"
-          breadCrumbParent="Forms & Tables"
-          breadCrumbActive="Notification List"/> */}
         <Card className="overflow-hidden agGrid-card">
+          <CardBody>
+            <Form onSubmit={this.submitHandler}>
+              <Editor
+                toolbarClassName="demo-toolbar-absolute"
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                editorState={this.state.editorState}
+                onEditorStateChange={this.onEditorStateChange}
+                toolbar={{
+                  options: ["inline", "blockType", "fontSize", "fontFamily"],
+                  inline: {
+                    options: [
+                      "bold",
+                      "italic",
+                      "underline",
+                      "strikethrough",
+                      "monospace",
+                    ],
+                    bold: { className: "bordered-option-classname" },
+                    italic: { className: "bordered-option-classname" },
+                    underline: { className: "bordered-option-classname" },
+                    strikethrough: { className: "bordered-option-classname" },
+                    code: { className: "bordered-option-classname" },
+                  },
+                  blockType: {
+                    className: "bordered-option-classname",
+                  },
+                  fontSize: {
+                    className: "bordered-option-classname",
+                  },
+                  fontFamily: {
+                    className: "bordered-option-classname",
+                  },
+                }}
+              />
+              <br />
+              <Button color="primary"> Add Paid Serveice</Button>
+            </Form>
+          </CardBody>
           <Row className="m-2">
             <Col>
               <h1 sm="6" className="float-left">
-                Paid Serveice List
+                Paid Service List
               </h1>
             </Col>
-            <Col>
+            {/* <Col>
               <Route
                 render={({ history }) => (
                   <Button
                     className=" btn btn-success float-right"
-                    onClick={() => history.push("/app/premium/addPaidServeice")}
+                    onClick={() => history.push("/app/premium/addPaidService")}
                   >
-                    Add Paid Serveice
+                    Add Paid Service
                   </Button>
                 )}
               />
-            </Col>
+            </Col> */}
           </Row>
           <CardBody className="py-0">
             {this.state.rowData === null ? null : (

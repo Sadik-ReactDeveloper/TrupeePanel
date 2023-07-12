@@ -105,7 +105,7 @@ export default class AddFnIndex extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add Date
                   </Button.Ripple>
                 </Col>
               </Row>

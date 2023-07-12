@@ -1,44 +1,55 @@
 import React from "react";
 import { Card, CardBody, Col, Row, Form, Button } from "reactstrap";
 import "react-toastify/dist/ReactToastify.css";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, RichUtils } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../assets/scss/plugins/extensions/editor.scss";
 import axiosConfig from "../../../../axiosConfig";
 import { history } from "../../../../history";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 
-class AddTermsCondition extends React.Component {
+class EditTermCondition extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      desc: " ",
+      desc: "",
       editorState: EditorState.createEmpty(),
     };
   }
 
   onEditorStateChange = (editorState) => {
+    console.log(editorState);
     this.setState({
       editorState,
+      // : convertToRaw(editorState.getCurrentContent()),
       desc: convertToRaw(editorState.getCurrentContent()),
     });
   };
+  handleKeyCommand(command, editorState) {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
 
+    if (newState) {
+      this.onChange(newState);
+      return "handled";
+    }
+
+    return "not-handled";
+  }
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/viewonecondition/${id}`)
+      .get(`/admin/getone_term_cond/${id}`)
       .then((response) => {
         console.log(response.data.data.desc);
         this.setState({
           desc: response.data.data.desc,
-
-          //   dealer: response.data.data.dealer,
         });
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   }
 
@@ -48,8 +59,9 @@ class AddTermsCondition extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
+    console.log(id);
     axiosConfig
-      .post(`/admin/edit_termscondition/${id}`, this.state)
+      .post(`/admin/edit_term_cond/${id}`, this.state)
       .then((response) => {
         console.log(response);
         // swal("Success!", "Submitted SuccessFull!", "success");
@@ -63,6 +75,7 @@ class AddTermsCondition extends React.Component {
   };
 
   render() {
+    const { editorState } = this.state;
     return (
       <Card>
         <Row className="m-2">
@@ -72,14 +85,20 @@ class AddTermsCondition extends React.Component {
             </h1>
           </Col>
           <Col>
-            <Button
-              className=" btn btn-danger float-right"
-              onClick={() =>
-                history.push("/app/pageSetUp/termscondition/TermConditionList")
-              }
-            >
-              Back
-            </Button>
+            <Route
+              render={({ history }) => (
+                <Button
+                  className=" btn btn-danger float-right"
+                  onClick={() =>
+                    history.push(
+                      "/app/pageSetUP/termscondition/TermConditionList"
+                    )
+                  }
+                >
+                  Back
+                </Button>
+              )}
+            />
           </Col>
         </Row>
         <CardBody>
@@ -93,12 +112,12 @@ class AddTermsCondition extends React.Component {
 />; */}
 
             <Editor
+              editorState={editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              onEditorStateChange={this.onEditorStateChange}
               toolbarClassName="demo-toolbar-absolute"
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              // value={this.state.desc}
-              editorState={this.state.editorState}
-              onEditorStateChange={this.onEditorStateChange}
               toolbar={{
                 options: ["inline", "blockType", "fontSize", "fontFamily"],
                 inline: {
@@ -127,11 +146,11 @@ class AddTermsCondition extends React.Component {
               }}
             />
             <br />
-            <Button color="primary"> Submit</Button>
+            <Button color="primary">Submit</Button>
           </Form>
         </CardBody>
       </Card>
     );
   }
 }
-export default AddTermsCondition;
+export default EditTermCondition;

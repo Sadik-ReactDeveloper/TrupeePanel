@@ -20,6 +20,7 @@ import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
+import swal from "sweetalert";
 class TradingViewCharts extends React.Component {
   state = {
     rowData: [],
@@ -129,9 +130,7 @@ class TradingViewCharts extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -141,6 +140,9 @@ class TradingViewCharts extends React.Component {
     ],
   };
   componentDidMount() {
+    this.tradingList();
+  }
+  tradingList = () => {
     axiosConfig
       .get(`/admin/getAllChart`)
       .then((response) => {
@@ -151,14 +153,33 @@ class TradingViewCharts extends React.Component {
       .catch((error) => {
         console.log(error.response);
       });
-  }
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/dlt_Chart/${id}`).then((response) => {
-      console.log(response);
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_Chart/${id}`).then((response) => {
+            this.tradingList();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

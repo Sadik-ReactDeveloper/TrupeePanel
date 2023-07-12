@@ -39,15 +39,16 @@ export class AddEquityCash extends Component {
       t5: "",
       t5_type: false,
       qty: "",
-      investment_amt: null,
-      no_of_lots: "",
+      // investment_amt: null,
+      // no_of_lots: "",
       pl_type: "",
       profit_loss_amt: "",
       expiryDate: "",
-      type: "",
       cstmMsg: "",
+      updateexpiryDate: "",
     };
     this.state = {
+      type: "",
       scriptN: [],
       expdateI: [],
     };
@@ -58,6 +59,7 @@ export class AddEquityCash extends Component {
     axiosConfig
       .get("/admin/getCashScript")
       .then((response) => {
+        console.log(response.data.data);
         this.setState({
           scriptN: response.data.data,
         });
@@ -71,9 +73,6 @@ export class AddEquityCash extends Component {
 
       .then((response) => {
         console.log(response.data.data[0]._id);
-        this.setState({
-          expdateI: response.data.data,
-        });
       })
       .catch((error) => {
         console.log(error);
@@ -87,13 +86,18 @@ export class AddEquityCash extends Component {
   // };
 
   changeHandler = (e) => {
+    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
+  };
+  changeHandler1 = (e) => {
+    console.log(e.target.value);
+    this.setState({ allScript: e.target.value });
   };
   submitHandler = (e) => {
     e.preventDefault();
     let obj = {
       script_type: this.state.script_type,
-      scriptName: this.state.allScript,
+      cash_scrpt_name: this.state.allScript,
       active_value: this.state.active_value,
       active_value2: this.state.active_value2,
       call_type: this.state.call_type,
@@ -110,19 +114,19 @@ export class AddEquityCash extends Component {
       // t5: "",
       t5_type: false,
       qty: this.state.qty,
-      investment_amt: this.state.investment_amt,
-      // no_of_lots: this.state.no_of_lots,
+      // investment_amt: this.state.investment_amt,
+      // no_of_lots: this.state.no_of_lots.toString(),
       // pl_type: this.state.pl_type,
       // profit_loss_amt: this.state.profit_loss_amt,
-      expiryDate: this.state.expdateI,
-      type: this.state.type,
+      // expiryDate: this.state.expdateI,
+      type: "Cash",
       cstmMsg: this.state.cstmMsg,
     };
     console.log(obj);
     axiosConfig
       .post("/admin/add_equityCash", obj)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/equityCashList");
       })
@@ -161,10 +165,10 @@ export class AddEquityCash extends Component {
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
-                    value={this.state.allScript}
-                    onChange={this.changeHandler}
+                    value={this.state.cash_scrpt_name}
+                    onChange={this.changeHandler1}
                   >
-                    <option>select script</option>
+                    <option>Select Script</option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -172,7 +176,7 @@ export class AddEquityCash extends Component {
                     ))}
                   </CustomInput>
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Expiry Date</Label>
                   <CustomInput
                     type="select"
@@ -182,12 +186,15 @@ export class AddEquityCash extends Component {
                   >
                     <option>Expiry Date</option>
                     {this.state.expdateI?.map((allExpDate) => (
-                      <option value={allExpDate?._id} key={allExpDate?._id}>
-                        {allExpDate?.expDate}
-                      </option>
+                      <>
+                       
+                        <option value={allExpDate?._id} key={allExpDate?._id}>
+                          {allExpDate?.expDate}
+                        </option>
+                      </>
                     ))}
                   </CustomInput>
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Equity Script</Label>
                   <Input
@@ -198,8 +205,6 @@ export class AddEquityCash extends Component {
                     onChange={this.changeHandler}
                   >
                     <option>Select Script</option>
-                    {/* <option>CE</option>
-                    <option>PF</option> */}
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -326,7 +331,7 @@ export class AddEquityCash extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Investment Amount</Label>
                   <Input
                     name="investment_amt"
@@ -335,7 +340,7 @@ export class AddEquityCash extends Component {
                     value={this.state.investment_amt}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Per Lot Price</Label>
                   <Input
@@ -345,7 +350,7 @@ export class AddEquityCash extends Component {
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
-                </Col>{" "} */}
+                </Col> */}
                 {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Achieved Target+</Label>
                   <Input
@@ -356,7 +361,7 @@ export class AddEquityCash extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Type</Label>
                   <Input
                     type="select"
@@ -368,7 +373,7 @@ export class AddEquityCash extends Component {
                     <option>Select type</option>
                     <option>Cash</option>
                   </Input>
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input

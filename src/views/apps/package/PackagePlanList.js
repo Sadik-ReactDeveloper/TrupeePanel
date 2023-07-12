@@ -11,7 +11,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import axios from "axios";
+import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
 // import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
@@ -135,9 +135,9 @@ class PackagePlanList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
+                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
+                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -146,20 +146,43 @@ class PackagePlanList extends React.Component {
       },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/plan_list").then((response) => {
+  componentDidMount() {
+    this.PackagePlanDataList();
+  }
+  PackagePlanDataList = () => {
+    axiosConfig.get("/admin/plan_list").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
     });
-  }
+  };
 
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/admin/deleteplan/${id}`).then((response) => {
-      console.log(response);
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Sure Want to cancel it");
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/deleteplan/${id}`).then((response) => {
+            this.PackagePlanDataList();
+          });
+          break;
+        default:
+          swal("Sure Want to cancel it");
+          break;
+      }
     });
   }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -205,7 +228,7 @@ class PackagePlanList extends React.Component {
                     className=" btn btn-success float-right"
                     onClick={() => history.push("/app/package/addPackagePlan")}
                   >
-                    Add Membership Plan
+                    Add Package Plan
                   </Button>
                 )}
               />

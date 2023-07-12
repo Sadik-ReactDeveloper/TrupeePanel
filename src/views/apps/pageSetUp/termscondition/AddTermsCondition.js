@@ -32,9 +32,12 @@ class AddTermsCondition extends React.Component {
   }
 
   onEditorStateChange = (editorState) => {
+    console.log(this.state.desc);
+
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+      // desc: draftToHtml(this.state.desc),
     });
   };
   submitHandler = (e) => {
