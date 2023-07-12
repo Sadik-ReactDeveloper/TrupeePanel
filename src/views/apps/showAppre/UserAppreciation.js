@@ -146,12 +146,7 @@ class UserAppreciation extends React.Component {
         console.log(error.response);
       });
   };
-  // async runthisfunction(id) {
-  //   console.log(id);
-  //   await axiosConfig.get(`/admin/dlt_appriciation/${id}`).then((response) => {
-  //     console.log(response);
-  //   });
-  // }
+
   runthisfunction(id) {
     swal(
       `Do You Want To Delete Permanently`,
