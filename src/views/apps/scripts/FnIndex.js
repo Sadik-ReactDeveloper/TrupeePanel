@@ -148,7 +148,6 @@ class FnIndex extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dltFnoScript/${id}`).then((response) => {
@@ -156,7 +155,6 @@ class FnIndex extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

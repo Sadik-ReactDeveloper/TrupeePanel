@@ -72,12 +72,9 @@ export default class EditTVC extends Component {
 
     let { id } = this.props.match.params;
     axiosConfig
-      // .post(`/editsize/${id}`, this.state)
       .post(`/admin/edit_trendingChart/${id}`, data)
-
       .then((response) => {
         console.log(response.data);
-
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/explore/Trupee/tradingViewCharts");
       })

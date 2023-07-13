@@ -28,8 +28,6 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/totlactivetrade")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ activetrade: response.data });
       })
       .catch((error) => {
@@ -39,8 +37,6 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/ttlCompletetrade")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ Completetrade: response.data });
       })
       .catch((error) => {
@@ -50,8 +46,6 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/ttlfreeusers")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ freeusers: response.data });
       })
       .catch((error) => {
@@ -60,8 +54,6 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/today_profit_loss")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ total: response.data });
       })
       .catch((error) => {
@@ -71,8 +63,6 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/weekely_profit_loss")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ weekly: response.data });
       })
       .catch((error) => {
@@ -81,76 +71,20 @@ class AnalyticsDashboard extends React.Component {
     axiosConfig
       .get("/admin/monthly_profit_loss")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ thirtydays: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
 
-    // axiosConfig
-    //   .get("/dealer/total7dayplanearnig")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     console.log(response.data.Earning);
-    //     this.setState({ day7planearnig: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // axiosConfig
-    //   .get("/dealer/totalbasicplanearning")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     //console.log(response.data.data);
-    //     this.setState({ basicplanearning: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     axiosConfig
       .get("/admin/ttlActiveuser")
       .then((response) => {
-        console.log(response.data);
-        //console.log(response.data.data);
         this.setState({ Activeuser: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // axiosConfig
-    //   .get("/dealer/totalmaneger")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     //console.log(response.data.data);
-    //     this.setState({ maneger: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // axiosConfig
-    //   .get("/dealer/totaldsm")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     //console.log(response.data.data);
-    //     this.setState({ dsm: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // axiosConfig
-    //   .get("/dealer/totaloutherstaff")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     //console.log(response.data.data);
-    //     this.setState({ outherstaff: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }
 
   render() {
@@ -159,7 +93,6 @@ class AnalyticsDashboard extends React.Component {
         <Col lg="12" md="12">
           <SalesCard />
         </Col>
-        {/* <h3>Menbership Plans</h3> */}
         <Row className="match-height">
           <Col lg="4" md="12">
             <Card
@@ -290,9 +223,6 @@ class AnalyticsDashboard extends React.Component {
         </Row>
 
         <Row>
-          {/* <Col sm="12">
-            <DispatchedOrders />
-          </Col> */}
           <Col sm="12">{/* <Notification />  */}</Col>
         </Row>
       </React.Fragment>

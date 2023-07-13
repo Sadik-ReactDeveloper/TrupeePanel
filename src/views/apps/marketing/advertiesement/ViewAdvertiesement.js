@@ -39,10 +39,6 @@ class ViewAdvertiesement extends React.Component {
         console.log(error);
       });
   }
-  // state = {
-  //   selectedColor: 1,
-  // };
-  // toggleSelectedColor = (color) => this.setState({ selectedColor: color });
   render() {
     return (
       <React.Fragment>
@@ -50,13 +46,17 @@ class ViewAdvertiesement extends React.Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-              Advertiesement Detail
+                Advertiesement Detail
               </h1>
             </Col>
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/marketing/advertiesement/advertiesementList")}
+                onClick={() =>
+                  history.push(
+                    "/app/marketing/advertiesement/advertiesementList"
+                  )
+                }
               >
                 Back
               </Button>

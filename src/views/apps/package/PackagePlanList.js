@@ -18,7 +18,6 @@ import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { ChevronDown, Trash2 } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
 class PackagePlanList extends React.Component {
   state = {
@@ -170,7 +169,6 @@ class PackagePlanList extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/deleteplan/${id}`).then((response) => {
@@ -178,7 +176,6 @@ class PackagePlanList extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

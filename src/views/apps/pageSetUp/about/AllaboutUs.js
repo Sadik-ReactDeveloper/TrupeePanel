@@ -10,7 +10,6 @@ import {
   DropdownItem,
   DropdownToggle,
   UncontrolledDropdown,
-  // CardTitle,
 } from "reactstrap";
 import { Route } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
@@ -19,7 +18,6 @@ import axiosConfig from "../../../../axiosConfig";
 import { ChevronDown, Edit, Trash2 } from "react-feather";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import swal from "sweetalert";
 class AllaboutUs extends React.Component {
   state = {
@@ -135,7 +133,6 @@ class AllaboutUs extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dlt_abtus/${id}`).then((response) => {
@@ -143,7 +140,6 @@ class AllaboutUs extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

@@ -11,14 +11,12 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import axios from "axios";
 import axiosConfig from "../../../axiosConfig";
 // import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
 import swal from "sweetalert";
 class UserAppreciation extends React.Component {
@@ -40,17 +38,12 @@ class UserAppreciation extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
         headerName: "User Name",
         field: "firstname",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -101,7 +94,6 @@ class UserAppreciation extends React.Component {
         headerName: "Actions",
         field: "sortorder",
         width: 180,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">

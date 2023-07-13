@@ -443,7 +443,6 @@ class EquityCashList extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
@@ -451,7 +450,6 @@ class EquityCashList extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

@@ -11,7 +11,6 @@ const Notification = () => {
     async function getNotifications() {
       try {
         const response = await axiosConfig.get("/admin/allnotification");
-        // console.log(dealerdata.data);
         setNotifications(response.data.data);
       } catch (error) {
         console.log("SomeThing Wrong");
@@ -22,11 +21,11 @@ const Notification = () => {
   return (
     <Card>
       <CardHeader>
-      <CardTitle>Currnet Trade P&L</CardTitle>
-        <CardTitle>Today's Total P&L 
-        <n> Rs._____</n>
+        <CardTitle>Currnet Trade P&L</CardTitle>
+        <CardTitle>
+          Today's Total P&L
+          <n> Rs._____</n>
         </CardTitle>
-    
       </CardHeader>
       <Table
         responsive
@@ -39,12 +38,11 @@ const Notification = () => {
             <th>Created Time</th>
             <th>Updated Time</th> */}
             <th>SNo.</th>
-           
+
             <th>Trade</th>
             <th>Subscriber</th>
             <th>P&L</th>
             {/* <th>Subscriber</th> */}
-
           </tr>
         </thead>
 
@@ -53,7 +51,7 @@ const Notification = () => {
             return (
               <tr key={i}>
                 <td>{notification.desc}</td>
-              
+
                 <td>
                   {moment(notification.createdAt).format(
                     "MMMM Do YYYY, h:mm:ss a"

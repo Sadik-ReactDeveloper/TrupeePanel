@@ -170,13 +170,6 @@ export default class AddAdvertiesement extends Component {
       this.state.selectedName
     );
 
-    // for (var value of data.values()) {
-    //   console.log(value);
-    // }
-
-    // for (var key of data.keys()) {
-    //   console.log(key);
-    // }
     axiosConfig
       .post("/addproduct", data)
       .then((response) => {
@@ -199,7 +192,11 @@ export default class AddAdvertiesement extends Component {
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/marketing/advertiesement/advertiesementList")}
+                onClick={() =>
+                  history.push(
+                    "/app/marketing/advertiesement/advertiesementList"
+                  )
+                }
               >
                 Back
               </Button>

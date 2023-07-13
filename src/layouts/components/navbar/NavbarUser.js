@@ -7,21 +7,17 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import axios from "axios";
 import * as Icon from "react-feather";
 import { Route } from "react-router-dom";
 import axiosConfig from "../../../axiosConfig";
 
 const handleNavigation = (e, path) => {
   e.preventDefault();
-  // history.push(path);
   window.location.replace(path);
 };
 
 const NavbarUser = () => {
   const [adminimg, setAdminimg] = useState([]);
-  // console.log(notifications);
-
   const tokenVerify = () => {
     let data = localStorage.getItem("ad-token");
     console.log("token data", data);
@@ -35,10 +31,7 @@ const NavbarUser = () => {
     tokenVerify();
     async function getNotifications() {
       try {
-        //axiosConfig.get(`/dlt_startup/${id}`)
-        // let userId = localStorage.getItem("userId");
         const data = await axiosConfig.get(
-          // (`/viewoneadmin/${userId}`);
           `/viewoneadmin/62e125db337df218d9c152f9`
         );
         console.log(data.data.data);
@@ -58,7 +51,6 @@ const NavbarUser = () => {
             <span className="user-name text-bold-600" color="#fff">
               {adminimg.name}
             </span>
-            {/* <span className="user-status">Available</span> */}
           </div>
           <span data-tour="user">
             <img
@@ -70,7 +62,6 @@ const NavbarUser = () => {
             />
           </span>
         </DropdownToggle>
-        {/* {/ <UserDropdown {...this.props} /> /} */}
         <DropdownMenu right>
           <DropdownItem
             tag="a"

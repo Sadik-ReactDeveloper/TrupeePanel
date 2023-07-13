@@ -17,7 +17,6 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import { Route } from "react-router-dom";
-// import moment from "moment";
 import swal from "sweetalert";
 class ExpDateList extends React.Component {
   state = {
@@ -38,9 +37,6 @@ class ExpDateList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Expiry Date",
@@ -50,9 +46,6 @@ class ExpDateList extends React.Component {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{params.data.expDate}</span>
-              {/* <span>{moment(params.data.expDate).format("dd/mm/yyyy")}
-              
-              </span> */}
             </div>
           );
         },
@@ -62,7 +55,6 @@ class ExpDateList extends React.Component {
         headerName: "Actions",
         field: "sortorder",
         width: 120,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -85,9 +77,7 @@ class ExpDateList extends React.Component {
                 size="25px"
                 color="red"
                 onClick={() => {
-                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -119,7 +109,6 @@ class ExpDateList extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dltDate/${id}`).then((response) => {
@@ -127,7 +116,6 @@ class ExpDateList extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

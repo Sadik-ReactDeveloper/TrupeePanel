@@ -142,7 +142,6 @@ class FnoOptionList extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dltEquityScript/${id}`).then((response) => {
@@ -150,7 +149,6 @@ class FnoOptionList extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

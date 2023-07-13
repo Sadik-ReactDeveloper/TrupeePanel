@@ -11,14 +11,12 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import axios from "axios";
 import axiosConfig from "../../../axiosConfig";
 // import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 import { Route } from "react-router-dom";
 class TransctionHistory extends React.Component {
   state = {
@@ -39,9 +37,6 @@ class TransctionHistory extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       //   {
       //     headerName: "User Name",
@@ -219,14 +214,6 @@ class TransctionHistory extends React.Component {
         console.log(error.response);
       });
   }
-  //   async runthisfunction(id) {
-  //     console.log(id);
-  //     await axiosConfig
-  //       .get(`/dealer/deletedealershipform/${id}`)
-  //       .then((response) => {
-  //         console.log(response);
-  //       });
-  //   }
 
   onGridReady = (params) => {
     this.gridApi = params.api;

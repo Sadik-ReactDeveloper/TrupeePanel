@@ -19,7 +19,6 @@ import swal from "sweetalert";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
-import { Route } from "react-router-dom";
 import moment from "moment";
 class AllTradeList extends React.Component {
   state = {
@@ -525,7 +524,6 @@ class AllTradeList extends React.Component {
     ).then((value) => {
       switch (value) {
         case "cancel":
-          swal("Sure Want to cancel it");
           break;
         case "catch":
           axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
@@ -533,7 +531,6 @@ class AllTradeList extends React.Component {
           });
           break;
         default:
-          swal("Sure Want to cancel it");
           break;
       }
     });

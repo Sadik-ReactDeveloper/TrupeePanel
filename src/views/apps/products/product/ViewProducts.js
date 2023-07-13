@@ -51,10 +51,6 @@ class ViewProducts extends React.Component {
         console.log(error);
       });
   }
-  // state = {
-  //   selectedColor: 1,
-  // };
-  // toggleSelectedColor = (color) => this.setState({ selectedColor: color });
   render() {
     return (
       <React.Fragment>
