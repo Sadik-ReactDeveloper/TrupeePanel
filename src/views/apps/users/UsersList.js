@@ -196,7 +196,6 @@ class UsersList extends React.Component {
   allUserLis = () => {
     axiosConfig.get("/admin/getuser").then((response) => {
       let rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
     });
   };

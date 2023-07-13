@@ -16,56 +16,12 @@ class LoginJWT extends React.Component {
     this.state = {
       email: "",
       password: "",
-      // token: "",
     };
   }
   handlechange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  // checkHandler = (e) => {
-  //   e.preventDefault();
-  //   if (e.target.value.trim() == "") {
-  //     this.setState({
-  //       // username: e.target.value.trim(),
-  //       // mobile: "",
-  //       email: "",
-  //     });
-  //     return;
-  //   }
-  //   if (isNaN(e.target.value.trim())) {
-  //     if (
-  //       /^([A-Za-z0-9_\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(
-  //         e.target.value.trim()
-  //       ) === false
-  //     ) {
-  //       //invalid email
-  //       this.setState({
-  //         // username: e.target.value.trim(),
-  //         // mobile: "",
-  //         email: "",
-  //         // _id: "62dfe40467dfb9d7ac812fce",
-  //       });
-  //     } else {
-  //       // valid mail
-  //       this.setState({
-  //         // username: e.target.value.trim(),
-  //         // mobile: "",
-  //         email: e.target.value.trim(),
-  //         // _id: "62dfe40467dfb9d7ac812fce",
-  //       });
-  //     }
-  //   } else {
-  //     //valid mobile
-  //     this.setState({
-  //       // username: e.target.value.trim(),
-  //       // mobile: e.target.value.trim(),
-  //       email: "",
-  //       // _id: "62dfe40467dfb9d7ac812fce",
-  //     });
-  //   }
-  // };
 
   handleLogin = (e) => {
     e.preventDefault();

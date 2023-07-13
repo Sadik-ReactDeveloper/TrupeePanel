@@ -114,7 +114,6 @@ class AllaboutUs extends React.Component {
   allAboutList = () => {
     axiosConfig.get("/admin/getAbout_us").then((response) => {
       const rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
     });
   };

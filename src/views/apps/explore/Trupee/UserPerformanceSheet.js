@@ -195,7 +195,6 @@ class UserPerformanceSheet extends React.Component {
       .get(`/admin/get_userPerSheet`)
       .then((response) => {
         let rowData = response.data.data;
-        console.log(rowData);
         JSON.stringify(rowData);
         this.setState({ rowData });
       })

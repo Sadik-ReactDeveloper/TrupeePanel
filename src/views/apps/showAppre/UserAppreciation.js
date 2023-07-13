@@ -130,7 +130,6 @@ class UserAppreciation extends React.Component {
       .get(`/admin/appriciation_list`)
       .then((response) => {
         let rowData = response.data.data;
-        console.log(rowData);
         JSON.stringify(rowData);
         this.setState({ rowData });
       })

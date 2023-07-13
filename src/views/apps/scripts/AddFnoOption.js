@@ -35,11 +35,7 @@ export default class AddFnoOption extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("/admin/addEquityScript", this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post("/admin/addEquityScript", this.state)
       .then((response) => {
         this.setState({ scriptName: "" });
         swal("Success!", "Submitted SuccessFull!", "success");

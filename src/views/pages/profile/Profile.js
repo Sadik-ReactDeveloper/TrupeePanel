@@ -42,12 +42,10 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    // let { id } = this.props.match.params;
-
+    let adminId = localStorage.getItem("userId");
     axiosConfig
-      .get(`/admin/viewoneadmin/64a29c3f4af1c51350645a96`)
+      .get(`/admin/viewoneadmin/${adminId}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           data: response.data.data,
           name: response.data.data.name,
@@ -58,7 +56,7 @@ class Profile extends React.Component {
         });
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data);
       });
   }
 
@@ -67,6 +65,7 @@ class Profile extends React.Component {
   };
 
   submitHandler = (e) => {
+    let adminId = localStorage.getItem("userId");
     e.preventDefault();
     console.log(this.state.data);
     const data = new FormData();
@@ -78,16 +77,13 @@ class Profile extends React.Component {
     if (this.state.selectedFile !== null) {
       data.append("adminimg", this.state.selectedFile, this.state.selectedName);
     }
-
-    //  let { id } = this.props.match.params;
     axiosConfig
-      .post(`admin/editAdmin/64a29c3f4af1c51350645a96`, data, {
+      .post(`admin/editAdmin/${adminId}`, data, {
         headers: {
           "ad-token": localStorage.getItem("ad-token"),
         },
       })
       .then((response) => {
-        console.log(response.data.message);
         swal("Success!", "Submitted SuccessFull!", "success");
         window.location.reload("/#/pages/profile");
       })
@@ -118,15 +114,15 @@ class Profile extends React.Component {
                   />
                   <ul className="lst-1">
                     <li className="lst-2">
-                      Name:{" "}
+                      Name:
                       <span className="lst-3">{this.state.data.name}</span>
                     </li>
                     <li className="lst-2">
-                      Mobile:{" "}
+                      Mobile:
                       <span className="lst-3">{this.state.data.mobile}</span>
                     </li>
                     <li className="lst-2">
-                      Email:{" "}
+                      Email:
                       <span className="lst-3">{this.state.data.email}</span>
                     </li>
                   </ul>

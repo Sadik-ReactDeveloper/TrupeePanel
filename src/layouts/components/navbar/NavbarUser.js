@@ -20,7 +20,6 @@ const NavbarUser = () => {
   const [adminimg, setAdminimg] = useState([]);
   const tokenVerify = () => {
     let data = localStorage.getItem("ad-token");
-    console.log("token data", data);
     sessionStorage.clear();
     if (data === undefined || data === null) {
       window.location.replace("/#/pages/login");
@@ -28,16 +27,14 @@ const NavbarUser = () => {
   };
 
   useEffect(() => {
+    let adminId = localStorage.getItem("userId");
     tokenVerify();
     async function getNotifications() {
       try {
-        const data = await axiosConfig.get(
-          `/viewoneadmin/62e125db337df218d9c152f9`
-        );
-        console.log(data.data.data);
+        const data = await axiosConfig.get(`/admin/viewoneadmin/${adminId}`);
         setAdminimg(data.data.data);
       } catch (error) {
-        console.log("SomeThing Wrong");
+        console.log(error);
       }
     }
     getNotifications();
