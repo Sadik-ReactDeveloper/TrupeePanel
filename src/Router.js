@@ -40,12 +40,16 @@ const EditAboutUs = lazy(() =>
 const TermConditionList = lazy(() =>
   import("./views/apps/pageSetUp/termscondition/TermConditionList")
 );
+
 const AddTermsCondition = lazy(() =>
   import("./views/apps/pageSetUp/termscondition/AddTermsCondition")
 );
 const EditTermCondition = lazy(() =>
   import("./views/apps/pageSetUp/termscondition/EditTermCondition")
 );
+// const EditTermCondition1 = lazy(() =>
+//   import("./views/apps/pageSetUp")
+// );
 const helpUs = lazy(() => import("./views/apps/pageSetUp/helpUs/HelpUS"));
 const EdithelpusForm = lazy(() =>
   import("./views/apps/pageSetUp/helpUs/EdithelpusForm")
@@ -169,6 +173,10 @@ const AddFaq = lazy(() => import("./views/apps/faq/AddFaq"));
 //Premium//
 const AddPaidService = lazy(() =>
   import("./views/apps/premium/AddPaidService")
+);
+
+const EditPaidServices = lazy(() =>
+  import("./views/apps/premium/EditPaidServices")
 );
 const PaidServiceList = lazy(() =>
   import("./views/apps/premium/PaidServiceList")
@@ -519,6 +527,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/premium/addPaidService"
               component={AddPaidService}
+            />
+            <AppRoute
+              path="/app/premium/editPaidService/:id"
+              component={EditPaidServices}
             />
             {/* scripts */}
             <AppRoute path="/app/scripts/fnIndex" component={FnIndex} />

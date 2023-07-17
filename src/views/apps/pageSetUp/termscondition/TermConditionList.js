@@ -37,13 +37,11 @@ class termscondition extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Descriptions",
         field: "desc",
+        left: 200,
         width: 600,
         cellRendererFramework: (params) => {
           return (

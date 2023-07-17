@@ -4,7 +4,6 @@ import {
   CardBody,
   Row,
   Col,
-  //FormGroup,
   CustomInput,
   Form,
   Label,
@@ -15,7 +14,6 @@ import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-// import Textarea from "../../../forms/form-elements/textarea/Textarea";
 
 class EditEquityCash extends React.Component {
   constructor(props) {
@@ -43,7 +41,7 @@ class EditEquityCash extends React.Component {
       t6_type: false,
       t7_type: false,
       qty: "",
-      investment_amt: "",
+      // investment_amt: "",
       no_of_lots: "",
       pl_type: "",
       profit_loss_amt: "",
@@ -60,13 +58,8 @@ class EditEquityCash extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewonetrades/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           script_type: response.data.data.script_type,
           cash_scrpt_name: response.data.data.cash_scrpt_name,
@@ -90,7 +83,6 @@ class EditEquityCash extends React.Component {
           t6_type: response.data.data.t6_type,
           t7_type: response.data.data.t7_type,
           qty: response.data.data.qty,
-          investment_amt: response.data.data.investment_amt,
           no_of_lots: response.data.data.no_of_lots,
           pl_type: response.data.data.pl_type,
           profit_loss_amt: response.data.data.profit_loss_amt,
@@ -105,11 +97,9 @@ class EditEquityCash extends React.Component {
       });
     //Script//
     axiosConfig
-      .get("/getCashScript")
+      .get("/admin/getCashScript")
       .then((response) => {
-        console.log(response);
         this.setState({
-          // scriptT: response.data.data,
           scriptN: response.data.data,
         });
       })
@@ -118,9 +108,8 @@ class EditEquityCash extends React.Component {
       });
     // expDate//
     axiosConfig
-      .get("/datelist")
+      .get("/admin/datelist")
       .then((response) => {
-        console.log(response);
         this.setState({
           expdateI: response.data.data,
         });
@@ -196,12 +185,24 @@ class EditEquityCash extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
+
+    let payload = {
+      // SL: this.state.SL,
+      sl_type: this.state.sl_type,
+      T1: this.state.T1,
+      t1_type: this.state.t1_type,
+      t2_type: this.state.t2_type,
+      T2: this.state.T2,
+      t3_type: this.state.t3_type,
+      t4_typ: this.state.t4_type,
+      T4: this.state.T4,
+      cstmMsg: this.state.cstmMsg,
+      status: this.state.cstmMsg,
+      tradeStatus: this.state.tradeStatus,
+    };
+    console.log(payload);
     axiosConfig
-      .post(`/editCash/${id}`, this.state, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .post(`/admin/editCash/${id}`, this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -240,7 +241,7 @@ class EditEquityCash extends React.Component {
             </Col>
           </Row>
           <CardBody>
-            <Form className="m-1" onSubmit={this.submitHandler}>
+            <Form className="m-1" onSubmit={(e) => this.submitHandler(e)}>
               <Row className="mb-2">
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Script Name</Label>
@@ -263,10 +264,10 @@ class EditEquityCash extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    <option>Expiry Date</option>
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}
@@ -329,7 +330,7 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>SL</Label>
                   <Input
                     name="SL"
@@ -338,7 +339,7 @@ class EditEquityCash extends React.Component {
                     value={this.state.SL}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>T₹ 1 </Label>
                   <Input

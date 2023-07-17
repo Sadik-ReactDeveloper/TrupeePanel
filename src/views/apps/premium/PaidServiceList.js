@@ -66,6 +66,20 @@ class PaidServeiceList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
+              <Route
+                render={({ history }) => (
+                  <Edit
+                    className="mr-50"
+                    size="25px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(
+                        `/app/premium/editPaidService/${params.data._id}`
+                      )
+                    }
+                  />
+                )}
+              />
               <Trash2
                 className="mr-50"
                 size="25px"
@@ -81,6 +95,7 @@ class PaidServeiceList extends React.Component {
     ],
   };
   onEditorStateChange = (editorState) => {
+    console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -89,24 +104,24 @@ class PaidServeiceList extends React.Component {
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
-    e.preventDefault();
-    let payload = {
-      desc: this.state.desc,
-    };
-    console.log(this.state.desc);
-    axiosConfig
-      .post("/admin/addPrmiumSrvc", payload)
-      .then((response) => {
-        console.log(response.data.data);
-        swal("Good job!", "You clicked the button!", "success");
-        this.setState({ editorState: "" });
-        this.getServiceData();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // submitHandler = (e) => {
+  //   e.preventDefault();
+  //   let payload = {
+  //     desc: this.state.desc,
+  //   };
+  //   // console.log(this.state.desc);
+  //   axiosConfig
+  //     .post("/admin/addPrmiumSrvc", payload)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       swal("Good job!", "You clicked the button!", "success");
+  //       this.setState({ editorState: "" });
+  //       this.getServiceData();
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   componentDidMount() {
     this.getServiceData();
   }
@@ -115,7 +130,7 @@ class PaidServeiceList extends React.Component {
       .get(`/admin/serviceslist`)
       .then((response) => {
         let rowData = response.data.data;
-        JSON.stringify(rowData);
+        // JSON.stringify(rowData);
         this.setState({ rowData });
       })
       .catch((error) => {
@@ -177,7 +192,7 @@ class PaidServeiceList extends React.Component {
     return (
       <React.Fragment>
         <Card className="overflow-hidden agGrid-card">
-          <CardBody>
+          {/* <CardBody>
             <Form onSubmit={this.submitHandler}>
               <Editor
                 toolbarClassName="demo-toolbar-absolute"
@@ -215,25 +230,13 @@ class PaidServeiceList extends React.Component {
               <br />
               <Button color="primary"> Add Paid Serveice</Button>
             </Form>
-          </CardBody>
+          </CardBody> */}
           <Row className="m-2">
             <Col>
               <h1 sm="6" className="float-left">
                 Paid Service List
               </h1>
             </Col>
-            {/* <Col>
-              <Route
-                render={({ history }) => (
-                  <Button
-                    className=" btn btn-success float-right"
-                    onClick={() => history.push("/app/premium/addPaidService")}
-                  >
-                    Add Paid Service
-                  </Button>
-                )}
-              />
-            </Col> */}
           </Row>
           <CardBody className="py-0">
             {this.state.rowData === null ? null : (

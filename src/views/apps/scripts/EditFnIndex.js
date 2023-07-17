@@ -19,7 +19,6 @@ export default class EditFnIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: "",
       scriptName: "",
     };
   }
@@ -27,15 +26,10 @@ export default class EditFnIndex extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/getoneFnoScript/${id}`, {
-        // headers: {
-        //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-        // },
-      })
+      .get(`/admin/getoneFnoScript/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
-          status: response.data.data.status,
           scriptName: response.data.data.scriptName,
         });
       })
@@ -43,9 +37,6 @@ export default class EditFnIndex extends Component {
         console.log(error);
       });
   }
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -115,29 +106,6 @@ export default class EditFnIndex extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col>   */}
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">

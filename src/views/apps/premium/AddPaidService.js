@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardBody,
-  Col,
-  Row,
-  Form,
-  Button,
-  Label,
-  Input,
-  CustomInput,
-} from "reactstrap";
+import { Card, CardBody, Form, Button } from "reactstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -24,7 +14,7 @@ class AddPaidServeice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
+      // title: "",
       desc: "",
       editorState: EditorState.createEmpty(),
     };
@@ -73,52 +63,8 @@ class AddPaidServeice extends React.Component {
   render() {
     return (
       <Card>
-        {/* <Row className="m-2">
-          <Col>
-            <h1 col-sm-6 className="float-left">
-              Add Paid Serveice
-            </h1>
-          </Col>
-          <Col>
-            <Route
-              render={({ history }) => (
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/premium/paidServiceList")}
-                >
-                  Back
-                </Button>
-              )}
-            />
-          </Col>
-        </Row> */}
         <CardBody>
           <Form onSubmit={this.submitHandler}>
-            {/* <Col lg="6" md="6" className="mb-2">
-              <Label>Title</Label>
-              <Input
-                type="text"
-                name="title"
-                value={this.state.title}
-                onChange={this.changeHandler}
-              />
-            </Col> */}
-            {/* <Col lg="6" md="6" sm="6" className="mb-2">
-              <Label>Membership plan</Label>
-              <CustomInput
-                type="select"
-                name="planId"
-                value={this.state.planId?.pack_name}
-                onChange={this.changeHandler}
-              >
-                <option>Select Plan</option>
-                {this.state.pack_nameM?.map((planmemship) => (
-                  <option value={planmemship?._id} key={planmemship?._id}>
-                    {planmemship?.pack_name}
-                  </option>
-                ))}
-              </CustomInput>
-            </Col> */}
             <Editor
               toolbarClassName="demo-toolbar-absolute"
               wrapperClassName="demo-wrapper"

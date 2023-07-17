@@ -289,10 +289,22 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/explore/Trupee/tradingViewCharts",
   },
+  {
+    type: "groupHeader",
+    groupTitle: "Report",
+  },
 
   {
     type: "groupHeader",
     groupTitle: "Profile Page",
+  },
+  {
+    id: "report",
+    title: "Report",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/pages/profile",
   },
   {
     id: "profile",

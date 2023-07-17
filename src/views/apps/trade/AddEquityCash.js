@@ -86,11 +86,9 @@ export class AddEquityCash extends Component {
   // };
 
   changeHandler = (e) => {
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
   changeHandler1 = (e) => {
-    console.log(e.target.value);
     this.setState({ allScript: e.target.value });
   };
   submitHandler = (e) => {

@@ -43,9 +43,6 @@ class EquityCashList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Script Name",
@@ -230,18 +227,18 @@ class EquityCashList extends React.Component {
           );
         },
       },
-      {
-        headerName: "Number Of Lots",
-        field: "no_of_lots",
-        width: 140,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.no_of_lots}</span>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Number Of Lots",
+      //   field: "no_of_lots",
+      //   width: 140,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data.no_of_lots}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       // {
       //   headerName: "Expiry Date ",
       //   field: "expDate",

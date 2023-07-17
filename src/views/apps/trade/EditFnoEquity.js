@@ -14,7 +14,6 @@ import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-// import Textarea from "../../../forms/form-elements/textarea/Textarea";
 
 class EditFnoEquity extends React.Component {
   constructor(props) {
@@ -61,7 +60,6 @@ class EditFnoEquity extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           script_type: response.data.data.script_type,
           equity_script: response.data.data.equity_script,
@@ -103,9 +101,7 @@ class EditFnoEquity extends React.Component {
     axiosConfig
       .get("/admin/getEquityScript")
       .then((response) => {
-        console.log(response);
         this.setState({
-          // scriptT: response.data.data,
           scriptN: response.data.data,
         });
       })
@@ -116,7 +112,6 @@ class EditFnoEquity extends React.Component {
     axiosConfig
       .get("/admin/datelist")
       .then((response) => {
-        console.log(response);
         this.setState({
           expdateI: response.data.data,
         });
@@ -193,9 +188,9 @@ class EditFnoEquity extends React.Component {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/admin/editfnoOption/${id}`, this.state, {})
+      .post(`/admin/editfnoOption/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
       })
       .catch((error) => {
@@ -203,7 +198,6 @@ class EditFnoEquity extends React.Component {
       });
   };
   render() {
-    console.log("this.state.sl_type", this.state.sl_type);
     return (
       <div>
         <Breadcrumbs
@@ -242,7 +236,6 @@ class EditFnoEquity extends React.Component {
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    {/* <option>select script</option> */}
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -255,10 +248,10 @@ class EditFnoEquity extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    {/* <option>Expiry Date</option> */}
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}
@@ -413,7 +406,7 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Type</Label>
                   <Input
                     type="text"
@@ -422,7 +415,7 @@ class EditFnoEquity extends React.Component {
                     value={this.state.type}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
@@ -527,7 +520,7 @@ class EditFnoEquity extends React.Component {
                     </span>
                   </div>
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="3" className="mb-2">
                   <Label>T5</Label>
                   <Input
                     type="number"
@@ -537,7 +530,7 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="3" className="mb-2">
                   <Label>T6</Label>
                   <Input
                     type="number"
@@ -547,7 +540,7 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="3" className="mb-2">
                   <Label>T7</Label>
                   <Input
                     type="number"
@@ -580,7 +573,7 @@ class EditFnoEquity extends React.Component {
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
-                <Col lg="6" md="6" className="mb-2">
+                <Col lg="6" md="6" className="my-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"

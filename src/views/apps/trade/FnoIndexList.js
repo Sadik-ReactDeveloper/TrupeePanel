@@ -257,7 +257,6 @@ class FnoIndexList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <span>{moment(params.data.date).format("L")}</span>  */}
               <span>{params.data.date}</span>
             </div>
           );
@@ -506,6 +505,7 @@ class FnoIndexList extends React.Component {
 
   fnoindexList = () => {
     axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
+      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

@@ -404,6 +404,7 @@ class FnoEquityList extends React.Component {
   }
   fnoEquity = () => {
     axiosConfig.get(`admin/fnoEquity_list`).then((response) => {
+      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

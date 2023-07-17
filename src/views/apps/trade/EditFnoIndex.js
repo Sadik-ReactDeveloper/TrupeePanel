@@ -4,7 +4,6 @@ import {
   CardBody,
   Row,
   Col,
-  //FormGroup,
   CustomInput,
   Form,
   Label,
@@ -15,7 +14,6 @@ import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
-// import Textarea from "../../../forms/form-elements/textarea/Textarea";
 
 class EditFnoIndex extends React.Component {
   constructor(props) {
@@ -28,8 +26,8 @@ class EditFnoIndex extends React.Component {
       fnoindex_scrpt_name: "",
       active_value: "",
       call_type: "",
-      qty: "",
-      investment_amt: "",
+      // qty: "",
+      // investment_amt: "",
       no_of_lots: "",
       trade_type: "",
       type: "Index",
@@ -62,6 +60,7 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
+        console.log(response.data.data.status);
         this.setState({
           expiryDate: response.data.data.expiryDate,
           script_type: response.data.data.script_type,
@@ -86,12 +85,13 @@ class EditFnoIndex extends React.Component {
           FT7_type: response.data.data.FT7_type,
           FT6: response.data.data.FT6,
           FT7: response.data.data.FT7,
-          qty: response.data.data.qty,
+          // qty: response.data.data.qty,
           sl_type: response.data.data.sl_type,
           no_of_lots: response.data.data.no_of_lots,
           trade_type: response.data.data.trade_type,
           type: response.data.data.type,
           cstmMsg: response.data.data.cstmMsg,
+          status: response.data.data.status,
         });
       })
       .catch((error) => {
@@ -121,6 +121,7 @@ class EditFnoIndex extends React.Component {
       });
   }
   changeHandler1 = (e) => {
+    console.log(e.target.value);
     this.setState({ status: e.target.value });
   };
 
@@ -187,19 +188,32 @@ class EditFnoIndex extends React.Component {
       this.setState({ trl_type: "false" });
     }
   };
-
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
   submitHandler = (e) => {
     e.preventDefault();
+    let obj = {
+      trade_type: this.state.trade_type,
+      trl_type: this.state.trl_type,
+      FT1_type: this.state.FT1_type,
+      FT2_type: this.state.FT2_type,
+      FT3_type: this.state.FT3_type,
+      status: this.state.state,
+      FT4: this.state.FT4,
+      FT5: this.state.FT5,
+      FT6: this.state.FT6,
+      FT7: this.state.FT7,
+      cstmMsg: this.state.cstmMsg,
+      sl_type: this.state.sl_type,
+    };
+    console.log(obj);
     let { id } = this.props.match.params;
-    console.log("object", id);
     axiosConfig
-      .post(`/admin/editFnoindex/${id}`, this.state)
-
+      .post(`/admin/editFnoindex/${id}`, obj)
       .then((response) => {
-        console.log("EditFNOIndex", response);
+        console.log("EditFNOIndex", response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
       })
       .catch((error) => {
@@ -208,8 +222,6 @@ class EditFnoIndex extends React.Component {
   };
 
   render() {
-    // const { FT1_type,FT2_type,FT3_type,FT5_type } = this.state;
-    // console.log("this.state.sl_type", this.state.sl_type);
     return (
       <div>
         <Breadcrumbs
@@ -245,6 +257,7 @@ class EditFnoIndex extends React.Component {
                   <CustomInput
                     type="select"
                     name="fnoindex_scrpt_name"
+                    disabled
                     value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -261,6 +274,7 @@ class EditFnoIndex extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -278,6 +292,7 @@ class EditFnoIndex extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
+                    disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
@@ -306,6 +321,7 @@ class EditFnoIndex extends React.Component {
                   <Input
                     id="exampleSelect"
                     name="call_type"
+                    disabled
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
@@ -326,6 +342,7 @@ class EditFnoIndex extends React.Component {
                   <Label>Active Value</Label>
                   <Input
                     type="number"
+                    disabled
                     placeholder="Enter Active Value"
                     name="active_value"
                     value={this.state.active_value}
@@ -333,7 +350,7 @@ class EditFnoIndex extends React.Component {
                   />
                 </Col>
 
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Quantity</Label>
                   <Input
                     type="number"
@@ -342,12 +359,13 @@ class EditFnoIndex extends React.Component {
                     value={this.state.qty}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Number Of Lots</Label>
                   <Input
                     type="number"
                     name="no_of_lots"
+                    disabled
                     placeholder="Enter Lots Price"
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
@@ -357,6 +375,7 @@ class EditFnoIndex extends React.Component {
                   <Label>TRAIL</Label>
                   <Input
                     type="number"
+                    disabled
                     placeholder="Enter TRAIL"
                     name="trl"
                     value={this.state.trl}

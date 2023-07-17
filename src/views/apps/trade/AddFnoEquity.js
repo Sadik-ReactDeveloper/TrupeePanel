@@ -278,11 +278,11 @@ export class AddFnoEquity extends Component {
                   />
                 </Col> */}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Per Lot Price</Label>
+                  <Label>Number Of Lots</Label>
                   <Input
                     type="text"
                     name="no_of_lots"
-                    placeholder="Enter Per Lots Price"
+                    placeholder="Enter Number Of Lots"
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
