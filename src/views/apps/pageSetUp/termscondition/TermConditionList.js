@@ -18,6 +18,7 @@ import { ChevronDown, Edit, Trash2 } from "react-feather";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import { Route } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
+import swal from "sweetalert";
 class termscondition extends React.Component {
   state = {
     rowData: [],
@@ -36,7 +37,7 @@ class termscondition extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 100,
-        filter: true,
+        // filter: true,
       },
       {
         headerName: "Descriptions",
@@ -69,57 +70,78 @@ class termscondition extends React.Component {
       //     ) : null;
       //   },
       // },
-      // {
-      //   headerName: "Actions",
-      //   field: "sortorder",
-      //   width: 200,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="actions cursor-pointer">
-      //         {/* <Route
-      //           render={({ history }) => (
-      //             <Edit
-      //               className="mr-50"
-      //               size="25px"
-      //               color="blue"
-      //               onClick={() =>
-      //                 history.push(
-      //                   `/app/pageSetUp/termscondition/EditTermCondition/${params.data._id}`
-      //                 )
-      //               }
-      //             />
-      //           )}
-      //         /> */}
+      {
+        headerName: "Actions",
+        field: "sortorder",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="actions cursor-pointer">
+              <Route
+                render={({ history }) => (
+                  <Edit
+                    className="mr-50"
+                    size="25px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(
+                        `/app/pageSetUp/termscondition/EditTermCondition/${params.data._id}`
+                      )
+                    }
+                  />
+                )}
+              />
 
-      //         <Trash2
-      //           className="mr-50"
-      //           size="25px"
-      //           color="red"
-      //           onClick={() => {
-      //             let selectedData = this.gridApi.getSelectedRows();
-      //             this.runthisfunction(params.data._id);
-      //             this.gridApi.updateRowData({ remove: selectedData });
-      //           }}
-      //         />
-      //       </div>
-      //     );
-      //   },
-      // },
+              {/* <Trash2
+                className="mr-50"
+                size="25px"
+                color="red"
+                onClick={() => {
+                  this.runthisfunction(params.data._id);
+                }}
+              /> */}
+            </div>
+          );
+        },
+      },
     ],
   };
-  async componentDidMount() {
-    await axiosConfig.get("/admin/get_term_cond").then((response) => {
+  componentDidMount() {
+    this.termsConditionList();
+  }
+  termsConditionList = () => {
+    axiosConfig.get("/admin/get_term_cond").then((response) => {
       const rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
     });
+  };
+
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_abtus/${id}`).then((response) => {
+            console.log(response.data);
+            this.termsConditionList();
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
-  // async runthisfunction(id) {
-  //   console.log(id);
-  //   await axiosConfig.get(`/admin/deleteabout/${id}`).then((response) => {
-  //     console.log(response);
-  //   });
-  // }
 
   onGridReady = (params) => {
     this.gridApi = params.api;
@@ -162,7 +184,7 @@ class termscondition extends React.Component {
               </h1>
             </Col>
           </Row>
-          <Col className="pt-4">
+          {/* <Col className="pt-4">
             <Route
               render={({ history }) => (
                 <Button
@@ -177,7 +199,7 @@ class termscondition extends React.Component {
                 </Button>
               )}
             />
-          </Col>
+          </Col> */}
           <CardBody className="py-0">
             {this.state.rowData === null ? null : (
               <div className="ag-theme-material w-100 my-2 ag-grid-table">

@@ -90,6 +90,7 @@ export class AddFaq extends Component {
                   <Label>Title</Label>
                   <Input
                     type="text"
+                    required
                     placeholder="Enter Title"
                     name="title"
                     value={this.state.title}
@@ -100,6 +101,7 @@ export class AddFaq extends Component {
                   <Label>Description</Label>
                   <Input
                     type="text"
+                    required
                     placeholder="Enter Description"
                     name="desc"
                     value={this.state.desc}

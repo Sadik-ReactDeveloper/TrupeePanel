@@ -3,6 +3,7 @@ import { Card, CardBody, Col, Row, Form, Button } from "reactstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { EditorState, convertToRaw, RichUtils } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../assets/scss/plugins/extensions/editor.scss";
 import axiosConfig from "../../../../axiosConfig";
@@ -24,8 +25,8 @@ class EditTermCondition extends React.Component {
     console.log(editorState);
     this.setState({
       editorState,
-      // : convertToRaw(editorState.getCurrentContent()),
-      desc: convertToRaw(editorState.getCurrentContent()),
+      // desc: convertToRaw(editorState.getCurrentContent()),
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
   };
   handleKeyCommand(command, editorState) {
@@ -64,13 +65,13 @@ class EditTermCondition extends React.Component {
       .post(`/admin/edit_term_cond/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        // swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push(
-          `/app/pageSetUp/termscondition/TermConditionList`
-        );
+        swal("Success!", "Submitted SuccessFull!", "success");
+        // this.props.history.push(
+        //   `/app/pageSetUp/termscondition/TermConditionList`
+        // );
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data);
       });
   };
 

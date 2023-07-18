@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import adminProfile from "../../../assets/img/admin.png";
 import {
   UncontrolledDropdown,
   DropdownMenu,
@@ -51,7 +51,8 @@ const NavbarUser = () => {
           </div>
           <span data-tour="user">
             <img
-              src={adminimg?.adminimg}
+              // src={adminimg?.adminimg}
+              src={adminProfile}
               className="round"
               height="40"
               width="40"

@@ -17,7 +17,6 @@ import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
-// import { Route } from "react-router-dom";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -47,6 +46,7 @@ class Profile extends React.Component {
     axiosConfig
       .get(`/admin/viewoneadmin/${adminId}`)
       .then((response) => {
+        console.log(response.data.data);
         this.setState({
           data: response.data.data,
           name: response.data.data.name,
@@ -85,6 +85,7 @@ class Profile extends React.Component {
         },
       })
       .then((response) => {
+        console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         window.location.reload("/#/pages/profile");
       })
@@ -108,7 +109,12 @@ class Profile extends React.Component {
               <Card className="bg-authentication rounded-0 mb-0 w-100">
                 <div className="profile-img text-center st-1">
                   <img
-                    src={this.state.data?.adminimg}
+                    src={
+                      // this.state.data?.adminimg
+                      //   ? this.state.data?.adminimg
+                      // :
+                      adminpimg
+                    }
                     alt="adminimg"
                     className="img-fluid img-border rounded-circle box-shadow-1"
                     width="150"

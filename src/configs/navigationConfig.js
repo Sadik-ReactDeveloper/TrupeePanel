@@ -93,7 +93,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/membership/membershipList",
+    navLink: "/app/membership/MembershipList",
   },
   // {
   //   id: "membershipLists",
@@ -193,7 +193,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/pageSetUP/about/AllaboutUs",
+    navLink: "/app/pageSetUp/about/AllaboutUs",
   },
   // {
   //   id: "helpUs",
@@ -209,7 +209,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/pageSetUP/termscondition/TermConditionList",
+    navLink: "/app/pageSetUp/termscondition/TermConditionList",
   },
   // {
   //   id: "refferalWalletList",
@@ -329,7 +329,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/app/feedback/feedbackList",
+    navLink: "/app/feedback/FeedBackList",
   },
   {
     id: "userAppreciation",
