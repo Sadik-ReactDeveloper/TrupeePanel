@@ -11,7 +11,6 @@ import {
   CustomInput,
 } from "reactstrap";
 import { Route } from "react-router-dom";
-// import { history } from "../../../history";
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
 

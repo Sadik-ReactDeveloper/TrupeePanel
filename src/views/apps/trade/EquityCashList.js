@@ -410,6 +410,7 @@ class EquityCashList extends React.Component {
   }
   equitycashData = () => {
     axiosConfig.get(`/admin/equityCash_list`).then((response) => {
+      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

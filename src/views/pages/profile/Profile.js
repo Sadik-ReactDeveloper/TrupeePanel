@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import "../../../assets/scss/pages/users-profile.scss";
+import adminpimg from "../../../assets/img/admin.png";
 import CheckBoxesVuexy from "../../../components/@vuexy/checkbox/CheckboxesVuexy";
 import { Check } from "react-feather";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
@@ -107,7 +108,7 @@ class Profile extends React.Component {
               <Card className="bg-authentication rounded-0 mb-0 w-100">
                 <div className="profile-img text-center st-1">
                   <img
-                    src={this.state.data.adminimg}
+                    src={this.state.data?.adminimg}
                     alt="adminimg"
                     className="img-fluid img-border rounded-circle box-shadow-1"
                     width="150"

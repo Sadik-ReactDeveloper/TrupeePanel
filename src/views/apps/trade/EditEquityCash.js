@@ -47,7 +47,7 @@ class EditEquityCash extends React.Component {
       profit_loss_amt: "",
       expiryDate: "",
       type: "Cash",
-      status: "",
+      // status: "",
       cstmMsg: "",
     };
     this.state = {
@@ -88,7 +88,7 @@ class EditEquityCash extends React.Component {
           profit_loss_amt: response.data.data.profit_loss_amt,
           expiryDate: response.data.data.expiryDate,
           type: response.data.data.type,
-          status: response.data.data.status,
+          // status: response.data.data.status,
           cstmMsg: response.data.data.cstmMsg,
         });
       })
@@ -175,9 +175,9 @@ class EditEquityCash extends React.Component {
       this.setState({ t7_type: "false" });
     }
   };
-  changeHandler6 = (e) => {
-    this.setState({ status: e.target.value });
-  };
+  // changeHandler6 = (e) => {
+  //   this.setState({ status: e.target.value });
+  // };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -197,7 +197,7 @@ class EditEquityCash extends React.Component {
       t4_typ: this.state.t4_type,
       T4: this.state.T4,
       cstmMsg: this.state.cstmMsg,
-      status: this.state.cstmMsg,
+      // status: this.state.cstmMsg,
       tradeStatus: this.state.tradeStatus,
     };
     console.log(payload);
@@ -316,7 +316,7 @@ class EditEquityCash extends React.Component {
                     type="number"
                     placeholder="Enter Active Value"
                     name="active_value"
-                    value={this.state.active_value}
+                    value={this.state.active_value || ""}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -544,7 +544,7 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
+                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
                   <Label className="mb-1">Call Status</Label>
                   <div
                     className="form-label-group"
@@ -565,8 +565,8 @@ class EditEquityCash extends React.Component {
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
+                </Col> */}
+                <Col lg="3" md="3" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"

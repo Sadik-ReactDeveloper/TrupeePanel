@@ -87,7 +87,7 @@ export default class EditSize extends Component {
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/users/usersList");
+        // this.props.history.push("/app/users/usersList");
       })
       .catch((error) => {
         console.log(error);
@@ -251,7 +251,7 @@ export default class EditSize extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Update Status
                   </Button.Ripple>
                 </Col>
               </Row>

@@ -441,23 +441,28 @@ class CompletedTradeList extends React.Component {
           //   </div>
           // ) : null;
 
-          return params?.data?.FT1_type == "true" ||
-            params?.data?.FT2_type == "true" ||
-            params?.data?.FT3_type == "true" ||
-            params?.data?.t1_type == "true" ||
-            params?.data?.t2_type == "true" ||
-            params?.data?.t3_type == "true" ||
-            params?.data?.t4_type == "true" ||
-            params?.data?.trl_type == "true" ||
-            params?.data?.t5_type == "true" ? (
+          return params?.data?.FT1_type === "true" ||
+            params?.data?.FT2_type === "true" ||
+            params?.data?.FT3_type === "true" ||
+            params?.data?.t1_type === "true" ||
+            params?.data?.t2_type === "true" ||
+            params?.data?.t3_type === "true" ||
+            params?.data?.t4_type === "true" ||
+            params?.data?.trl_type === "true" ||
+            params?.data?.t5_type === "true" ? (
             <div className="badge badge-pill badge-success">
               {params?.data?.status}
             </div>
-          ) : params?.data?.sl_type == "true" ? (
+          ) : params?.data?.sl_type === "true" &&
+            params?.data?.status === "Active" ? (
+            <div className="badge badge-pill badge-success">
+              {params?.data?.status}
+            </div>
+          ) : (
             <div className="badge badge-pill badge-danger">
               {params?.data?.status}
             </div>
-          ) : null;
+          );
         },
       },
       {

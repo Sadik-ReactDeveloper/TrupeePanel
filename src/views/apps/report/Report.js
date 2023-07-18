@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Card,
@@ -11,6 +10,8 @@ import {
   DropdownItem,
   DropdownToggle,
   Button,
+  Label,
+  CustomInput,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
@@ -20,7 +21,7 @@ import { Trash2, ChevronDown } from "react-feather";
 //import classnames from "classnames";
 //import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-import "../../../assets/scss/pages/users.scss"
+import "../../../assets/scss/pages/users.scss";
 class Report extends React.Component {
   state = {
     rowData: [],
@@ -40,9 +41,6 @@ class Report extends React.Component {
         field: "node.rowIndex + 1",
         width: 150,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Name",
@@ -270,25 +268,59 @@ class Report extends React.Component {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       <Row className="app-user-list">
-        <Col sm="12">
-          
-        </Col>
+        <Col sm="12"></Col>
         <Col sm="12">
           <Card>
+            <h1 col-sm-6 className="float-left p-2">
+              Filter Data
+            </h1>
             <Row className="m-2">
-              <Col>
-                <h1 col-sm-6 className="float-left">
-                  Report List
-                </h1>
-              </Col>
-              {/* <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/privacyPolicy/addPolicy")}
+              <Col lg="3" md="3" sm="6" className="mb-2">
+                <Label>Status</Label>
+                <CustomInput
+                  type="select"
+                  // name="fnoindex_scrpt_name"
+                  required
+                  // value={this.state.fnoindex_scrpt_name}
+                  // onChange={this.changeHandler}
                 >
-                  Add New Policy
+                  <option>Select Script</option>
+                  <option>Active</option>
+                  <option>Deactive</option>
+
+                  {/* {this.state.scriptN?.map((allScript) => (
+                      <option value={allScript?._id} key={allScript?._id}>
+                        {allScript?.scriptName}
+                      </option>
+                    ))} */}
+                </CustomInput>
+              </Col>
+              <Col lg="3" md="3" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2"> */}
+                <Label>Date</Label>
+                <Input
+                  type="date"
+                  name="fnoindex_scrpt_name"
+                  required
+                  // value={this.state.fnoindex_scrpt_name}
+                  // onChange={this.changeHandler}
+                >
+                  {/* {this.state.scriptN?.map((allScript) => (
+                      <option value={allScript?._id} key={allScript?._id}>
+                        {allScript?.scriptName}
+                      </option>
+                    ))} */}
+                </Input>
+                {/* </Col> */}
+              </Col>
+              <Col lg="3" md="3" sm="6" className="mt-1">
+                <Button
+                  className="float-right btn btn-success"
+                  onClick={() => alert("Data Update")}
+                >
+                  Filter Data
                 </Button>
-              </Col> */}
+              </Col>
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (

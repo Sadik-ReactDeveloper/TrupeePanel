@@ -37,6 +37,7 @@ const EditAboutUs = lazy(() =>
   import("./views/apps/pageSetUp/about/EditAboutUs")
 );
 
+const Report = lazy(() => import("./views/apps/report/Report"));
 const TermConditionList = lazy(() =>
   import("./views/apps/pageSetUp/termscondition/TermConditionList")
 );
@@ -764,6 +765,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/pageSetUp/termscondition/EditTermCondition/:id"
               component={EditTermCondition}
+            />
+            <AppRoute
+              path="/app/pageSetUp/reportData/report"
+              component={Report}
             />
             <AppRoute
               path="/app/pageSetUp/termscondition/TermConditionList"

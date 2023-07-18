@@ -293,19 +293,19 @@ const navigationConfig = [
     type: "groupHeader",
     groupTitle: "Report",
   },
-
-  {
-    type: "groupHeader",
-    groupTitle: "Profile Page",
-  },
   {
     id: "report",
     title: "Report",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
-    navLink: "/pages/profile",
+    navLink: "/app/pageSetUp/reportData/report",
   },
+  {
+    type: "groupHeader",
+    groupTitle: "Profile Page",
+  },
+
   {
     id: "profile",
     title: "My Account",
