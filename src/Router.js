@@ -170,6 +170,7 @@ const AddRefferalWallet = lazy(() =>
 //FAQ//
 const FaqList = lazy(() => import("./views/apps/faq/FaqList"));
 const AddFaq = lazy(() => import("./views/apps/faq/AddFaq"));
+const EditFaq = lazy(() => import("./views/apps/faq/EditFaq"));
 
 //Premium//
 const AddPaidService = lazy(() =>
@@ -515,6 +516,7 @@ class AppRouter extends React.Component {
             {/* FAQ */}
             <AppRoute path="/app/faq/faqList" component={FaqList} />
             <AppRoute path="/app/faq/addFaq" component={AddFaq} />
+            <AppRoute path="/app/faq/editfaq/:id" component={EditFaq} />
             {/* FeedBack */}
             <AppRoute
               path="/app/feedback/FeedBackList"

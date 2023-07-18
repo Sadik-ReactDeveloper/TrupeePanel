@@ -77,30 +77,27 @@ class FaqList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
                     size="25px"
                     color="blue"
                     onClick={() =>
-                      history.push(
-                        
-                        `/app/about/EditAboutUs/${params.data._id}`
-                      )
+                      history.push(`/app/faq/editfaq/${params.data._id}`)
                     }
                   />
                 )}
-              /> */}
+              />
 
-              <Trash2
+              {/* <Trash2
                 className="mr-50"
                 size="25px"
                 color="red"
                 onClick={() => {
                   this.runthisfunction(params.data._id);
                 }}
-              />
+              /> */}
             </div>
           );
         },
@@ -198,7 +195,7 @@ class FaqList extends React.Component {
                   FAQ List
                 </h1>
               </Col>
-              <Col>
+              {/* <Col>
                 <Route
                   render={({ history }) => (
                     <Button
@@ -209,7 +206,7 @@ class FaqList extends React.Component {
                     </Button>
                   )}
                 />
-              </Col>
+              </Col> */}
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (
