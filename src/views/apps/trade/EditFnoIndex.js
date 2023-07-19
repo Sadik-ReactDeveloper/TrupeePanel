@@ -307,10 +307,10 @@ class EditFnoIndex extends React.Component {
                     id="exampleSelect"
                     name="trade_type"
                     type="select"
+                    disabled
                     value={this.state.trade_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Trade</option>
                     <option value="BankNifty">BANK NIFTY</option>
                     <option value="Nifty">NIFTY</option>
                   </Input>

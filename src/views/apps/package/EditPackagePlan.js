@@ -13,6 +13,7 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
+import swal from "sweetalert";
 // import moment from "moment";
 
 export default class EditPackagePlan extends Component {
@@ -23,9 +24,7 @@ export default class EditPackagePlan extends Component {
       mrp_price: "",
       desc: "",
       des_price: "",
-    
       status: "",
-    
     };
     // this.state = {
     //   planN: [],
@@ -35,11 +34,9 @@ export default class EditPackagePlan extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/getoneexpDate/${id}`, {
-      
-      })
+      .get(`/admin/viewoneplan/${id}`)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         this.setState({
           pack_name: response.data.data.pack_name,
           mrp_price: response.data.data.mrp_price,
@@ -62,15 +59,19 @@ export default class EditPackagePlan extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
-
+    let payload = {
+      pack_name: this.state.pack_name,
+      mrp_price: this.state.mrp_price,
+      des_price: this.state.des_price,
+      desc: this.state.desc,
+      status: this.state.status,
+    };
     axiosConfig
-      .post(`/editplan/${id}`)
+      .post(`/admin/editplan/${id}`, payload)
       .then((response) => {
         console.log(response);
-        // swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push(`/app/package/PackagePlanList`);
+        swal("Success!", "Submitted SuccessFull!", "success");
       })
-
       .catch((error) => {
         console.log(error.response);
       });
@@ -107,19 +108,6 @@ export default class EditPackagePlan extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>User ID</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter User Id"
-                    // name="desc"{
-  
-    
-
-                    // value={this.state.desc}
-                    // onChange={this.changeHandler}
-                  />
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Package Plan</Label>
                   <Input
@@ -129,12 +117,11 @@ export default class EditPackagePlan extends Component {
                     value={this.state.pack_name}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Plan</option>
                     <option>FREE</option>
-                    <option>1 Month</option>
-                    <option>3 Month</option>
-                    <option>6 Month</option>
-                    <option>1 Year</option>
+                    <option>30 Days</option>
+                    <option>90 Days</option>
+                    <option>180 Days</option>
+                    <option>365 Days</option>
                   </Input>
                 </Col>
                 <Col lg="6" md="6" className="mb-2">

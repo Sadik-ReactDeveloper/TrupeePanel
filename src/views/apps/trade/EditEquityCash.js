@@ -248,6 +248,7 @@ class EditEquityCash extends React.Component {
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
+                    disabled
                     value={this.state.cash_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -281,10 +282,10 @@ class EditEquityCash extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
+                    disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -295,6 +296,7 @@ class EditEquityCash extends React.Component {
                     id="exampleSelect"
                     name="call_type"
                     type="select"
+                    disabled
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
@@ -316,6 +318,7 @@ class EditEquityCash extends React.Component {
                     type="number"
                     placeholder="Enter Active Value"
                     name="active_value"
+                    disabled
                     value={this.state.active_value || ""}
                     onChange={this.changeHandler}
                   />
@@ -326,7 +329,19 @@ class EditEquityCash extends React.Component {
                     type="number"
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
+                    disabled
                     value={this.state.active_value2}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Quantity</Label>
+                  <Input
+                    type="number"
+                    name="qty"
+                    disabled
+                    placeholder="Enter Quantity"
+                    value={this.state.qty}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -390,17 +405,7 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="number"
-                    name="qty"
-                    placeholder="Enter Quantity"
-                    value={this.state.qty}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Type</Label>
                   <Input
                     type="text"
@@ -409,7 +414,7 @@ class EditEquityCash extends React.Component {
                     value={this.state.type}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Col lg="3" md="3" sm="3" className="mb-3 mt-1">

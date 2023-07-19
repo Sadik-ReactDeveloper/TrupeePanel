@@ -13,10 +13,9 @@ import {
 } from "reactstrap";
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../utility/context/Layout";
-import { ChevronDown, Trash2 } from "react-feather";
+import { ChevronDown, Edit, Trash2 } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import { Route } from "react-router-dom";
 class PackagePlanList extends React.Component {
@@ -114,7 +113,7 @@ class PackagePlanList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
@@ -127,7 +126,7 @@ class PackagePlanList extends React.Component {
                     }
                   />
                 )}
-              /> */}
+              />
 
               <Trash2
                 className="mr-50"
@@ -218,7 +217,7 @@ class PackagePlanList extends React.Component {
                 </h1>
               </Col>
             </Row>
-            <Col className="pt-4">
+            {/* <Col className="pt-4">
               <Route
                 render={({ history }) => (
                   <Button
@@ -229,7 +228,7 @@ class PackagePlanList extends React.Component {
                   </Button>
                 )}
               />
-            </Col>
+            </Col> */}
 
             <CardBody className="py-0">
               {this.state.rowData === null ? null : (

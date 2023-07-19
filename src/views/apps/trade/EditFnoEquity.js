@@ -232,6 +232,7 @@ class EditFnoEquity extends React.Component {
                   <Label>Script Name</Label>
                   <CustomInput
                     type="select"
+                    disabled
                     name="fnoequty_scrpt_name"
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
@@ -265,12 +266,10 @@ class EditFnoEquity extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
+                    disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
-                    {/* <option>CE</option>
-                    <option>PF</option> */}
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -280,6 +279,7 @@ class EditFnoEquity extends React.Component {
                   <Input
                     id="exampleSelect1"
                     name="call_type"
+                    disabled
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
@@ -302,6 +302,7 @@ class EditFnoEquity extends React.Component {
                     type="text"
                     placeholder="Enter Active Value"
                     name="active_value"
+                    disabled
                     value={this.state.active_value}
                     onChange={this.changeHandler}
                   />
@@ -310,6 +311,7 @@ class EditFnoEquity extends React.Component {
                   <Label>Range Value</Label>
                   <Input
                     type="number"
+                    disabled
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
                     value={this.state.active_value2}
@@ -381,6 +383,7 @@ class EditFnoEquity extends React.Component {
                   <Input
                     type="text"
                     name="qty"
+                    disabled
                     placeholder="Enter Quantity"
                     value={this.state.qty}
                     onChange={this.changeHandler}
@@ -397,11 +400,12 @@ class EditFnoEquity extends React.Component {
                   />
                 </Col> */}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Per Lot Price</Label>
+                  <Label>Number Of Lot</Label>
                   <Input
                     type="text"
                     name="no_of_lots"
-                    placeholder="Enter Per Lot Price"
+                    disabled
+                    placeholder="Enter Number Of Lot"
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
