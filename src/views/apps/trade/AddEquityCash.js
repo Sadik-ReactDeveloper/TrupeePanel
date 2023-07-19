@@ -8,15 +8,11 @@ import {
   Input,
   Label,
   Button,
-  // FormGroup,
   CustomInput,
 } from "reactstrap";
 import { Route } from "react-router-dom";
-// import Select from "react-select";
-// import { history } from "../../../history";
 import swal from "sweetalert";
 import axiosConfig from "../../../axiosConfig";
-
 export class AddEquityCash extends Component {
   constructor(props) {
     super(props);
@@ -78,12 +74,6 @@ export class AddEquityCash extends Component {
         console.log(error);
       });
   }
-
-  // handleChange = (dealer) => {
-  //   this.setState({ dealer }, () =>
-  //     console.log(`Option selected:`, this.state.dealer)
-  //   );
-  // };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
