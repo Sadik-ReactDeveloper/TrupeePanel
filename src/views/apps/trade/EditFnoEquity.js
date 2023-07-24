@@ -49,6 +49,7 @@ class EditFnoEquity extends React.Component {
       T6: "",
       T7: "",
       t7_type: false,
+      tradeStatus: "",
     };
     this.state = {
       expdateI: [],
@@ -91,6 +92,7 @@ class EditFnoEquity extends React.Component {
           type: response.data.data.type,
           status: response.data.data.status,
           cstmMsg: response.data.data.cstmMsg,
+          tradeStatus: this.state.tradeStatus,
         });
       })
       .catch((error) => {

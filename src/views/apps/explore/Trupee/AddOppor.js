@@ -23,7 +23,6 @@ export default class AddOppor extends Component {
       title: "",
       desc: "",
       img: "",
-
       selectedName: "",
       selectedFile: null,
     };

@@ -29,7 +29,7 @@ export class AddFnoIndex extends Component {
       trade_type: "",
       t5: "",
       status: "",
-      cstmMsg: "",
+      // cstmMsg: "",
     };
     this.state = {
       type: "Index",
@@ -124,7 +124,8 @@ export class AddFnoIndex extends Component {
                   <CustomInput
                     type="select"
                     name="fnoindex_scrpt_name"
-                    required
+                    // valid={this.state.fnoindex_scrpt_name ? true : false}
+                    // invalid={this.state.fnoindex_scrpt_name ? false : true}
                     value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -141,7 +142,8 @@ export class AddFnoIndex extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
-                    required
+                    // valid={this.state.expiryDate ? true : false}
+                    // invalid={this.state.expiryDate ? false : true}
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -161,6 +163,8 @@ export class AddFnoIndex extends Component {
                     type="select"
                     value={this.state.script_type}
                     onChange={this.changeHandler}
+                    // valid={this.state.script_type ? true : false}
+                    // invalid={this.state.script_type ? false : true}
                   >
                     <option>Select Script</option>
                     <option>BUY</option>
@@ -175,6 +179,8 @@ export class AddFnoIndex extends Component {
                     type="select"
                     value={this.state.trade_type}
                     onChange={this.changeHandler}
+                    // valid={this.state.trade_type ? true : false}
+                    // invalid={this.state.trade_type ? false : true}
                   >
                     <option>Select Trade</option>
                     <option value="BankNifty">BANK NIFTY</option>
@@ -190,8 +196,11 @@ export class AddFnoIndex extends Component {
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
+                    placeholder="Select Call Type"
+                    // valid={this.state.call_type ? true : false}
+                    // invalid={this.state.call_type ? false : true}
                   >
-                    <option>Select Call Type</option>
+                    {/* <option>Select Call Type</option> */}
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -205,9 +214,10 @@ export class AddFnoIndex extends Component {
                 </Col>
 
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Active Value</Label>
+                  <Label>Active Value*</Label>
                   <Input
                     type="number"
+                    required
                     placeholder="Enter Active Value"
                     name="active_value"
                     value={this.state.active_value}
@@ -215,10 +225,11 @@ export class AddFnoIndex extends Component {
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Range value</Label>
+                  <Label>Range value*</Label>
                   <Input
                     name="t5"
                     type="number"
+                    required
                     placeholder="Enter T5 "
                     value={this.state.t5}
                     onChange={this.changeHandler}
@@ -306,8 +317,8 @@ export class AddFnoIndex extends Component {
                     name="cstmMsg"
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
-                  /> 
-                   </Col>*/}
+                  />
+                </Col> */}
                 {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
                   <div

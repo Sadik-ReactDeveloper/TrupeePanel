@@ -40,7 +40,7 @@ export class AddEquityCash extends Component {
       pl_type: "",
       profit_loss_amt: "",
       expiryDate: "",
-      cstmMsg: "",
+      // cstmMsg: "",
       updateexpiryDate: "",
     };
     this.state = {
@@ -108,7 +108,7 @@ export class AddEquityCash extends Component {
       // profit_loss_amt: this.state.profit_loss_amt,
       // expiryDate: this.state.expdateI,
       type: "Cash",
-      cstmMsg: this.state.cstmMsg,
+      // cstmMsg: this.state.cstmMsg,
     };
     console.log(obj);
     axiosConfig
@@ -149,10 +149,12 @@ export class AddEquityCash extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Script Name</Label>
+                  <Label>Script Name*</Label>
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
+                    // valid={true}
+                    // invalid={true}
                     value={this.state.cash_scrpt_name}
                     onChange={this.changeHandler1}
                   >
@@ -189,6 +191,8 @@ export class AddEquityCash extends Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
+                    required
+                    // valid={true}
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
@@ -198,11 +202,13 @@ export class AddEquityCash extends Component {
                   </Input>
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
-                  <Label for="exampleSelect">Call Type</Label>
+                  <Label for="exampleSelect">Call Type*</Label>
                   <Input
                     id="exampleSelect"
                     name="call_type"
                     type="select"
+                    required
+                    resource=""
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
@@ -240,45 +246,49 @@ export class AddEquityCash extends Component {
                   </div>
                 </Col> */}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Active Value</Label>
+                  <Label>Active Value*</Label>
                   <Input
                     type="number"
                     placeholder="Enter Active Value"
                     name="active_value"
+                    required
                     value={this.state.active_value}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Range Value</Label>
+                  <Label>Range Value*</Label>
                   <Input
                     type="number"
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
+                    required
                     value={this.state.active_value2}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>SL</Label>
+                  <Label>SL*</Label>
                   <Input
                     name="SL"
                     type="number"
+                    required
                     placeholder="Enter Stop Loss"
                     value={this.state.SL}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>T₹ 1 </Label>
+                  <Label>T₹ 1* </Label>
                   <Input
                     type="number"
+                    required
                     placeholder="Enter Target 1"
                     name="T1"
                     value={this.state.T1}
                     onChange={this.changeHandler}
                   />
-                </Col>{" "}
+                </Col>
                 <Col lg="6" md="6" className="mb-2">
                   <Label>T₹ 2</Label>
                   <Input
@@ -310,10 +320,11 @@ export class AddEquityCash extends Component {
                   />
                 </Col>{" "}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
+                  <Label>Quantity*</Label>
                   <Input
                     type="number"
                     name="qty"
+                    required
                     placeholder="Enter Quantity"
                     value={this.state.qty}
                     onChange={this.changeHandler}
@@ -362,7 +373,7 @@ export class AddEquityCash extends Component {
                     <option>Cash</option>
                   </Input>
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"
@@ -370,11 +381,11 @@ export class AddEquityCash extends Component {
                     name="cstmMsg"
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
-                  />
-                  {/* <span>
+                  /> */}
+                {/* <span>
                     <b> We will type 210+ Keep booking or trailing stop loss</b>
                   </span> */}
-                </Col>
+                {/* </Col> */}
               </Row>
               <Row>
                 <Button.Ripple

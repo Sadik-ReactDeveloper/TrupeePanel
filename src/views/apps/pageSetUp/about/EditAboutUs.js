@@ -16,7 +16,11 @@ import {
 import { Route } from "react-router-dom";
 // import { history } from "../../../history";
 import axiosConfig from "../../../../axiosConfig";
-
+import { EditorState, convertToRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../../assets/scss/plugins/extensions/editor.scss";
 export default class EditAboutUs extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +45,12 @@ export default class EditAboutUs extends Component {
         console.log(error.response);
       });
   }
-
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    });
+  };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -102,7 +111,7 @@ export default class EditAboutUs extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-              <Col lg="12" md="12" sm="12" className="mb-2">
+              {/* <Col lg="12" md="12" sm="12" className="mb-2">
                 <Label>Descriptions</Label>
                 <Input
                   type="textarea"
@@ -110,8 +119,45 @@ export default class EditAboutUs extends Component {
                   value={this.state.desc}
                   onChange={this.changeHandler}
                 ></Input>
+              </Col> */}
+              <Col lg="6" md="6" sm="6" className="mb-2">
+                <Label>Descripition</Label>
+                <Editor
+                  toolbarClassName="demo-toolbar-absolute"
+                  wrapperClassName="demo-wrapper"
+                  editorClassName="demo-editor"
+                  editorState={this.state.editorState}
+                  onEditorStateChange={this.onEditorStateChange}
+                  toolbar={{
+                    options: ["inline", "blockType", "fontSize", "fontFamily"],
+                    inline: {
+                      options: [
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strikethrough",
+                        "monospace",
+                      ],
+                      bold: { className: "bordered-option-classname" },
+                      italic: { className: "bordered-option-classname" },
+                      underline: { className: "bordered-option-classname" },
+                      strikethrough: {
+                        className: "bordered-option-classname",
+                      },
+                      code: { className: "bordered-option-classname" },
+                    },
+                    blockType: {
+                      className: "bordered-option-classname",
+                    },
+                    fontSize: {
+                      className: "bordered-option-classname",
+                    },
+                    fontFamily: {
+                      className: "bordered-option-classname",
+                    },
+                  }}
+                />
               </Col>
-
               <Row>
                 <Col
                   lg="6"

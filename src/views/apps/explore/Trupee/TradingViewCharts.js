@@ -90,13 +90,16 @@ class TradingViewCharts extends React.Component {
       {
         headerName: "Upload Image",
         field: "image",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.image}</span>
+              {params.data.image ? (
+                // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                <img src={params.data.image} alt="No Image" />
+              ) : (
+                <span style={{ color: "red" }}>No Available</span>
+              )}
             </div>
           );
         },
@@ -106,7 +109,6 @@ class TradingViewCharts extends React.Component {
         headerName: "Actions",
         field: "sortorder",
         width: 150,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">

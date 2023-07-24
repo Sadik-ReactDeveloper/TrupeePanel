@@ -21,6 +21,7 @@ import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
 import swal from "sweetalert";
+import ReactHtmlParser from "react-html-parser";
 
 class TrupeeUniversity extends React.Component {
   state = {
@@ -62,7 +63,7 @@ class TrupeeUniversity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },

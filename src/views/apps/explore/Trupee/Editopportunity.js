@@ -23,26 +23,42 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../assets/scss/plugins/extensions/editor.scss";
-export default class AddTU extends Component {
+export default class Editopportunity extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       title: "",
-      video_link: "",
+      image: "",
+      selectedName: "",
+      selectedFile: null,
       editorState: EditorState.createEmpty(),
       desc: "",
     };
   }
   onEditorStateChange = (editorState) => {
-    console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
   };
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    axiosConfig
+      .get(`/getone_startup/${id}`)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          title: response.data.data.title,
+          desc: response.data.data.desc,
+          image: response.data.data.image,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  onChangeHandler = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
   };
 
   changeHandler = (e) => {
@@ -51,12 +67,25 @@ export default class AddTU extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
+
+    const data = new FormData();
+    data.append("title", this.state.title);
+    data.append("desc", this.state.desc);
+    data.append("image", this.state.selectedFile, this.state.selectedName);
+
+    for (var value of data.values()) {
+      console.log(value);
+    }
+
+    let { id } = this.props.match.params;
     axiosConfig
-      .post("/admin/add_Tuniversity", this.state)
+      .post(`/edit_startup/${id}`, data)
+
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/explore/Trupee/trupeeUniversity");
+        this.props.history.push("/app/explore/Trupee/startUp");
       })
       .catch((error) => {
         console.log(error);
@@ -73,13 +102,10 @@ export default class AddTU extends Component {
                 <BreadcrumbItem href="/analyticsDashboard" tag="a">
                   Home
                 </BreadcrumbItem>
-                <BreadcrumbItem
-                  href="/app/explore/Trupee/trupeeUniversity"
-                  tag="a"
-                >
-                  Trupee University List
+                <BreadcrumbItem href="/app/explore/Trupee/opportunity" tag="a">
+                  Opportunity List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Add Trupee University</BreadcrumbItem>
+                <BreadcrumbItem active>Edit Opportunity</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -88,7 +114,7 @@ export default class AddTU extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Trupee University
+                Edit Opportunity
               </h1>
             </Col>
             <Col>
@@ -96,9 +122,7 @@ export default class AddTU extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() =>
-                      history.push("/app/explore/Trupee/trupeeUniversity")
-                    }
+                    onClick={() => history.push("/app/explore/Trupee/startUp")}
                   >
                     Back
                   </Button>
@@ -115,23 +139,13 @@ export default class AddTU extends Component {
                     required
                     type="text"
                     name="title"
-                    placeholder="Enter Title"
+                    placeholder="Title"
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Image</Label>
-                  <Input
-                    // required
-                    type="text"
-                    name="image"
-                    placeholder=""
-                    value={this.state.image}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col> */}
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
+
+                <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
                     required
@@ -139,28 +153,8 @@ export default class AddTU extends Component {
                     name="image"
                     onChange={this.onChangeHandler}
                   />
-                </Col> */}
-                <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Video Link</Label>
-                  <Input
-                    type="text"
-                    name="video_link"
-                    placeholder="Video Link"
-                    value={this.state.video_link}
-                    onChange={this.changeHandler}
-                  ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Descripition</Label>
-                  <Input
-                    required
-                    type="textarea"
-                    name="desc"
-                    placeholder="Descripition"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col> */}
+
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Descripition</Label>
                   <Editor
@@ -212,7 +206,7 @@ export default class AddTU extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add University
+                    Update
                   </Button.Ripple>
                 </Col>
               </Row>

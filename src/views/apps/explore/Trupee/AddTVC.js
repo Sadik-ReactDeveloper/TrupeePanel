@@ -13,6 +13,11 @@ import {
 } from "reactstrap";
 import { Route } from "react-router-dom";
 import Select from "react-select";
+import { EditorState, convertToRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../../assets/scss/plugins/extensions/editor.scss";
 // import { history } from "../../../history";
 // import axiosConfig from "../../../../axiosConfig";
 // import swal from "sweetalert";
@@ -24,15 +29,21 @@ export class AddTVC extends Component {
     this.state = {
       title: "",
       desc: "",
-      image: "",
+      editorState: EditorState.createEmpty(),
       chart_type: "",
-      selectedName: "",
+      // selectedName: "",
       selectedFile: null,
     };
   }
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    });
+  };
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
+    // this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
   changeHandler1 = (e) => {
@@ -44,21 +55,23 @@ export class AddTVC extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(this.state);
     const data = new FormData();
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
     data.append("chart_type", this.state.chart_type);
-    data.append("image", this.state.selectedFile, this.state.selectedName);
+    if (this.state.selectedFile === null) {
+      data.append("image", this.state.selectedFile, this.state.selectedName);
+    }
 
     axiosConfig
       .post("/admin/addTrending_chart", data)
       .then((response) => {
         console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/explore/Trupee/TradingViewCharts");
+        // this.props.history.push("/app/explore/Trupee/TradingViewCharts");
       })
       .catch((error) => {
+        swal("error", "Error", "error");
         console.log(error);
       });
   };
@@ -101,16 +114,6 @@ export class AddTVC extends Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Descripiton</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter Descripiton"
-                    name="desc"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
 
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Charts</Label>
@@ -129,10 +132,53 @@ export class AddTVC extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
-                    required
                     type="file"
                     name="image"
                     onChange={this.onChangeHandler}
+                  />
+                </Col>
+
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>Descripition</Label>
+                  <Editor
+                    toolbarClassName="demo-toolbar-absolute"
+                    wrapperClassName="demo-wrapper"
+                    editorClassName="demo-editor"
+                    editorState={this.state.editorState}
+                    onEditorStateChange={this.onEditorStateChange}
+                    toolbar={{
+                      options: [
+                        "inline",
+                        "blockType",
+                        "fontSize",
+                        "fontFamily",
+                      ],
+                      inline: {
+                        options: [
+                          "bold",
+                          "italic",
+                          "underline",
+                          "strikethrough",
+                          "monospace",
+                        ],
+                        bold: { className: "bordered-option-classname" },
+                        italic: { className: "bordered-option-classname" },
+                        underline: { className: "bordered-option-classname" },
+                        strikethrough: {
+                          className: "bordered-option-classname",
+                        },
+                        code: { className: "bordered-option-classname" },
+                      },
+                      blockType: {
+                        className: "bordered-option-classname",
+                      },
+                      fontSize: {
+                        className: "bordered-option-classname",
+                      },
+                      fontFamily: {
+                        className: "bordered-option-classname",
+                      },
+                    }}
                   />
                 </Col>
               </Row>

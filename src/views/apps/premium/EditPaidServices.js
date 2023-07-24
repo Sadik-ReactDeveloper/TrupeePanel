@@ -6,13 +6,11 @@ import {
   Col,
   Form,
   Label,
-  Input,
   Button,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
 import { Route } from "react-router-dom";
 import swal from "sweetalert";
 import { EditorState, convertToRaw } from "draft-js";
@@ -149,14 +147,6 @@ export default class EditCash extends Component {
                       },
                     }}
                   />
-                  {/* <Input
-                    required
-                    type="text"
-                    name="desc"
-                    placeholder="Edit Service"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input> */}
                 </Col>
               </Row>
               <Row>

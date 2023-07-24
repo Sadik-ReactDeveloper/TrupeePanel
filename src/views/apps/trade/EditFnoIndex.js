@@ -26,8 +26,6 @@ class EditFnoIndex extends React.Component {
       fnoindex_scrpt_name: "",
       active_value: "",
       call_type: "",
-      // qty: "",
-      // investment_amt: "",
       no_of_lots: "",
       trade_type: "",
       type: "Index",
@@ -49,6 +47,7 @@ class EditFnoIndex extends React.Component {
       FT7: "",
       status: "",
       cstmMsg: "",
+      tradeStatus: "",
     };
     this.state = {
       scriptN: [],
@@ -92,6 +91,7 @@ class EditFnoIndex extends React.Component {
           type: response.data.data.type,
           cstmMsg: response.data.data.cstmMsg,
           status: response.data.data.status,
+          //  tradeStatus: response.data.data.tradeStatus
         });
       })
       .catch((error) => {
@@ -122,7 +122,7 @@ class EditFnoIndex extends React.Component {
   }
   changeHandler1 = (e) => {
     console.log(e.target.value);
-    this.setState({ status: e.target.value });
+    this.setState({ tradeStatus: e.target.value });
   };
 
   changeHandler2 = (e) => {
@@ -207,6 +207,7 @@ class EditFnoIndex extends React.Component {
       FT7: this.state.FT7,
       cstmMsg: this.state.cstmMsg,
       sl_type: this.state.sl_type,
+      tradeStatus: this.state.tradeStatus,
     };
     console.log(obj);
     let { id } = this.props.match.params;
@@ -611,7 +612,7 @@ class EditFnoIndex extends React.Component {
                   />
                 </Col>
 
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1"> Call Status</Label>
                   <div
                     className="form-label-group"
@@ -630,6 +631,29 @@ class EditFnoIndex extends React.Component {
                       type="radio"
                       name="status"
                       value="Closed"
+                    />
+                    <span style={{ marginRight: "3px" }}>Completed</span>
+                  </div>
+                </Col> */}
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label className="mb-1">Trade Status Change</Label>
+                  <div
+                    className="form-label-group"
+                    onChange={(e) => this.changeHandler1(e)}
+                  >
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Active"
+                    />
+                    <span style={{ marginRight: "20px" }}>Active</span>
+
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Completed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>

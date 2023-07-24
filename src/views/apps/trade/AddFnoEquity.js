@@ -43,7 +43,7 @@ export class AddFnoEquity extends Component {
       no_of_lots: "",
       expiryDate: "",
 
-      cstmMsg: "",
+      // cstmMsg: "",
     };
     this.state = {
       // scriptT: [],
@@ -125,6 +125,8 @@ export class AddFnoEquity extends Component {
                   <CustomInput
                     type="select"
                     name="fnoequty_scrpt_name"
+                    // valid={this.state.fnoequty_scrpt_name ? true : false}
+                    // invalid={this.state.fnoequty_scrpt_name ? false : true}
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -141,6 +143,8 @@ export class AddFnoEquity extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    // valid={this.state.expiryDate ? true : false}
+                    // invalid={this.state.expiryDate ? false : true}
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -160,6 +164,8 @@ export class AddFnoEquity extends Component {
                     type="select"
                     value={this.state.script_type}
                     onChange={this.changeHandler}
+                    // valid={this.state.script_type ? true : false}
+                    // invalid={this.state.script_type ? false : true}
                   >
                     <option>Select Script</option>
                     <option>BUY</option>
@@ -174,6 +180,8 @@ export class AddFnoEquity extends Component {
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
+                    // valid={this.state.call_type ? true : false}
+                    // invalid={this.state.call_type ? false : true}
                   >
                     <option>Select Call Type</option>
                     <option>Intraday</option>
@@ -193,6 +201,7 @@ export class AddFnoEquity extends Component {
                     type="text"
                     placeholder="Enter Active Value"
                     name="active_value"
+                    required
                     value={this.state.active_value}
                     onChange={this.changeHandler}
                   />
@@ -203,6 +212,7 @@ export class AddFnoEquity extends Component {
                     type="number"
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
+                    required
                     value={this.state.active_value2}
                     onChange={this.changeHandler}
                   />
@@ -212,6 +222,7 @@ export class AddFnoEquity extends Component {
                   <Input
                     name="SL"
                     type="text"
+                    required
                     placeholder="Enter Stop Loss"
                     value={this.state.SL}
                     onChange={this.changeHandler}
@@ -223,6 +234,7 @@ export class AddFnoEquity extends Component {
                     type="text"
                     placeholder="Enter Target 1"
                     name="T1"
+                    required
                     value={this.state.T1}
                     onChange={this.changeHandler}
                   />
@@ -310,7 +322,7 @@ export class AddFnoEquity extends Component {
                     <option>Equity</option>
                   </Input>
                 </Col> */}
-                <Col lg="6" md="6" className="mb-2">
+                {/* <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"
@@ -319,10 +331,7 @@ export class AddFnoEquity extends Component {
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
                   />
-                  {/* <span>
-                    <b> We will type 210+ Keep booking or trailing stop loss</b>
-                  </span> */}
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Button.Ripple

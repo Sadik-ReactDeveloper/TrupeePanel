@@ -20,6 +20,8 @@ import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
+import { Emoji, EmojiStyle } from "emoji-picker-react";
+import ReactHtmlParser from "react-html-parser";
 class GeneralNotifList extends React.Component {
   state = {
     rowData: [],
@@ -38,14 +40,14 @@ class GeneralNotifList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 100,
         filter: true,
       },
       {
         headerName: "Title ",
         field: "title",
         filter: true,
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div>
@@ -55,14 +57,29 @@ class GeneralNotifList extends React.Component {
         },
       },
       {
-        headerName: "Description ",
-        field: "desc",
+        headerName: "Emoji ",
+        field: "emoji",
         filter: true,
-        width: 350,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div>
-              <span>{params.data.desc}</span>
+              <span>
+                <Emoji unified={params.data.emoji} size="25" />
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Description ",
+        field: "desc",
+        filter: true,
+        width: 300,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
@@ -71,16 +88,19 @@ class GeneralNotifList extends React.Component {
         headerName: "Upload Image",
         field: "img",
         width: 300,
-        // pinned: window.innerWidth > 992 ? "left" : false,d-flex align-items-center cursor-pointer
         cellRendererFramework: (params) => {
           return (
             <div className=" ">
-              <img
-                className="w-50  rounded-0"
-                src={params.data.img[0]}
-                alt="No img"
-                width="100%"
-              />
+              {params.data.img[0] ? (
+                <img
+                  className="w-50  rounded-0"
+                  src={params.data.img[0]}
+                  alt="No img"
+                  width="100%"
+                />
+              ) : (
+                <span style={{ color: "red" }}>No Image Available</span>
+              )}
             </div>
           );
         },
@@ -93,18 +113,16 @@ class GeneralNotifList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
                     color="blue"
                     size={20}
-                    onClick={() =>
-                      history.push(`/app/size/editSize/${params.data._id}`)
-                    }
+                    onClick={() => history.push(`/app/trade/editNotification`)}
                   />
                 )}
-              /> */}
+              />
               <Trash2
                 size={20}
                 color="red"

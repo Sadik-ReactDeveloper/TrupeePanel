@@ -15,7 +15,6 @@ import axiosConfig from "../../../../axiosConfig";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
 import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
@@ -40,18 +39,12 @@ class StartUp extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 150,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
         headerName: "Title",
         field: "title",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -63,9 +56,7 @@ class StartUp extends React.Component {
       {
         headerName: "Descripiton",
         field: "desc",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -77,13 +68,15 @@ class StartUp extends React.Component {
       {
         headerName: "Upload Image",
         field: "image",
-        // filter: true,
         width: 200,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.image}</span>
+              {params.data.image ? (
+                <img src={params.data.image} alt="uploaded Image" />
+              ) : (
+                <span style={{ color: "red" }}>Image No available</span>
+              )}
             </div>
           );
         },

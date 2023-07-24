@@ -14,11 +14,10 @@ import {
 import { Route } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../../utility/context/Layout";
-import { ChevronDown, Trash2 } from "react-feather";
+import { ChevronDown, Edit, Trash2 } from "react-feather";
 import axiosConfig from "../../../../axiosConfig";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import swal from "sweetalert";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 
 class Opportunity extends React.Component {
   state = {
@@ -39,18 +38,12 @@ class Opportunity extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 150,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
         headerName: "Title",
         field: "title",
-        // filter: true,
         width: 250,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -69,7 +62,7 @@ class Opportunity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.img}</span>
+              <img src={params.data.img} alt="image" />
             </div>
           );
         },
@@ -77,9 +70,7 @@ class Opportunity extends React.Component {
       {
         headerName: "Description",
         field: "desc",
-        // filter: true,
         width: 250,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -97,7 +88,7 @@ class Opportunity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
@@ -105,13 +96,12 @@ class Opportunity extends React.Component {
                     color="blue"
                     onClick={() =>
                       history.push(
-                        
-                        `/app/about/EditAboutUs/${params.data._id}`
+                        `/app/explore/Trupee/editopportunity/${params.data._id}`
                       )
                     }
                   />
                 )}
-              /> */}
+              />
 
               <Trash2
                 className="mr-50"

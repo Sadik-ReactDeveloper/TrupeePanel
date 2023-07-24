@@ -46,7 +46,6 @@ class AllTradeList extends React.Component {
         headerName: "Type Of Script",
         field: "script_type",
         width: 140,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex  align-items-center cursor-pointer">
@@ -71,19 +70,18 @@ class AllTradeList extends React.Component {
         },
       },
 
-      // {
-      //   headerName: "Expiry Date",
-      //   field: "expDate",
-      //   width: 140,
-      //   // pinned: window.innerWidth > 992 ? "left" : false,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex  align-items-center cursor-pointer">
-      //         <span>{params.data.expiryDate?.expDate}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: "Date",
+        field: "Date",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>{params.data.date}</span>
+            </div>
+          );
+        },
+      },
       {
         headerName: "Trade Type",
         field: "type",
@@ -249,7 +247,6 @@ class AllTradeList extends React.Component {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{moment(params.data.updatedAt).format("ll")} </span>
-              {/* <span>{params.data.date}</span> */}
             </div>
           );
         },
@@ -421,7 +418,7 @@ class AllTradeList extends React.Component {
         },
       },
       {
-        headerName: "status ",
+        headerName: "Status ",
         field: "tradeStatus",
         filter: true,
         width: 150,
@@ -436,19 +433,21 @@ class AllTradeList extends React.Component {
           //   </div>
           // ) : null;
 
-          return params?.data?.FT1_type == "true" ||
-            params?.data?.FT2_type == "true" ||
-            params?.data?.FT3_type == "true" ||
-            params?.data?.t1_type == "true" ||
-            params?.data?.t2_type == "true" ||
-            params?.data?.t3_type == "true" ||
-            params?.data?.t4_type == "true" ||
-            params?.data?.trl_type == "true" ||
-            params?.data?.t5_type == "true" ? (
+          return params?.data?.FT1_type === "true" ||
+            params?.data?.FT2_type === "true" ||
+            params?.data?.FT3_type === "true" ||
+            params?.data?.t1_type === "true" ||
+            params?.data?.t2_type === "true" ||
+            params?.data?.t3_type === "true" ||
+            params?.data?.t4_type === "true" ||
+            params?.data?.trl_type === "true" ||
+            params?.data?.t5_type === "true" ||
+            params?.data?.tradeStatus === "Completed" ? (
             <div className="badge badge-pill badge-success">
               {params?.data?.tradeStatus}
             </div>
-          ) : params?.data?.sl_type == "true" ? (
+          ) : params?.data?.sl_type === "true" ||
+            params?.data?.tradeStatus === "NA" ? (
             <div className="badge badge-pill badge-danger">
               {params?.data?.tradeStatus}
             </div>
@@ -458,10 +457,8 @@ class AllTradeList extends React.Component {
       {
         headerName: "Actions",
         field: "sortorder",
-        // field: "transactions",
         width: 150,
         pinned: window.innerWidth > 992 ? "right" : false,
-
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -506,6 +503,7 @@ class AllTradeList extends React.Component {
   alltradeList = () => {
     axiosConfig.get(`/admin/tradelist`).then((response) => {
       const rowData = response.data.data;
+      console.log(response.data.data);
       this.setState({ rowData });
     });
   };

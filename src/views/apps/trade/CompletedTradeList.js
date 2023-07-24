@@ -21,6 +21,7 @@ import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
 import moment from "moment";
+import swal from "sweetalert";
 
 class CompletedTradeList extends React.Component {
   state = {
@@ -42,9 +43,6 @@ class CompletedTradeList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
@@ -77,19 +75,19 @@ class CompletedTradeList extends React.Component {
         },
       },
 
-      // {
-      //   headerName: "Expiry Date",
-      //   field: "expDate",
-      //   width: 140,
-      //   // pinned: window.innerWidth > 992 ? "left" : false,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex  align-items-center cursor-pointer">
-      //         <span>{params.data.expiryDate?.expDate}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: " Date",
+        field: "date",
+        width: 140,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>{params.data.date}</span>
+            </div>
+          );
+        },
+      },
       {
         headerName: "Trade Type",
         field: "type",
@@ -450,19 +448,11 @@ class CompletedTradeList extends React.Component {
             params?.data?.t4_type === "true" ||
             params?.data?.trl_type === "true" ||
             params?.data?.t5_type === "true" ? (
-            <div className="badge badge-pill badge-success">
-              {params?.data?.status}
-            </div>
+            <div className="badge badge-pill badge-success">Completed</div>
           ) : params?.data?.sl_type === "true" &&
             params?.data?.status === "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params?.data?.status}
-            </div>
-          ) : (
-            <div className="badge badge-pill badge-danger">
-              {params?.data?.status}
-            </div>
-          );
+            <div className="badge badge-pill badge-danger ">Completed</div>
+          ) : null;
         },
       },
       {
@@ -500,9 +490,7 @@ class CompletedTradeList extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -512,24 +500,52 @@ class CompletedTradeList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get(`/admin/completedTrade`).then((response) => {
+  componentDidMount() {
+    this.getCompletedTradeList();
+  }
+  getCompletedTradeList = () => {
+    axiosConfig.get(`/admin/completedTrade`).then((response) => {
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
+  };
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(
+  //     (response) => {
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.getCompletedTradeList();
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
-  //   async runthisfunction(id) {
-  //     console.log(id);
-  //     await axiosConfig.get(`/dlt_alltrade/${id}`).then(
-  //       (response) => {
-  //         console.log(response);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

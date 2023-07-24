@@ -5,26 +5,28 @@ import {
   Input,
   Row,
   Col,
+  Button,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  Button,
   Label,
   CustomInput,
 } from "reactstrap";
+
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import { Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
-//import { history } from "../../../history";
+import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
+import swal from "sweetalert";
+import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import moment from "moment";
 class Report extends React.Component {
   state = {
     rowData: [],
+    list: [],
     paginationPageSize: 20,
     currenPageSize: "",
     getPageSize: "",
@@ -34,189 +36,464 @@ class Report extends React.Component {
       resizable: true,
       suppressMenu: true,
     },
+
     columnDefs: [
       {
-        headerName: "S.no",
+        headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 100,
         filter: true,
       },
+
       {
-        headerName: "Name",
-        field: "name",
-        filter: true,
-        resizable: true,
-        width: 180,
+        headerName: "Type Of Script",
+        field: "script_type",
+        width: 140,
+        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.name}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Email",
-        field: "email",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.email}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Customer Type",
-        field: "you_are",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.you_are}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Request Type",
-        field: "typeof_req",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.typeof_req}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Category",
-        field: "category",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.category}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Mobile No.",
-        field: "mobile_no",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.mobile_no}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "State",
-        field: "state",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.state}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "City",
-        field: "district",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.district}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Address",
-        field: "address",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.address}</span>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Comment",
-        field: "comments",
-        filter: true,
-        resizable: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <div className="ml-2">
-                <span>{params.data.comments}</span>
-              </div>
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>{params.data.script_type}</span>
             </div>
           );
         },
       },
 
       {
-        headerName: "Actions",
-        field: "transactions",
+        headerName: "Script Name",
+        field: "scriptName",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>{params.data.fnoindex_scrpt_name?.scriptName}</span>
+              <span>{params.data.fnoequty_scrpt_name?.scriptName}</span>
+              <span>{params.data.cash_scrpt_name?.scriptName}</span>
+            </div>
+          );
+        },
+      },
+
+      // {
+      //   headerName: "Expiry Date",
+      //   field: "expDate",
+      //   width: 140,
+      //   // pinned: window.innerWidth > 992 ? "left" : false,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex  align-items-center cursor-pointer">
+      //         <span>{params.data.expiryDate?.expDate}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
+      {
+        headerName: "Trade Type",
+        field: "type",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.type}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Call Type",
+        field: "call_type",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.call_type}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Active Value",
+        field: "active_value",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.active_value}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Active Value 2",
+        field: "active_value2",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.active_value2}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: " SL",
+        field: "SL",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.SL}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Trial",
+        field: "trl",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.trl}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "T₹ 1",
+        field: "T1",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.T1}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "T₹ 2",
+        field: "T2",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.T2}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "T₹ 3",
+        field: "T3",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.T3}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "T₹ 4",
+        field: "T4",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.T4}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "T5",
+        field: "t5",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.t5}</span>
+            </div>
+          );
+        },
+      },
+
+      {
+        headerName: "Quantity",
+        field: "qty",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.qty}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Investment Amount",
+        field: "investment_amt",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.investment_amt}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Date",
+        field: "updatedAt",
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{moment(params.data.updatedAt).format("ll")} </span>
+              {/* <span>{params.data.date}</span> */}
+            </div>
+          );
+        },
+      },
+
+      {
+        headerName: "Number Of Lots",
+        field: "no_of_lots",
+        width: 140,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.no_of_lots}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "SL Type",
+        field: "sl_type",
+        filter: true,
         width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.sl_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.sl_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "Trial Type",
+        field: "trl_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.trl_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.trl_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "FT1 Type",
+        field: "FT1_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.FT1_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.FT1_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "FT2 Type",
+        field: "FT2_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.FT2_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.FT2_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "FT3 Type",
+        field: "FT3_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.FT3_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.FT3_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "T1 Type",
+        field: "t1_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.t1_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.t1_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "T2 Type",
+        field: "t2_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.t2_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.t2_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "T3 Type",
+        field: "t3_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.t3_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.t3_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "T4 Type",
+        field: "t4_type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.t4_type}
+            </div>
+          ) : params.value === "false" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.t4_type}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "status ",
+        field: "tradeStatus",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          // return params.value === "Closed" ? (
+          //   <div className="badge badge-pill badge-success">
+          //     {params.data.tradeStatus}
+          //   </div>
+          // ) : params.value === "Closed" ? (
+          //   <div className="badge badge-pill badge-danger">
+          //     {params.data.tradeStatus}
+          //   </div>
+          // ) : null;
+
+          return params?.data?.FT1_type === "true" ||
+            params?.data?.FT2_type === "true" ||
+            params?.data?.FT3_type === "true" ||
+            params?.data?.t1_type === "true" ||
+            params?.data?.t2_type === "true" ||
+            params?.data?.t3_type === "true" ||
+            params?.data?.t4_type === "true" ||
+            params?.data?.trl_type === "true" ||
+            params?.data?.t5_type === "true" ? (
+            <div className="badge badge-pill badge-success">
+              {params?.data?.tradeStatus}
+            </div>
+          ) : params?.data?.sl_type === "true" ? (
+            <div className="badge badge-pill badge-danger">
+              {params?.data?.tradeStatus}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "Actions",
+        field: "sortorder",
+        width: 150,
+        pinned: window.innerWidth > 992 ? "right" : false,
+
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Edit className="mr-50" size={20} /> */}
+              {/* <Eye
+                className="mr-50"
+                color="green"
+                size={20}
+                onClick={() =>
+                  history.push(`/app/size/viewSize/${params.data._id}`)
+                }
+              /> */}
+              {/* <Route
+                render={({ history }) => (
+                  <Edit
+                    className="mr-50"
+                    size="25px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(`/app/trade/editAllTrade/${params.data._id}`)
+                    }
+                  />
+                )}
+              /> */}
+
               <Trash2
                 size={20}
+                color="red"
                 onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>
@@ -226,20 +503,43 @@ class Report extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get("/allcontactus").then((response) => {
-      let rowData = response.data.data;
+  componentDidMount() {
+    this.alltradeList();
+  }
+  alltradeList = () => {
+    axiosConfig.get(`/admin/tradelist`).then((response) => {
+      console.log(response.data.data[1].fnoindex_scrpt_name.scriptName);
+      const rowData = response.data.data;
+      const list = response.data.data;
       this.setState({ rowData });
+      this.setState({ list });
+    });
+  };
+  runthisfunction(id) {
+    swal(
+      `Do You Want To Delete Permanently`,
+      "This item will be deleted immediately",
+
+      {
+        buttons: {
+          cancel: "Cancel",
+          catch: { text: "Delete ", value: "catch" },
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case "cancel":
+          break;
+        case "catch":
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+            this.alltradeList();
+          });
+          break;
+        default:
+          break;
+      }
     });
   }
-
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/delcontactus/${id}`).then((response) => {
-      console.log(response);
-    });
-  }
-
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -268,52 +568,33 @@ class Report extends React.Component {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       <Row className="app-user-list">
-        <Col sm="12"></Col>
         <Col sm="12">
           <Card>
             <h1 col-sm-6 className="float-left p-2">
               Filter Data
             </h1>
             <Row className="m-2">
-              <Col lg="3" md="3" sm="6" className="mb-2">
-                <Label>Status</Label>
-                <CustomInput
-                  type="select"
-                  // name="fnoindex_scrpt_name"
-                  required
-                  // value={this.state.fnoindex_scrpt_name}
-                  // onChange={this.changeHandler}
-                >
-                  <option>Select Script</option>
-                  <option>Active</option>
-                  <option>Deactive</option>
-
-                  {/* {this.state.scriptN?.map((allScript) => (
-                      <option value={allScript?._id} key={allScript?._id}>
-                        {allScript?.scriptName}
-                      </option>
-                    ))} */}
-                </CustomInput>
-              </Col>
-              <Col lg="3" md="3" sm="6" className="mb-2">
-                {/* <Col lg="6" md="6" sm="6" className="mb-2"> */}
-                <Label>Date</Label>
+              <Col lg="4" md="3" sm="6" className="mb-2">
+                <Label>Satrt Date</Label>
                 <Input
                   type="date"
                   name="fnoindex_scrpt_name"
                   required
                   // value={this.state.fnoindex_scrpt_name}
                   // onChange={this.changeHandler}
-                >
-                  {/* {this.state.scriptN?.map((allScript) => (
-                      <option value={allScript?._id} key={allScript?._id}>
-                        {allScript?.scriptName}
-                      </option>
-                    ))} */}
-                </Input>
-                {/* </Col> */}
+                ></Input>
               </Col>
-              <Col lg="3" md="3" sm="6" className="mt-1">
+              <Col lg="4" md="3" sm="6" className="mb-2">
+                <Label>Ende Date</Label>
+                <Input
+                  type="date"
+                  name="fnoindex_scrpt_name"
+                  required
+                  // value={this.state.fnoindex_scrpt_name}
+                  // onChange={this.changeHandler}
+                ></Input>
+              </Col>
+              <Col lg="4" md="3" sm="6" className="mt-1">
                 <Button
                   className="float-right btn btn-success"
                   onClick={() => alert("Data Update")}

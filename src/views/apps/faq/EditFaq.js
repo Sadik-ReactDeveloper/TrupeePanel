@@ -95,7 +95,7 @@ export default class EditFaq extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() => history.push("/app/premium/paidServiceList")}
+                    onClick={() => history.push("/app/faq/faqList")}
                   >
                     Back
                   </Button>

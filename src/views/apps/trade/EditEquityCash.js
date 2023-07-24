@@ -47,8 +47,9 @@ class EditEquityCash extends React.Component {
       profit_loss_amt: "",
       expiryDate: "",
       type: "Cash",
-      // status: "",
+      status: "",
       cstmMsg: "",
+      tradeStatus: "",
     };
     this.state = {
       expdateI: [],
@@ -88,7 +89,7 @@ class EditEquityCash extends React.Component {
           profit_loss_amt: response.data.data.profit_loss_amt,
           expiryDate: response.data.data.expiryDate,
           type: response.data.data.type,
-          // status: response.data.data.status,
+          status: response.data.data.status,
           cstmMsg: response.data.data.cstmMsg,
         });
       })
@@ -175,9 +176,9 @@ class EditEquityCash extends React.Component {
       this.setState({ t7_type: "false" });
     }
   };
-  // changeHandler6 = (e) => {
-  //   this.setState({ status: e.target.value });
-  // };
+  changeHandler6 = (e) => {
+    this.setState({ status: e.target.value });
+  };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -197,14 +198,14 @@ class EditEquityCash extends React.Component {
       t4_typ: this.state.t4_type,
       T4: this.state.T4,
       cstmMsg: this.state.cstmMsg,
-      // status: this.state.cstmMsg,
+      status: this.state.cstmMsg,
       tradeStatus: this.state.tradeStatus,
     };
-    console.log(payload);
+    console.log("payload", payload);
     axiosConfig
       .post(`/admin/editCash/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/equityCashList");
       })
@@ -300,7 +301,6 @@ class EditEquityCash extends React.Component {
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Call Type</option>
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -549,7 +549,18 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
+
+                <Col lg="3" md="3" className="mb-2">
+                  <Label>Trade Alert</Label>
+                  <Input
+                    type="text"
+                    placeholder="Keep booking or trailing stop loss"
+                    name="cstmMsg"
+                    value={this.state.cstmMsg}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
                   <Label className="mb-1">Call Status</Label>
                   <div
                     className="form-label-group"
@@ -570,16 +581,6 @@ class EditEquityCash extends React.Component {
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
-                </Col> */}
-                <Col lg="3" md="3" className="mb-2">
-                  <Label>Trade Alert</Label>
-                  <Input
-                    type="text"
-                    placeholder="Keep booking or trailing stop loss"
-                    name="cstmMsg"
-                    value={this.state.cstmMsg}
-                    onChange={this.changeHandler}
-                  />
                 </Col>
               </Row>
 

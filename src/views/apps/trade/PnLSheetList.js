@@ -16,7 +16,14 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Edit, Trash2, ChevronDown, Smartphone } from "react-feather";
+import {
+  Edit,
+  Trash2,
+  ChevronDown,
+  Smartphone,
+  View,
+  Eye,
+} from "react-feather";
 //import classnames from "classnames";
 // import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
@@ -52,7 +59,7 @@ class PnLSheetList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.pnlimg}</span>
+              <img src={params.data.pnlimg} alt="P&L" />
             </div>
           );
         },
@@ -124,29 +131,18 @@ class PnLSheetList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Smartphone
-      //             className="mr-50"
-      //             size="25px"
-      //             color={params.data.status === "Active" ? "green" : "red"}
-      //             onClick={() => {
-      //               let selectedData = this.gridApi.getSelectedRows();
-      //               this.runthisfunctionEdit(params.data._id, selectedData);
-      //             }}
-      //           /> */}
-              {/* <Route
-      //             render={({ history }) => (
-      //               <Edit
-      //                 className="mr-50"
-      //                 size="25px"
-      //                 color="blue"
-      //                 onClick={() =>
-      //                   history.push(
-      //                     `/app/trade/editEquityCash/${params.data._id}`
-      //                   )
-      //                 }
-      //               />
-      //             )}
-      //           /> */}
+              <Route
+                render={({ history }) => (
+                  <Eye
+                    className="mr-50"
+                    size="25px"
+                    color="green"
+                    onClick={() =>
+                      history.push(`/app/trade/ViewpnLSheet/${params.data._id}`)
+                    }
+                  />
+                )}
+              />
 
               <Trash2
                 size={20}

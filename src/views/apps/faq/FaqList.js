@@ -20,6 +20,7 @@ import { history } from "../../../history";
 import { Route } from "react-router-dom";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import ReactHtmlParser from "react-html-parser";
 class FaqList extends React.Component {
   state = {
     rowData: [],
@@ -64,7 +65,7 @@ class FaqList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },

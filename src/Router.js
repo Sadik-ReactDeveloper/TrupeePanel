@@ -149,7 +149,13 @@ const GeneralNotifList = lazy(() =>
 const AddGeneralNotif = lazy(() =>
   import("./views/apps/trade/AddGeneralNotif")
 );
+const EditNotification = lazy(() =>
+  import("./views/apps/trade/notification/EditNotification")
+);
 const PnLSheetList = lazy(() => import("./views/apps/trade/PnLSheetList"));
+const ViewPnLSheet = lazy(() =>
+  import("./views/apps/trade/PnLSheet/ViewPnLSheet")
+);
 
 //package//
 const PackagePlanList = lazy(() =>
@@ -216,9 +222,10 @@ const ViewStartUp = lazy(() =>
 );
 
 const RefferEarn = lazy(() => import("./views/apps/explore/Trupee/RefferEarn"));
-const TradingViewCharts = lazy(() =>
-  import("./views/apps/explore/Trupee/TradingViewCharts")
-);
+
+// const TradingViewCharts = lazy(() =>
+//   import("./views/apps/explore/Trupee/TradingViewCharts")
+// );
 const PerformanceSheet = lazy(() =>
   import("./views/apps/explore/Trupee/PerformanceSheet")
 );
@@ -231,10 +238,16 @@ const UserPerformanceSheet = lazy(() =>
 const Opportunity = lazy(() =>
   import("./views/apps/explore/Trupee/Opportunity")
 );
+const Editopportunity = lazy(() =>
+  import("./views/apps/explore/Trupee/Editopportunity")
+);
 const AddOppor = lazy(() => import("./views/apps/explore/Trupee/AddOppor"));
+// TradingViewCharts
+const TradingViewCharts = lazy(() =>
+  import("./views/apps/explore/Trupee/TradingViewCharts")
+);
 const AddTVC = lazy(() => import("./views/apps/explore/Trupee/AddTVC"));
 const EditTVC = lazy(() => import("./views/apps/explore/Trupee/EditTVC"));
-
 // const RefferEarn = lazy(() => import("./views/apps/explore/Trupee/RefferEarn"));
 
 // MemberShipContent//
@@ -615,7 +628,13 @@ class AppRouter extends React.Component {
               path="/app/trade/addGeneralNotif"
               component={AddGeneralNotif}
             />
+            <AppRoute
+              path="/app/trade/editNotification"
+              // path="/app/trade/editNotification/:id"
+              component={EditNotification}
+            />
             <AppRoute path="/app/trade/pnLSheetList" component={PnLSheetList} />
+            <AppRoute path="/app/trade/ViewpnLSheet" component={ViewPnLSheet} />
             {/* setting */}
             <AppRoute path="/app/setting/enquiryForm" component={EnquiryForm} />
             <AppRoute
@@ -709,6 +728,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/explore/Trupee/opportunity"
               component={Opportunity}
+            />
+            <AppRoute
+              path="/app/explore/Trupee/editopportunity"
+              component={Editopportunity}
             />
             <AppRoute
               path="/app/explore/Trupee/addOppor"

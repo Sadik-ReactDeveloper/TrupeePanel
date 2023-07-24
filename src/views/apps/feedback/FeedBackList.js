@@ -87,25 +87,21 @@ class FeedBackList extends React.Component {
         headerName: "Actions",
         field: "sortorder",
         width: 200,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
               {/* <Route
-                render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(
-                        
-                        `/app/about/EditAboutUs/${params.data._id}`
-                      )
-                    }
-                  />
-                )}
-              /> */}
+                render={({ history }) => ( */}
+              <Eye
+                className="mr-50"
+                size="25px"
+                color="green"
+                // onClick={() =>
+                //   history.push(`/app/about/EditAboutUs/${params.data._id}`)
+                // }
+              />
+              {/* )} */}
+              {/* /> */}
               <Trash2
                 className="mr-50"
                 size="25px"

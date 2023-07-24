@@ -18,6 +18,11 @@ import axiosConfig from "../../../../axiosConfig";
 import { history } from "../../../../history";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
+import { EditorState, convertToRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../../assets/scss/plugins/extensions/editor.scss";
 
 export default class EditTVC extends Component {
   constructor(props) {
@@ -31,6 +36,12 @@ export default class EditTVC extends Component {
       selectedFile: null,
     };
   }
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    });
+  };
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
@@ -165,7 +176,7 @@ export default class EditTVC extends Component {
                   </Input>
                 </Col>
 
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Descripition</Label>
                   <Input
                     required
@@ -175,6 +186,49 @@ export default class EditTVC extends Component {
                     value={this.state.desc}
                     onChange={this.changeHandler}
                   ></Input>
+                </Col> */}
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>Descripition</Label>
+                  <Editor
+                    toolbarClassName="demo-toolbar-absolute"
+                    wrapperClassName="demo-wrapper"
+                    editorClassName="demo-editor"
+                    editorState={this.state.editorState}
+                    onEditorStateChange={this.onEditorStateChange}
+                    toolbar={{
+                      options: [
+                        "inline",
+                        "blockType",
+                        "fontSize",
+                        "fontFamily",
+                      ],
+                      inline: {
+                        options: [
+                          "bold",
+                          "italic",
+                          "underline",
+                          "strikethrough",
+                          "monospace",
+                        ],
+                        bold: { className: "bordered-option-classname" },
+                        italic: { className: "bordered-option-classname" },
+                        underline: { className: "bordered-option-classname" },
+                        strikethrough: {
+                          className: "bordered-option-classname",
+                        },
+                        code: { className: "bordered-option-classname" },
+                      },
+                      blockType: {
+                        className: "bordered-option-classname",
+                      },
+                      fontSize: {
+                        className: "bordered-option-classname",
+                      },
+                      fontFamily: {
+                        className: "bordered-option-classname",
+                      },
+                    }}
+                  />
                 </Col>
 
                 {/* <Col lg="6" md="6" sm="6" className="mb-2">

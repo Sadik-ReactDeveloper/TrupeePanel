@@ -34,7 +34,6 @@ export default class AddStartUp extends Component {
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
   };
   changeHandler1 = (e) => {
     this.setState({ status: e.target.value });
@@ -133,7 +132,6 @@ export default class AddStartUp extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
-                    required
                     type="file"
                     name="image"
                     onChange={this.onChangeHandler}
@@ -193,7 +191,7 @@ export default class AddStartUp extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add StartUp
                   </Button.Ripple>
                 </Col>
               </Row>
