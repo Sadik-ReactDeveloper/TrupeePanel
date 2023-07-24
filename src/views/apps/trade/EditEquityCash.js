@@ -205,7 +205,7 @@ class EditEquityCash extends React.Component {
     axiosConfig
       .post(`/admin/editCash/${id}`, this.state)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/equityCashList");
       })
