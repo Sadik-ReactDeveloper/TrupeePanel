@@ -37,7 +37,6 @@ function AddGeneralNotif() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(selectedEmoji);
     let data = new FormData();
     data.append("title", title);
     data.append("emoji", selectedEmoji);
@@ -117,7 +116,7 @@ function AddGeneralNotif() {
                   <CustomInput
                     type="file"
                     name="img"
-                    accept="image/*"
+                    // accept="image/*"
                     onChange={handleImageChange}
                   />
                 </Col>

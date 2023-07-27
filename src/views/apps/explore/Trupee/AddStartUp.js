@@ -57,7 +57,6 @@ export default class AddStartUp extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
-
     const data = new FormData();
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
@@ -66,12 +65,10 @@ export default class AddStartUp extends Component {
 
     axiosConfig
       .post("/admin/addStartup", data)
-
       .then((response) => {
         console.log(response.data);
-
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/explore/Trupee/startUp");
+        // this.props.history.push("/app/explore/Trupee/startUp");
       })
       .catch((error) => {
         console.log(error);
@@ -117,7 +114,7 @@ export default class AddStartUp extends Component {
             </Col>
           </Row>
           <CardBody>
-            <Form className="m-1" onSubmit={this.submitHandler}>
+            <Form className="m-1" onSubmit={(e) => this.submitHandler(e)}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Title</Label>
@@ -143,7 +140,6 @@ export default class AddStartUp extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Video Link</Label>
                   <Input
-                    required
                     type="text"
                     name="video_link"
                     placeholder="Embeded Code"
@@ -151,17 +147,7 @@ export default class AddStartUp extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Descripition</Label>
-                  <Input
-                    required
-                    type="textarea"
-                    name="desc"
-                    placeholder=""
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col> */}
+
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Descripition</Label>
                   <Editor

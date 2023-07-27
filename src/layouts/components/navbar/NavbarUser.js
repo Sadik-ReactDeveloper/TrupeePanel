@@ -32,8 +32,6 @@ const NavbarUser = () => {
     async function getNotifications() {
       try {
         const data = await axiosConfig.get(`/admin/viewoneadmin/${adminId}`);
-        console.log(data.data.data.name);
-        console.log(data.data.data.adminimg[0]);
         setAdminimg(data.data.data);
       } catch (error) {
         console.log(error);

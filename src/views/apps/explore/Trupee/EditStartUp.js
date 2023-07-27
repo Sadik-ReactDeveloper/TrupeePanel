@@ -46,7 +46,6 @@ export default class AddStartUp extends Component {
     axiosConfig
       .get(`/admin/getone_startup/${id}`)
       .then((response) => {
-        console.log(response.data.data);
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,
@@ -69,7 +68,6 @@ export default class AddStartUp extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
-
     const data = new FormData();
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
@@ -148,16 +146,16 @@ export default class AddStartUp extends Component {
                     type="file"
                     className="form-control"
                     name="image"
+                    // value={this.state.image[0]}
                     onChange={this.onChangeHandler}
                   />
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Video Link</Label>
                   <Input
-                    required
                     type="text"
                     name="video_link"
-                    placeholder="Video Link"
+                    placeholder="Embeded Code"
                     value={this.state.video_link}
                     onChange={this.changeHandler}
                   ></Input>

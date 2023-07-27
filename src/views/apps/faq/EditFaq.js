@@ -24,6 +24,7 @@ export default class EditFaq extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "",
       editorState: EditorState.createEmpty(),
       desc: "",
     };
@@ -35,6 +36,7 @@ export default class EditFaq extends Component {
       .get(`/admin/getoneFaq/${id}`)
       .then((response) => {
         this.setState({
+          title: response.data.data.title,
           desc: response.data.data.desc,
         });
       })
@@ -43,7 +45,6 @@ export default class EditFaq extends Component {
       });
   }
   onEditorStateChange = (editorState) => {
-    console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -106,6 +107,17 @@ export default class EditFaq extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Title</Label>
+                  <Input
+                    type="text"
+                    required
+                    placeholder="Enter Title"
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Description</Label>
                   <Editor

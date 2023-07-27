@@ -22,18 +22,15 @@ export default class AddFnIndex extends Component {
       expDate: "",
     };
   }
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
 
   changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ expDate: e.target.value });
   };
   submitHandler = (e) => {
     e.preventDefault();
 
     axiosConfig
-      .post("/admin/addExpDate", this.state, {})
+      .post("/admin/addExpDate", this.state)
       .then((response) => {
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/trade/expdate/expDateList");
