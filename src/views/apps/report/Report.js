@@ -26,6 +26,8 @@ import moment from "moment";
 class Report extends React.Component {
   state = {
     rowData: [],
+    StartDate: "",
+    EndDate: "",
     list: [],
     paginationPageSize: 20,
     currenPageSize: "",
@@ -506,9 +508,17 @@ class Report extends React.Component {
   componentDidMount() {
     this.alltradeList();
   }
+  changeHandlerStartDate = (e) => {
+    const startDate = moment(e.target.value).format("D-MM-YYYY");
+    this.setState({ StartDate: startDate });
+  };
+  changeHandlerEndDate = (e) => {
+    const endDate = moment(e.target.value).format("D-MM-YYYY");
+    this.setState({ EndDate: endDate });
+  };
   alltradeList = () => {
     axiosConfig.get(`/admin/tradelist`).then((response) => {
-      console.log(response.data.data[1].fnoindex_scrpt_name.scriptName);
+      console.log(response.data.data);
       const rowData = response.data.data;
       const list = response.data.data;
       this.setState({ rowData });
@@ -531,7 +541,7 @@ class Report extends React.Component {
         case "cancel":
           break;
         case "catch":
-          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then((response) => {
+          axiosConfig.get(`/admin/dlt_alltrade/${id}`).then(() => {
             this.alltradeList();
           });
           break;
@@ -564,6 +574,19 @@ class Report extends React.Component {
     }
   };
 
+  submitHandler = (e) => {
+    console.log(this.state.StartDate, this.state.EndDate);
+    axiosConfig
+      .get(
+        `/user/tradefilterBydate?start=${this.state.StartDate}&end=${this.state.EndDate}`
+      )
+      .then((response) => {
+        this.setState({ rowData: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   render() {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
@@ -575,21 +598,22 @@ class Report extends React.Component {
             </h1>
             <Row className="m-2">
               <Col lg="4" md="3" sm="6" className="mb-2">
-                <Label>Satrt Date</Label>
+                <Label>Start Date</Label>
                 <Input
                   type="date"
-                  name="fnoindex_scrpt_name"
+                  name="StartDate"
                   required
                   // value={this.state.fnoindex_scrpt_name}
-                  // onChange={this.changeHandler}
+                  onChange={this.changeHandlerStartDate}
                 ></Input>
               </Col>
               <Col lg="4" md="3" sm="6" className="mb-2">
-                <Label>Ende Date</Label>
+                <Label>End Date</Label>
                 <Input
                   type="date"
-                  name="fnoindex_scrpt_name"
+                  name="EndDate"
                   required
+                  onChange={this.changeHandlerEndDate}
                   // value={this.state.fnoindex_scrpt_name}
                   // onChange={this.changeHandler}
                 ></Input>
@@ -597,7 +621,7 @@ class Report extends React.Component {
               <Col lg="4" md="3" sm="6" className="mt-1">
                 <Button
                   className="float-right btn btn-success"
-                  onClick={() => alert("Data Update")}
+                  onClick={(e) => this.submitHandler(e)}
                 >
                   Filter Data
                 </Button>

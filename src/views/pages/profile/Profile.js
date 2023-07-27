@@ -46,7 +46,6 @@ class Profile extends React.Component {
     axiosConfig
       .get(`/admin/viewoneadmin/${adminId}`)
       .then((response) => {
-        console.log(response.data.data);
         this.setState({
           data: response.data.data,
           name: response.data.data.name,
@@ -68,7 +67,7 @@ class Profile extends React.Component {
   submitHandler = (e) => {
     let adminId = localStorage.getItem("userId");
     e.preventDefault();
-    console.log(this.state.data);
+
     const data = new FormData();
     data.append("name", this.state.name);
     data.append("email", this.state.email);
@@ -110,14 +109,14 @@ class Profile extends React.Component {
                 <div className="profile-img text-center st-1">
                   <img
                     src={
-                      // this.state.data?.adminimg
-                      //   ? this.state.data?.adminimg
-                      // :
-                      adminpimg
+                      this.state.data?.adminimg
+                        ? this.state.data?.adminimg
+                        : adminpimg
                     }
                     alt="adminimg"
-                    className="img-fluid img-border rounded-circle box-shadow-1"
+                    className="rounded-circle"
                     width="150"
+                    height="150"
                   />
                   <ul className="lst-1">
                     <li className="lst-2">

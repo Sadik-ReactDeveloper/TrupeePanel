@@ -107,7 +107,7 @@ export default class EditFaq extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Edit Faq</Label>
+                  <Label>Description</Label>
                   <Editor
                     toolbarClassName="demo-toolbar-absolute"
                     wrapperClassName="demo-wrapper"

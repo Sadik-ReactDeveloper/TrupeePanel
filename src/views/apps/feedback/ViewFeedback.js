@@ -14,16 +14,16 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
-import axiosConfig from "../../../../axiosConfig";
-import { history } from "../../../../history";
+import axiosConfig from "../../../axiosConfig";
+// import { history } from "../../../../history";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../../../../assets/scss/plugins/extensions/editor.scss";
-export default class Editopportunity extends Component {
+// import { EditorState, convertToRaw } from "draft-js";
+// import { Editor } from "react-draft-wysiwyg";
+// import draftToHtml from "draftjs-to-html";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import "../../../../assets/scss/plugins/extensions/editor.scss";
+export default class ViewFeedback extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,26 +31,28 @@ export default class Editopportunity extends Component {
       image: "",
       selectedName: "",
       selectedFile: null,
-      editorState: EditorState.createEmpty(),
+      userMobile: "",
+      //   editorState: EditorState.createEmpty(),
       desc: "",
     };
   }
-  onEditorStateChange = (editorState) => {
-    this.setState({
-      editorState,
-      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-    });
-  };
+  //   onEditorStateChange = (editorState) => {
+  //     this.setState({
+  //       editorState,
+  //       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+  //     });
+  //   };
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/getoneOportunity/${id}`)
+      .get(`/admin/getoneFeedback/${id}`)
       .then((response) => {
         console.log(response.data.data);
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,
           image: response.data.data.image,
+          userMobile: response.data.data.userid.mobile,
         });
       })
       .catch((error) => {
@@ -64,27 +66,6 @@ export default class Editopportunity extends Component {
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-
-    const data = new FormData();
-    data.append("title", this.state.title);
-    data.append("desc", this.state.desc);
-    data.append("img", this.state.selectedFile);
-
-    let { id } = this.props.match.params;
-    axiosConfig
-      .post(`/admin/editOportunity/${id}`, data)
-      .then((response) => {
-        console.log(response.data.data);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        // this.props.history.push("/app/explore/Trupee/startUp");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   render() {
     return (
@@ -97,9 +78,9 @@ export default class Editopportunity extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/explore/Trupee/opportunity" tag="a">
-                  Opportunity List
+                  View Feedback
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Edit Opportunity</BreadcrumbItem>
+                <BreadcrumbItem active>View Feedback</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -108,7 +89,7 @@ export default class Editopportunity extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Edit Opportunity
+                View Feedback
               </h1>
             </Col>
             <Col>
@@ -116,9 +97,7 @@ export default class Editopportunity extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() =>
-                      history.push("/app/explore/Trupee/opportunity")
-                    }
+                    onClick={() => history.push("/app/feedback/FeedBackList")}
                   >
                     Back
                   </Button>
@@ -134,22 +113,36 @@ export default class Editopportunity extends Component {
                   <Input
                     required
                     type="text"
+                    disabled
                     name="title"
-                    placeholder="Title"
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Image</Label>
+                  <Label>Mobile</Label>
                   <Input
-                    type="file"
-                    name="image"
-                    onChange={this.onChangeHandler}
-                  />
+                    required
+                    type="text"
+                    disabled
+                    name="userMobile"
+                    value={this.state.userMobile}
+                    onChange={this.changeHandler}
+                  ></Input>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>Description</Label>
+                  <Input
+                    required
+                    type="textarea"
+                    disabled
+                    name="desc"
+                    value={this.state.desc}
+                    onChange={this.changeHandler}
+                  ></Input>
                 </Col>
 
+                {/* 
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Descripition</Label>
                   <Editor
@@ -192,9 +185,9 @@ export default class Editopportunity extends Component {
                       },
                     }}
                   />
-                </Col>
+                </Col> */}
               </Row>
-              <Row>
+              {/* <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Button.Ripple
                     color="primary"
@@ -204,7 +197,7 @@ export default class Editopportunity extends Component {
                     Update
                   </Button.Ripple>
                 </Col>
-              </Row>
+              </Row> */}
             </Form>
           </CardBody>
         </Card>

@@ -17,7 +17,7 @@ const handleNavigation = (e, path) => {
 };
 
 const NavbarUser = () => {
-  const [adminimg, setAdminimg] = useState([]);
+  const [adminimg, setAdminimg] = useState({});
   const tokenVerify = () => {
     let data = localStorage.getItem("ad-token");
     sessionStorage.clear();
@@ -32,6 +32,8 @@ const NavbarUser = () => {
     async function getNotifications() {
       try {
         const data = await axiosConfig.get(`/admin/viewoneadmin/${adminId}`);
+        console.log(data.data.data.name);
+        console.log(data.data.data.adminimg[0]);
         setAdminimg(data.data.data);
       } catch (error) {
         console.log(error);
@@ -51,8 +53,7 @@ const NavbarUser = () => {
           </div>
           <span data-tour="user">
             <img
-              // src={adminimg?.adminimg}
-              src={adminProfile}
+              src={adminimg.adminimg ? adminimg.adminimg : adminProfile}
               className="round"
               height="40"
               width="40"

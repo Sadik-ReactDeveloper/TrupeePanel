@@ -15,6 +15,7 @@ import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
+import { Route } from "react-router-dom";
 //import classnames from "classnames";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
@@ -47,7 +48,7 @@ class FeedBackList extends React.Component {
       {
         headerName: "User Name",
         field: "firstname",
-        width: 250,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -62,7 +63,7 @@ class FeedBackList extends React.Component {
       {
         headerName: "Mobile",
         field: "mobile",
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -74,7 +75,7 @@ class FeedBackList extends React.Component {
       {
         headerName: "Descripiton",
         field: "desc",
-        width: 300,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -90,18 +91,20 @@ class FeedBackList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
-                render={({ history }) => ( */}
-              <Eye
-                className="mr-50"
-                size="25px"
-                color="green"
-                // onClick={() =>
-                //   history.push(`/app/about/EditAboutUs/${params.data._id}`)
-                // }
+              <Route
+                render={({ history }) => (
+                  <Eye
+                    className="mr-50"
+                    size="25px"
+                    color="green"
+                    onClick={() =>
+                      history.push(
+                        `/app/feedback/viewFeedback/${params.data._id}`
+                      )
+                    }
+                  />
+                )}
               />
-              {/* )} */}
-              {/* /> */}
               <Trash2
                 className="mr-50"
                 size="25px"
@@ -122,6 +125,7 @@ class FeedBackList extends React.Component {
   }
   feedback = () => {
     axiosConfig.get("/admin/getFeedback").then((response) => {
+      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

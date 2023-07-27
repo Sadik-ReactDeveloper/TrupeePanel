@@ -13,18 +13,9 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { Route } from "react-router-dom";
 import swal from "sweetalert";
-import EmojiPicker, {
-  EmojiStyle,
-  Emoji,
-  // SkinTones,
-  // Theme,
-  // Categories,
-  // EmojiClickData,
-  // SuggestionMode,
-  // SkinTonePickerLocation,
-} from "emoji-picker-react";
+import EmojiPicker, { EmojiStyle, Emoji } from "emoji-picker-react";
 import "react-toastify/dist/ReactToastify.css";
-import { EditorState, RichUtils, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -33,7 +24,6 @@ function AddGeneralNotif() {
   const [title, setTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("");
-  // const [url, setUrl] = useState("");
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -41,8 +31,7 @@ function AddGeneralNotif() {
     return setEditorState(editorState);
   };
 
-  function handleEmoji(emojiData, event) {
-    // console.log(emojiData.emoji,);
+  function handleEmoji(emojiData) {
     setSelectedEmoji(emojiData.unified);
   }
 
@@ -77,21 +66,6 @@ function AddGeneralNotif() {
   return (
     <>
       <div>
-        {/* <Row>
-          <Col sm="12">
-            <div>
-              <Breadcrumb listTag="div">
-                <BreadcrumbItem href="/analyticsDashboard" tag="a">
-                  Home
-                </BreadcrumbItem>
-                <BreadcrumbItem href="/app/trade/generalNotifList" tag="a">
-                  General Notification List
-                </BreadcrumbItem>
-                <BreadcrumbItem active>Add General Notification</BreadcrumbItem>
-              </Breadcrumb>
-            </div>
-          </Col>
-        </Row> */}
         <Card>
           <Row className="m-2">
             <Col>
@@ -171,6 +145,7 @@ function AddGeneralNotif() {
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Editor
+                    className="form-control"
                     toolbarClassName="demo-toolbar-absolute"
                     wrapperClassName="demo-wrapper"
                     editorClassName="demo-editor"

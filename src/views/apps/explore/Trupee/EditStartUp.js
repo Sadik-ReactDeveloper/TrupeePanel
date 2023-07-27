@@ -79,10 +79,8 @@ export default class AddStartUp extends Component {
     let { id } = this.props.match.params;
     axiosConfig
       .post(`/edit_startup/${id}`, data)
-
       .then((response) => {
         console.log(response.data);
-
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/explore/Trupee/startUp");
       })
@@ -147,8 +145,8 @@ export default class AddStartUp extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
-                    required
                     type="file"
+                    className="form-control"
                     name="image"
                     onChange={this.onChangeHandler}
                   />

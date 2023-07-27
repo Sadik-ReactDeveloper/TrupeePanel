@@ -12,15 +12,15 @@ import {
   CustomInput,
   Button,
 } from "reactstrap";
-import  axiosConfig from "../../../axiosConfig";
+import axiosConfig from "../../../axiosConfig";
 export default class AddSilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        banner_title:"",
-        banner_img: "",
-        selectedFile: null,
-        status: ""
+      banner_title: "",
+      banner_img: "",
+      selectedFile: null,
+      status: "",
     };
   }
   onChangeHandler = (event) => {
@@ -47,27 +47,19 @@ export default class AddSilder extends Component {
         this.state.selectedName
       );
     }
-    for (var value of data.values()) {
-      console.log(value);
-    }
 
-    for (var key of data.keys()) {
-      console.log(key);
-    }
-
-    
-    
-    axiosConfig.post("/addbanner", data)
+    axiosConfig
+      .post("/addbanner", data)
       .then((response) => {
         console.log(response);
-        alert("Slider Added Successful")
+        alert("Slider Added Successful");
         this.props.history.push("/app/slider/sliderList");
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   render() {
     return (
       <div>
@@ -80,55 +72,56 @@ export default class AddSilder extends Component {
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Title</Label>
-                  <Input   
-                    required 
-                    type="text" 
+                  <Input
+                    required
+                    type="text"
                     name="banner_title"
-                    placeholder="Enter Banner Title" 
+                    placeholder="Enter Banner Title"
                     value={this.state.banner_title}
-                    onChange={this.changeHandler}>
-                  </Input>
+                    onChange={this.changeHandler}
+                  ></Input>
                 </Col>
-         
+
                 <Col lg="4" md="4" sm="4" className="mb-2">
                   <Label>BannerImage</Label>
-                  <CustomInput  
-                    required 
+                  <CustomInput
+                    required
                     type="file"
-                    placeholder="Enter Banner Image" 
+                    placeholder="Enter Banner Image"
                     onChange={this.onChangeHandler}
-                  />    
+                  />
                 </Col>
-              </Row> 
+              </Row>
               <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
+                <Label className="mb-1">Status</Label>
+                <div
+                  className="form-label-group"
+                  onChange={(e) => this.changeHandler1(e)}
+                >
+                  <input
+                    style={{ marginRight: "3px" }}
+                    type="radio"
+                    name="status"
+                    value="Active"
+                  />
+                  <span style={{ marginRight: "20px" }}>Active</span>
 
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col> 
+                  <input
+                    style={{ marginRight: "3px" }}
+                    type="radio"
+                    name="status"
+                    value="Inactive"
+                  />
+                  <span style={{ marginRight: "3px" }}>Inactive</span>
+                </div>
+              </Col>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Button.Ripple
                     color="primary"
                     type="submit"
-                    className="mr-1 mb-1">
+                    className="mr-1 mb-1"
+                  >
                     Add Slider
                   </Button.Ripple>
                 </Col>

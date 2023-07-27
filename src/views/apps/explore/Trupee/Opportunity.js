@@ -18,7 +18,7 @@ import { ChevronDown, Edit, Trash2 } from "react-feather";
 import axiosConfig from "../../../../axiosConfig";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import swal from "sweetalert";
-
+import ReactHtmlParser from "react-html-parser";
 class Opportunity extends React.Component {
   state = {
     rowData: [],
@@ -61,8 +61,17 @@ class Opportunity extends React.Component {
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <img src={params.data.img} alt="image" />
+            <div className=" ">
+              {params.data.img[0] ? (
+                <img
+                  // className="w-50  rounded-0"
+                  src={params.data.img[0]}
+                  alt="No img"
+                  width="100%"
+                />
+              ) : (
+                <span style={{ color: "red" }}>No Image Available</span>
+              )}
             </div>
           );
         },
@@ -74,7 +83,7 @@ class Opportunity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
@@ -124,6 +133,7 @@ class Opportunity extends React.Component {
     axiosConfig
       .get(`/admin/getOportunity`)
       .then((response) => {
+        console.log(response.data.data);
         let rowData = response.data.data;
         JSON.stringify(rowData);
         this.setState({ rowData });

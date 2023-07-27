@@ -116,6 +116,18 @@ class RefferEarn extends React.Component {
         },
       },
       {
+        headerName: "Mobile",
+        field: "mobile",
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.refer_from.mobile}</span>
+            </div>
+          );
+        },
+      },
+      {
         headerName: "Date",
         field: "createdAt",
         width: 100,

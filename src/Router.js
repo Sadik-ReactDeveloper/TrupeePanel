@@ -27,6 +27,7 @@ const TransctionHistory = lazy(() =>
 
 // feedback //
 const FeedBackList = lazy(() => import("./views/apps/feedback/FeedBackList"));
+const ViewFeedback = lazy(() => import("./views/apps/feedback/ViewFeedback"));
 
 //pageSetUp//
 const aboutUs = lazy(() => import("./views/apps/pageSetUp/about/AboutUs"));
@@ -535,6 +536,10 @@ class AppRouter extends React.Component {
               path="/app/feedback/FeedBackList"
               component={FeedBackList}
             />
+            <AppRoute
+              path="/app/feedback/viewFeedback/:id"
+              component={ViewFeedback}
+            />
             {/* Premium */}
             <AppRoute
               path="/app/premium/paidServiceList"
@@ -629,12 +634,14 @@ class AppRouter extends React.Component {
               component={AddGeneralNotif}
             />
             <AppRoute
-              path="/app/trade/editNotification"
-              // path="/app/trade/editNotification/:id"
+              path="/app/trade/editNotification/:id"
               component={EditNotification}
             />
             <AppRoute path="/app/trade/pnLSheetList" component={PnLSheetList} />
-            <AppRoute path="/app/trade/ViewpnLSheet" component={ViewPnLSheet} />
+            <AppRoute
+              path="/app/trade/ViewpnLSheet/:id"
+              component={ViewPnLSheet}
+            />
             {/* setting */}
             <AppRoute path="/app/setting/enquiryForm" component={EnquiryForm} />
             <AppRoute
@@ -730,7 +737,7 @@ class AppRouter extends React.Component {
               component={Opportunity}
             />
             <AppRoute
-              path="/app/explore/Trupee/editopportunity"
+              path="/app/explore/Trupee/editopportunity/:id"
               component={Editopportunity}
             />
             <AppRoute

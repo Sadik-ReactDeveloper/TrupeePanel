@@ -155,7 +155,6 @@ export default class EditTVC extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
                   <Input
-                    required
                     type="file"
                     name="image"
                     onChange={this.onChangeHandler}

@@ -77,7 +77,7 @@ class AllTradeList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex  align-items-center cursor-pointer">
-              <span>{params.data.date}</span>
+              <span>{moment(params.data.updatedAt).format("ll")}</span>
             </div>
           );
         },
@@ -419,37 +419,13 @@ class AllTradeList extends React.Component {
       },
       {
         headerName: "Status ",
-        field: "tradeStatus",
+        field: "status",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
-          // return params.value === "Closed" ? (
-          //   <div className="badge badge-pill badge-success">
-          //     {params.data.tradeStatus}
-          //   </div>
-          // ) : params.value === "Closed" ? (
-          //   <div className="badge badge-pill badge-danger">
-          //     {params.data.tradeStatus}
-          //   </div>
-          // ) : null;
-
-          return params?.data?.FT1_type === "true" ||
-            params?.data?.FT2_type === "true" ||
-            params?.data?.FT3_type === "true" ||
-            params?.data?.t1_type === "true" ||
-            params?.data?.t2_type === "true" ||
-            params?.data?.t3_type === "true" ||
-            params?.data?.t4_type === "true" ||
-            params?.data?.trl_type === "true" ||
-            params?.data?.t5_type === "true" ||
-            params?.data?.tradeStatus === "Completed" ? (
+          return params.data.status === "Active" ? (
             <div className="badge badge-pill badge-success">
-              {params?.data?.tradeStatus}
-            </div>
-          ) : params?.data?.sl_type === "true" ||
-            params?.data?.tradeStatus === "NA" ? (
-            <div className="badge badge-pill badge-danger">
-              {params?.data?.tradeStatus}
+              {params.data.status}
             </div>
           ) : null;
         },
@@ -470,19 +446,6 @@ class AllTradeList extends React.Component {
                   history.push(`/app/size/viewSize/${params.data._id}`)
                 }
               /> */}
-              {/* <Route
-                render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(`/app/trade/editAllTrade/${params.data._id}`)
-                    }
-                  />
-                )}
-              /> */}
-
               <Trash2
                 size={20}
                 color="red"
@@ -501,9 +464,8 @@ class AllTradeList extends React.Component {
     this.alltradeList();
   }
   alltradeList = () => {
-    axiosConfig.get(`/admin/tradelist`).then((response) => {
+    axiosConfig.get(`/admin/activeTradeList`).then((response) => {
       const rowData = response.data.data;
-      console.log(response.data.data);
       this.setState({ rowData });
     });
   };
@@ -569,18 +531,6 @@ class AllTradeList extends React.Component {
                   All Active Trade List
                 </h1>
               </Col>
-              {/* <Col className="pt-4">
-                  <Route
-                    render={({ history }) => (
-                      <Button
-                        className=" btn btn-success float-right"
-                        onClick={() => history.push("/app/trade/addAllTrade")}
-                      >
-                        Add
-                      </Button>
-                    )}
-                  />
-                </Col> */}
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (

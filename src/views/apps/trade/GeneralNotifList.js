@@ -119,7 +119,11 @@ class GeneralNotifList extends React.Component {
                     className="mr-50"
                     color="blue"
                     size={20}
-                    onClick={() => history.push(`/app/trade/editNotification`)}
+                    onClick={() =>
+                      history.push(
+                        `/app/trade/editNotification/${params.data._id}`
+                      )
+                    }
                   />
                 )}
               />
@@ -144,7 +148,6 @@ class GeneralNotifList extends React.Component {
   allNotificationList = () => {
     axiosConfig.get("/admin/get_notification").then((response) => {
       const rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
     });
   };

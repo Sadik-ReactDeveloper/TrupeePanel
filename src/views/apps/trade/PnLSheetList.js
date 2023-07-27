@@ -12,7 +12,8 @@ import {
   DropdownToggle,
 } from "reactstrap";
 // import swal from "sweetalert";
-
+import { saveAs } from "file-saver";
+import FileSaver from "file-saver";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -33,6 +34,8 @@ import { Route } from "react-router-dom";
 class PnLSheetList extends React.Component {
   state = {
     rowData: [],
+
+    down: "",
     paginationPageSize: 20,
     currenPageSize: "",
     getPageSize: "",
@@ -51,6 +54,11 @@ class PnLSheetList extends React.Component {
         width: 100,
         filter: true,
       },
+      {
+        headerName: "Image",
+        field: "imageUrl",
+        cellRenderer: "imageCellRenderer",
+      },
 
       {
         headerName: "P&L Image",
@@ -59,7 +67,22 @@ class PnLSheetList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <img src={params.data.pnlimg} alt="P&L" />
+              <img src={params.data.pnlimg[0]} alt="P&L" />
+            </div>
+          );
+        },
+      },
+
+      {
+        headerName: "Download",
+        field: "download",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="cursor-pointer">
+              <button onClick={() => this.sayHello(params.data.pnlimg[0])}>
+                download
+              </button>
             </div>
           );
         },
@@ -104,30 +127,11 @@ class PnLSheetList extends React.Component {
         },
       },
 
-      //   {
-      //     headerName: "status ",
-      //     field: "status",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: (params) => {
-      //       return params.value === "Active" ? (
-      //         <div className="badge badge-pill badge-success">
-      //           {params.data.status}
-      //         </div>
-      //       ) : params.value === "Deactive" ? (
-      //         <div className="badge badge-pill badge-warning">
-      //           {params.data.status}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
       {
         headerName: "Actions",
         field: "sortorder",
-        // field: "transactions",
         width: 150,
         pinned: window.innerWidth > 992 ? "right" : false,
-
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -160,8 +164,29 @@ class PnLSheetList extends React.Component {
     ],
   };
 
+  imageCellRenderer = (params) => {
+    const imageUrl = params.data.pnlimg[0];
+    return (
+      <a href={imageUrl} target="_blank" download>
+        <img
+          src={imageUrl}
+          alt="Item"
+          style={{ width: "100px", height: "auto" }}
+        />
+      </a>
+    );
+  };
+  //  downloadImage=async(e) ={
+  //  	e.preventDefault()
+  // 	const src = linkRef.current.href
+  // 	const imageBlob = await (await fetch(src)).blob()
+  // 	linkRef.current.href = URL.createObjectURL(imageBlob)
+  // 	linkRef.current.download = 'randomImage'
+  // 	linkRef.current.click()
+  // }
   async componentDidMount() {
     await axiosConfig.get(`/admin/getPnlSheet`).then((response) => {
+      this.setState({ down: response.data.data[0].pnlimg[0] });
       const rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -178,7 +203,32 @@ class PnLSheetList extends React.Component {
       }
     );
   }
+  handleDownload = () => {
+    const imageUrl = "https://example.com/image.jpg"; // Replace with the actual image URL
 
+    // Create a temporary anchor element to trigger the download
+    const link = document.createElement("a");
+    link.href = imageUrl;
+    link.download = "image.jpg"; // Set the desired image name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  sayHello = (img) => {
+    var blob = new Blob([img], {
+      type: "image/jpeg",
+    });
+    FileSaver.saveAs(blob, "trupee.png");
+    const link = document.createElement("a");
+    link.href = img;
+
+    // Set the filename for the downloaded image (you can modify this as needed).
+    link.download = "dynamic-image.jpg";
+
+    // Programmatically click the anchor element to trigger the download.
+    link.click();
+  };
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -297,6 +347,9 @@ class PnLSheetList extends React.Component {
                           defaultColDef={defaultColDef}
                           columnDefs={columnDefs}
                           rowData={rowData}
+                          frameworkComponents={{
+                            imageCellRenderer: this.imageCellRenderer,
+                          }}
                           onGridReady={this.onGridReady}
                           colResizeDefault={"shift"}
                           animateRows={true}

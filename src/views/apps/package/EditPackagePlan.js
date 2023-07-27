@@ -118,10 +118,10 @@ export default class EditPackagePlan extends Component {
                     onChange={this.changeHandler}
                   >
                     <option>FREE</option>
-                    <option>30 Days</option>
-                    <option>90 Days</option>
-                    <option>180 Days</option>
-                    <option>365 Days</option>
+                    <option>30Days</option>
+                    <option>90Days</option>
+                    <option>180Days</option>
+                    <option>365Days</option>
                   </Input>
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
