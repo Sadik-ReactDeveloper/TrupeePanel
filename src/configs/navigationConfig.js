@@ -74,6 +74,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/trade/equityCashList",
   },
+  {
+    id: "tradealert",
+    title: "Trade Alert",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/trade/tradealert/trademsg",
+  },
 
   {
     type: "groupHeader",

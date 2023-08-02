@@ -46,7 +46,7 @@ class EditFnoIndex extends React.Component {
       FT6: "",
       FT7: "",
       status: "",
-      cstmMsg: "",
+      // cstmMsg: "",
       tradeStatus: "",
     };
     this.state = {
@@ -89,7 +89,7 @@ class EditFnoIndex extends React.Component {
           no_of_lots: response.data.data.no_of_lots,
           trade_type: response.data.data.trade_type,
           type: response.data.data.type,
-          cstmMsg: response.data.data.cstmMsg,
+          // cstmMsg: response.data.data.cstmMsg,
           status: response.data.data.status,
           //  tradeStatus: response.data.data.tradeStatus
         });
@@ -200,12 +200,12 @@ class EditFnoIndex extends React.Component {
       FT1_type: this.state.FT1_type,
       FT2_type: this.state.FT2_type,
       FT3_type: this.state.FT3_type,
-      status: this.state.state,
       FT4: this.state.FT4,
       FT5: this.state.FT5,
       FT6: this.state.FT6,
       FT7: this.state.FT7,
-      cstmMsg: this.state.cstmMsg,
+      status: this.state.status,
+      // cstmMsg: this.state.cstmMsg,
       sl_type: this.state.sl_type,
       tradeStatus: this.state.tradeStatus,
     };
@@ -653,13 +653,13 @@ class EditFnoIndex extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      value="Completed"
+                      value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
               </Row>
-              <Col lg="6" md="6" className="mb-2">
+              {/* <Col lg="6" md="6" className="mb-2">
                 <Label>Trade Alert</Label>
                 <Input
                   type="text"
@@ -668,7 +668,7 @@ class EditFnoIndex extends React.Component {
                   value={this.state.cstmMsg}
                   onChange={this.changeHandler}
                 />
-              </Col>
+              </Col> */}
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Button.Ripple

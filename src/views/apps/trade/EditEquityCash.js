@@ -48,7 +48,7 @@ class EditEquityCash extends React.Component {
       expiryDate: "",
       type: "Cash",
       status: "",
-      cstmMsg: "",
+      // cstmMsg: "",
       tradeStatus: "",
     };
     this.state = {
@@ -90,7 +90,7 @@ class EditEquityCash extends React.Component {
           expiryDate: response.data.data.expiryDate,
           type: response.data.data.type,
           status: response.data.data.status,
-          cstmMsg: response.data.data.cstmMsg,
+          // cstmMsg: response.data.data.cstmMsg,
         });
       })
       .catch((error) => {
@@ -197,9 +197,9 @@ class EditEquityCash extends React.Component {
       t3_type: this.state.t3_type,
       t4_typ: this.state.t4_type,
       T4: this.state.T4,
-      cstmMsg: this.state.cstmMsg,
-      status: this.state.cstmMsg,
+      // cstmMsg: this.state.cstmMsg,
       tradeStatus: this.state.tradeStatus,
+      status: this.state.status,
     };
     console.log("payload", payload);
     axiosConfig
@@ -550,7 +550,7 @@ class EditEquityCash extends React.Component {
                   />
                 </Col>
 
-                <Col lg="3" md="3" className="mb-2">
+                {/* <Col lg="3" md="3" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"
@@ -559,7 +559,7 @@ class EditEquityCash extends React.Component {
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
                   <Label className="mb-1">Call Status</Label>
                   <div
@@ -577,7 +577,7 @@ class EditEquityCash extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      value="Deactive"
+                      value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>

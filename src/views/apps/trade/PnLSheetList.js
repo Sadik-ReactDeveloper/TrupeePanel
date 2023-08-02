@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 // import swal from "sweetalert";
 import FileSaver from "file-saver";
+// import { ImageGroup, Image } from "react-fullscreen-image";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -29,7 +30,17 @@ import {
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
-
+const images = [
+  "https://unsplash.com/photos/Bkci_8qcdvQ",
+  "https://unsplash.com/photos/hS46bsAASwQ",
+  "https://unsplash.com/photos/2VDa8bnLM8c",
+  "https://unsplash.com/photos/_LuLiJc1cdo",
+  "https://unsplash.com/photos/1Z2niiBPg5A",
+  "https://unsplash.com/photos/pHANr-CpbYM",
+  "https://unsplash.com/photos/pQMM63GE7fo",
+  "https://unsplash.com/photos/2VDa8bnLM8c",
+  "https://unsplash.com/photos/MBkQKiH14ng",
+];
 class PnLSheetList extends React.Component {
   state = {
     rowData: [],
@@ -67,27 +78,29 @@ class PnLSheetList extends React.Component {
         },
       },
 
-      {
-        headerName: "Download",
-        field: "download",
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="cursor-pointer">
-              <button
-                onClick={() =>
-                  this.sayHello(
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Stack_Overflow_logo.svg/1280px-Stack_Overflow_logo.svg.png",
-                    "LogoStackOverflow.png"
-                  )
-                }
-              >
-                download
-              </button>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Download",
+      //   field: "download",
+      //   width: 200,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="cursor-pointer">
+      //         <button
+      //           onClick={
+      //             () =>
+      //               this.sayHello(
+      //                 "https://trupee.s3.amazonaws.com/64b7ecabbc633e04629eed06.image.jpg",
+      //                 "Images.jpg"
+      //               )
+      //             // this.sayHello(` ${params.data?.pnlimg?.[0]}`, "Images.png")
+      //           }
+      //         >
+      //           download
+      //         </button>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         headerName: "User Name",
         field: "firstname",

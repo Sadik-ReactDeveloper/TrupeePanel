@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from "react";
 import {
   Card,
@@ -102,7 +103,7 @@ export default class PnLViewSheet extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="4" md="6" sm="6" className="mb-2">
                   <Label>UserName</Label>
                   <Input
                     required
@@ -113,7 +114,7 @@ export default class PnLViewSheet extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="4" md="6" sm="6" className="mb-2">
                   <Label>Mobile</Label>
                   <Input
                     type="text"
@@ -123,7 +124,7 @@ export default class PnLViewSheet extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="4" md="6" sm="6" className="mb-2">
                   <Label>Email</Label>
                   <Input
                     type="email"
@@ -133,8 +134,13 @@ export default class PnLViewSheet extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
-                  <img src={this.state.image} alt="no image" />
+                <Col lg="12" md="12" sm="6" className="mb-2">
+                  <img
+                    src={this.state.image}
+                    alt="no image"
+                    // width="100%"
+                    // height="100%"
+                  />
                 </Col>
               </Row>
             </Form>

@@ -333,6 +333,19 @@ class FnoEquityList extends React.Component {
         },
       },
       {
+        headerName: "Trade Alert",
+        field: "tradealert",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.no_of_lots}</span>
+            </div>
+          );
+        },
+      },
+      {
         headerName: "Status ",
         field: "status",
         filter: true,

@@ -140,6 +140,9 @@ const EditFnoEquity = lazy(() => import("./views/apps/trade/EditFnoEquity"));
 const FnoIndexList = lazy(() => import("./views/apps/trade/FnoIndexList"));
 const AddFnoIndex = lazy(() => import("./views/apps/trade/AddFnoIndex"));
 const EditFnoIndex = lazy(() => import("./views/apps/trade/EditFnoIndex"));
+const TradeAlert = lazy(() =>
+  import("./views/apps/trade/tradealert/TradeAlert")
+);
 
 // const BankNiftyList = lazy(() => import("./views/apps/trade/BankNiftyList"));
 
@@ -618,6 +621,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/trade/editFnoIndex/:id"
               component={EditFnoIndex}
+            />
+            <AppRoute
+              path="/app/trade/tradealert/trademsg"
+              component={TradeAlert}
             />
             <AppRoute path="/app/trade/addFnoIndex" component={AddFnoIndex} />
             {/* <AppRoute

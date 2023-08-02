@@ -44,7 +44,7 @@ class EditFnoEquity extends React.Component {
       expiryDate: "",
       type: "Equity",
       status: "",
-      cstmMsg: "",
+      // cstmMsg: "",
       t6_type: false,
       T6: "",
       T7: "",
@@ -91,7 +91,7 @@ class EditFnoEquity extends React.Component {
           t7_type: response.data.data.t7_type,
           type: response.data.data.type,
           status: response.data.data.status,
-          cstmMsg: response.data.data.cstmMsg,
+          // cstmMsg: response.data.data.cstmMsg,
           tradeStatus: this.state.tradeStatus,
         });
       })
@@ -574,12 +574,12 @@ class EditFnoEquity extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      value="Deactive"
+                      value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
-                <Col lg="6" md="6" className="my-2">
+                {/* <Col lg="6" md="6" className="my-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"
@@ -588,10 +588,7 @@ class EditFnoEquity extends React.Component {
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
                   />
-                  {/* <span>
-                    <b> We will type 210+ Keep booking or trailing stop loss</b>
-                  </span> */}
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
