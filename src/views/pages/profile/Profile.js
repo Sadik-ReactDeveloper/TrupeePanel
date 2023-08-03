@@ -38,7 +38,6 @@ class Profile extends React.Component {
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
   };
 
   componentDidMount() {

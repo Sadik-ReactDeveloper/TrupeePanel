@@ -177,7 +177,7 @@ class EditEquityCash extends React.Component {
     }
   };
   changeHandler6 = (e) => {
-    this.setState({ status: e.target.value });
+    this.setState({ tradeStatus: e.target.value });
   };
 
   changeHandler = (e) => {
@@ -205,9 +205,9 @@ class EditEquityCash extends React.Component {
     axiosConfig
       .post(`/admin/editCash/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/trade/equityCashList");
+        // this.props.history.push("/app/trade/equityCashList");
       })
       .catch((error) => {
         console.log(error);
@@ -569,6 +569,7 @@ class EditEquityCash extends React.Component {
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
+                      checked={this.state.status === "Active" ? true : false}
                       name="status"
                       value="Active"
                     />
@@ -577,6 +578,7 @@ class EditEquityCash extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
+                      checked={this.state.status === "Closed" ? true : false}
                       value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>

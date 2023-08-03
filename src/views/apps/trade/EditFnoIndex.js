@@ -262,7 +262,6 @@ class EditFnoIndex extends React.Component {
                     value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>select script</option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -279,7 +278,6 @@ class EditFnoIndex extends React.Component {
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    <option>Expiry Date</option>
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}
@@ -351,16 +349,6 @@ class EditFnoIndex extends React.Component {
                   />
                 </Col>
 
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="number"
-                    name="qty"
-                    placeholder="Enter Quantity"
-                    value={this.state.qty}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Number Of Lots</Label>
                   <Input
@@ -491,26 +479,7 @@ class EditFnoIndex extends React.Component {
                     </span>
                   </div>
                 </Col>
-                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">T4</Label>
-                  <div className="form-label-group">
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="checkbox"
-                      name="FT4_type"
-                      onChange={(e) => this.changeHandlerT4(e)}
-                      checked={
-                        this.state.FT4_type === "false" ||
-                        this.state.FT4_type === false
-                          ? false
-                          : true
-                      }
-                    />
-                    <span style={{ marginRight: "20px" }}>
-                      {this.state.FT4_type}
-                    </span>
-                  </div>
-                </Col> */}
+
                 <Col lg="3" md="3" className="mb-2">
                   <Label>T4</Label>
                   <Input
@@ -521,26 +490,7 @@ class EditFnoIndex extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">T5</Label>
-                  <div className="form-label-group">
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="checkbox"
-                      name="FT5_type"
-                      onChange={(e) => this.changeHandlerT5(e)}
-                      checked={
-                        this.state.FT5_type === "false" ||
-                        this.state.FT5_type === false
-                          ? false
-                          : true
-                      }
-                    />
-                    <span style={{ marginRight: "20px" }}>
-                      {this.state.FT5_type}
-                    </span>
-                  </div>
-                </Col> */}
+
                 <Col lg="3" md="3" className="mb-2">
                   <Label>T5</Label>
                   <Input
@@ -551,26 +501,7 @@ class EditFnoIndex extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">T6</Label>
-                  <div className="form-label-group">
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="checkbox"
-                      name="FT6_type"
-                      onChange={(e) => this.changeHandlerT6(e)}
-                      checked={
-                        this.state.FT6_type === "false" ||
-                        this.state.FT6_type === false
-                          ? false
-                          : true
-                      }
-                    />
-                    <span style={{ marginRight: "20px" }}>
-                      {this.state.FT6_type}
-                    </span>
-                  </div>
-                </Col> */}
+
                 <Col lg="3" md="3" className="mb-2">
                   <Label>T6</Label>
                   <Input
@@ -581,26 +512,7 @@ class EditFnoIndex extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">T7</Label>
-                  <div className="form-label-group">
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="checkbox"
-                      name="FT7_type"
-                      onChange={(e) => this.changeHandlerT7(e)}
-                      checked={
-                        this.state.FT7_type === "false" ||
-                        this.state.FT7_type === false
-                          ? false
-                          : true
-                      }
-                    />
-                    <span style={{ marginRight: "20px" }}>
-                      {this.state.FT7_type}
-                    </span>
-                  </div>
-                </Col> */}
+
                 <Col lg="3" md="3" className="mb-2">
                   <Label>T7</Label>
                   <Input
@@ -644,6 +556,7 @@ class EditFnoIndex extends React.Component {
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
+                      checked={this.state.status === "Active" ? true : false}
                       name="status"
                       value="Active"
                     />
@@ -653,6 +566,7 @@ class EditFnoIndex extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
+                      checked={this.state.status === "Closed" ? true : false}
                       value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>

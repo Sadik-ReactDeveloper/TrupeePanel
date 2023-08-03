@@ -465,7 +465,6 @@ class AllTradeList extends React.Component {
   }
   alltradeList = () => {
     axiosConfig.get(`/admin/activeTradeList`).then((response) => {
-      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

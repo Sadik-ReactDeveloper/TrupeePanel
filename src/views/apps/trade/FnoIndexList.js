@@ -505,7 +505,6 @@ class FnoIndexList extends React.Component {
 
   fnoindexList = () => {
     axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
-      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });

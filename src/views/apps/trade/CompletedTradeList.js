@@ -424,7 +424,7 @@ class CompletedTradeList extends React.Component {
         },
       },
       {
-        headerName: "status ",
+        headerName: "Status ",
         field: "status",
         filter: true,
         width: 150,

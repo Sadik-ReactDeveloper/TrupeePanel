@@ -1,3 +1,4 @@
+/* eslint-disable no-labels */
 import React, { Component } from "react";
 import {
   Card,
@@ -40,13 +41,15 @@ export class TradeAlert extends Component {
       no_of_lots: "",
       expiryDate: "",
 
-      // cstmMsg: "",
+      cstmMsg: "",
     };
     this.state = {
       // scriptT: [],
       type: "Equity",
       scriptN: [],
       expdateI: [],
+      scriptName: [],
+      typeName: "",
     };
   }
   //Script//
@@ -74,19 +77,21 @@ export class TradeAlert extends Component {
       });
   }
   changeHandler = (e) => {
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  // changeHandlerType = async (e) => {};
   submitHandler = (e) => {
     e.preventDefault();
 
+    let payload = {
+      type: this.state.typeName,
+      script_name: this.state.fnoequty_scrpt_name,
+      trade_alert: this.state.cstmMsg,
+    };
     axiosConfig
-      .post("/admin/add_fnoEquity", this.state)
-      .then((response) => {
-        console.log("option", response.data.data);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/trade/fnoEquityList");
-      })
+      .post("/admin/send_tradeAlert", payload)
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -106,48 +111,45 @@ export class TradeAlert extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Expiry Date</Label>
-                  <CustomInput
-                    type="select"
-                    name="expiryDate"
-                    value={this.state.expiryDate}
-                    onChange={this.changeHandler}
-                  >
-                    <option>Expiry Date</option>
-                    {this.state.expdateI?.map((allExpDate) => (
-                      <option value={allExpDate?._id} key={allExpDate?._id}>
-                        {allExpDate?.expDate}
-                      </option>
-                    ))}
-                  </CustomInput>
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Trade Type</Label>
                   <Input
-                    name="trade_type"
+                    name="typeName"
                     type="select"
-                    value={this.state.trade_type}
-                    onChange={this.changeHandler}
+                    value={this.state.typeName}
+                    onChange={(e) => {
+                      this.setState({ typeName: e.target.value });
+                      if (e.target.value !== "Select Trade") {
+                        axiosConfig
+                          .get(`/user/Scriptlist/${e.target.value}`)
+                          .then((response) => {
+                            this.setState({ scriptName: response.data.data });
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }
+                    }}
                   >
                     <option>Select Trade</option>
-                    <option>FNO INDEX</option>
-                    <option>FNO OPTION</option>
-                    <option>CASH EQUITY</option>
+                    <option>Index</option>
+                    <option>Equity</option>
+                    <option>Cash</option>
                   </Input>
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Script Name</Label>
                   <CustomInput
+                    id="name"
                     type="select"
                     name="fnoequty_scrpt_name"
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
                     <option>Select Script</option>
-                    {this.state.scriptN?.map((allScript) => (
-                      <option value={allScript?._id} key={allScript?._id}>
-                        {allScript?.scriptName}
+                    {this.state.scriptName?.map((allScript, index) => (
+                      <option value={allScript} key={index}>
+                        {allScript}
                       </option>
                     ))}
                   </CustomInput>

@@ -90,9 +90,9 @@ class EditFnoEquity extends React.Component {
           t6_type: response.data.data.t6_type,
           t7_type: response.data.data.t7_type,
           type: response.data.data.type,
-          status: response.data.data.status,
+          status: response.data.data.tradeStatus,
           // cstmMsg: response.data.data.cstmMsg,
-          tradeStatus: this.state.tradeStatus,
+          // tradeStatus: this.state.tradeStatus,
         });
       })
       .catch((error) => {
@@ -180,7 +180,7 @@ class EditFnoEquity extends React.Component {
     }
   };
   changeHandler6 = (e) => {
-    this.setState({ status: e.target.value });
+    this.setState({ tradeStatus: e.target.value });
   };
 
   changeHandler = (e) => {
@@ -370,16 +370,6 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Achieved Target+</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter Target 5"
-                    name="t5"
-                    value={this.state.t5}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Quantity</Label>
                   <Input
@@ -391,16 +381,6 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Investment Amount</Label>
-                  <Input
-                    name="investment_amt"
-                    type="text"
-                    placeholder="Enter Investment Amount"
-                    value={this.state.investment_amt}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Number Of Lot</Label>
                   <Input
@@ -412,16 +392,6 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Trade Type</Label>
-                  <Input
-                    type="text"
-                    name="type"
-                    placeholder="Enter Trade Type"
-                    value={this.state.type}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
               </Row>
               <Row>
                 <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
@@ -579,6 +549,7 @@ class EditFnoEquity extends React.Component {
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
+
                 {/* <Col lg="6" md="6" className="my-2">
                   <Label>Trade Alert</Label>
                   <Input
