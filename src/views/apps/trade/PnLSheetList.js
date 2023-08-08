@@ -72,7 +72,7 @@ class PnLSheetList extends React.Component {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               {/* {params.data.pnlimg[0]} */}
-              <img src={params.data.pnlimg[0]} alt="P&L" />
+              <img src={params.data.pnlimg[0]} alt="P&L" height={200} />
             </div>
           );
         },

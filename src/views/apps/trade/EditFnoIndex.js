@@ -46,7 +46,7 @@ class EditFnoIndex extends React.Component {
       FT6: "",
       FT7: "",
       status: "",
-      // cstmMsg: "",
+      cstmMsg: "",
       tradeStatus: "",
     };
     this.state = {
@@ -89,9 +89,9 @@ class EditFnoIndex extends React.Component {
           no_of_lots: response.data.data.no_of_lots,
           trade_type: response.data.data.trade_type,
           type: response.data.data.type,
-          // cstmMsg: response.data.data.cstmMsg,
+          cstmMsg: response.data.data.cstmMsg,
           status: response.data.data.status,
-          //  tradeStatus: response.data.data.tradeStatus
+          tradeStatus: response.data.data.tradeStatus,
         });
       })
       .catch((error) => {
@@ -121,7 +121,6 @@ class EditFnoIndex extends React.Component {
       });
   }
   changeHandler1 = (e) => {
-    console.log(e.target.value);
     this.setState({ tradeStatus: e.target.value });
   };
 
@@ -205,7 +204,7 @@ class EditFnoIndex extends React.Component {
       FT6: this.state.FT6,
       FT7: this.state.FT7,
       status: this.state.status,
-      // cstmMsg: this.state.cstmMsg,
+      cstmMsg: this.state.cstmMsg,
       sl_type: this.state.sl_type,
       tradeStatus: this.state.tradeStatus,
     };
@@ -325,7 +324,6 @@ class EditFnoIndex extends React.Component {
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Call Type</option>
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -524,41 +522,28 @@ class EditFnoIndex extends React.Component {
                   />
                 </Col>
 
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1"> Call Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Closed"
-                    />
-                    <span style={{ marginRight: "3px" }}>Completed</span>
-                  </div>
-                </Col> */}
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Trade Alert</Label>
+                  <Input
+                    type="text"
+                    placeholder="Keep booking or trailing stop loss"
+                    name="cstmMsg"
+                    value={this.state.cstmMsg}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Trade Status Change</Label>
                   <div
                     className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
+                    onChange={this.changeHandler1}
                   >
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
-                      checked={this.state.status === "Active" ? true : false}
                       name="status"
                       value="Active"
+                      defaultChecked
                     />
                     <span style={{ marginRight: "20px" }}>Active</span>
 
@@ -566,23 +551,13 @@ class EditFnoIndex extends React.Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      checked={this.state.status === "Closed" ? true : false}
                       value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
               </Row>
-              {/* <Col lg="6" md="6" className="mb-2">
-                <Label>Trade Alert</Label>
-                <Input
-                  type="text"
-                  placeholder="Keep booking or trailing stop loss"
-                  name="cstmMsg"
-                  value={this.state.cstmMsg}
-                  onChange={this.changeHandler}
-                />
-              </Col> */}
+
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Button.Ripple

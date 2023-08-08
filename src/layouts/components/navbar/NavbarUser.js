@@ -15,6 +15,10 @@ const handleNavigation = (e, path) => {
   e.preventDefault();
   window.location.replace(path);
 };
+const handleNavigationbar = (e, path) => {
+  e.preventDefault();
+  window.location.replace(path);
+};
 
 const NavbarUser = () => {
   const [adminimg, setAdminimg] = useState({});
@@ -59,7 +63,7 @@ const NavbarUser = () => {
             />
           </span>
         </DropdownToggle>
-        <DropdownMenu right>
+        <DropdownMenu right style={{ width: "fit-content" }}>
           <DropdownItem
             tag="a"
             href="#"
@@ -68,7 +72,20 @@ const NavbarUser = () => {
             <Icon.User size={14} className="mr-50" />
             <span className="align-middle">Edit Profile</span>
           </DropdownItem>
-
+          <DropdownItem divider />
+          <Route
+            render={({ history }) => (
+              <DropdownItem
+                tag="a"
+                onClick={(e) =>
+                  handleNavigationbar(e, "/#/pages/changepassword")
+                }
+              >
+                <Icon.Lock size={14} className="mr-50" />
+                <span className="align-middle">Change Password</span>
+              </DropdownItem>
+            )}
+          />
           <DropdownItem divider />
           <Route
             render={({ history }) => (

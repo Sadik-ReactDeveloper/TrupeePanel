@@ -4,17 +4,17 @@
 // 	----------------------------------------------------------------------------------------------
 // 	Item Name: Vuexy React Admin Template
 // 	Version: 1.0
-// 	Author: PIXINVENT
+// 	Author: Sveltose Technology
 // 	Author URL: http://www.themeforest.net/user/pixinvent
 // ================================================================================================
 
 // Core variables and mixins overrides
-@import '~bootstrap/scss/_functions.scss';
-@import '../core/variables/variables';
-@import '~bootstrap/scss/_variables.scss';
+@import "~bootstrap/scss/_functions.scss";
+@import "../core/variables/variables";
+@import "~bootstrap/scss/_variables.scss";
 
 // Overrides user variable
-@import '../core/variables/components-variables';
+@import "../core/variables/components-variables";
 
 // User profile Scss
 #user-profile {
@@ -86,7 +86,7 @@
   }
 }
 
-// rohit css
+// sadik css
 .st-2 {
   padding: 30px;
 }
@@ -110,7 +110,9 @@ button.btn-icon.rounded-circle.mr-1.btn.btn-primary.stpro {
   margin-left: 80px;
   margin-top: -30px;
 }
-
+.form-control {
+  margin: 10px 0px;
+}
 // Profile-header-navbar responsive padding
 @media only screen and (min-width: 992px) {
   #user-profile {

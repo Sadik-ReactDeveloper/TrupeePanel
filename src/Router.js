@@ -140,9 +140,6 @@ const EditFnoEquity = lazy(() => import("./views/apps/trade/EditFnoEquity"));
 const FnoIndexList = lazy(() => import("./views/apps/trade/FnoIndexList"));
 const AddFnoIndex = lazy(() => import("./views/apps/trade/AddFnoIndex"));
 const EditFnoIndex = lazy(() => import("./views/apps/trade/EditFnoIndex"));
-const TradeAlert = lazy(() =>
-  import("./views/apps/trade/tradealert/TradeAlert")
-);
 
 // const BankNiftyList = lazy(() => import("./views/apps/trade/BankNiftyList"));
 
@@ -377,6 +374,9 @@ const ReactTables = lazy(() =>
 const Aggrid = lazy(() => import("./views/tables/aggrid/Aggrid"));
 const DataTable = lazy(() => import("./views/tables/data-tables/DataTables"));
 const profile = lazy(() => import("./views/pages/profile/Profile"));
+const ChangePassword = lazy(() =>
+  import("./views/pages/profile/ChangePassword")
+);
 const faq = lazy(() => import("./views/pages/faq/FAQ"));
 
 const knowledgeBase = lazy(() =>
@@ -418,6 +418,9 @@ const ExportSelected = lazy(() =>
 );
 
 const Login = lazy(() => import("./views/pages/authentication/login/Login"));
+// const ChangePassword = lazy(() =>
+//   import("./views/pages/authentication/ChangePassword")
+// );
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 );
@@ -621,10 +624,6 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/trade/editFnoIndex/:id"
               component={EditFnoIndex}
-            />
-            <AppRoute
-              path="/app/trade/tradealert/trademsg"
-              component={TradeAlert}
             />
             <AppRoute path="/app/trade/addFnoIndex" component={AddFnoIndex} />
             {/* <AppRoute
@@ -1075,6 +1074,11 @@ class AppRouter extends React.Component {
               component={DataTable}
             />
             <AppRoute exact={true} path="/pages/profile" component={profile} />
+            <AppRoute
+              exact={true}
+              path="/pages/changepassword"
+              component={ChangePassword}
+            />
             <AppRoute exact={true} path="/pages/faq" component={faq} />
             <AppRoute
               exact={true}

@@ -31,13 +31,13 @@ export default class AddStartUp extends Component {
       desc: "",
       image: "",
       video_link: "",
-      selectedName: "",
+      // selectedName: "",
       selectedFile: null,
       editorState: EditorState.createEmpty(),
     };
   }
   onEditorStateChange = (editorState) => {
-    console.log(editorState);
+    // console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -45,28 +45,25 @@ export default class AddStartUp extends Component {
   };
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
-  };
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
   };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
+  submitHandler = async (e) => {
+    // console.log(e.targget.value);
     e.preventDefault();
-    console.log(this.state);
     const data = new FormData();
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
     data.append("video_link", this.state.video_link);
-    data.append("image", this.state.selectedFile, this.state.selectedName);
-
-    axiosConfig
+    if (this.state.selectedFile != null) {
+      data.append("image", this.state.selectedFile);
+    }
+    await axiosConfig
       .post("/admin/addStartup", data)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         // this.props.history.push("/app/explore/Trupee/startUp");
       })
@@ -114,7 +111,7 @@ export default class AddStartUp extends Component {
             </Col>
           </Row>
           <CardBody>
-            <Form className="m-1" onSubmit={(e) => this.submitHandler(e)}>
+            <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Title</Label>
@@ -191,29 +188,6 @@ export default class AddStartUp extends Component {
                     }}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col>  */}
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">

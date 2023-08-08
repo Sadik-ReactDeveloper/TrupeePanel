@@ -16,6 +16,7 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
 import { history } from "../../../../history";
+import ReactHtmlParser from "react-html-parser";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
@@ -60,7 +61,7 @@ class StartUp extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
@@ -68,12 +69,19 @@ class StartUp extends React.Component {
       {
         headerName: "Upload Image",
         field: "image",
-        width: 200,
+        width: 300,
+        height: 250,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {params.data.image ? (
-                <img src={params.data.image} alt="uploaded Image" />
+            <div className="setUp">
+              {params.data.image[0] ? (
+                <img
+                  className=" rounded-0"
+                  src={params.data.image[0]}
+                  alt="No img"
+                  width="60px"
+                  height="50px"
+                />
               ) : (
                 <span style={{ color: "red" }}>Image No available</span>
               )}
@@ -140,6 +148,7 @@ class StartUp extends React.Component {
   startupList = () => {
     axiosConfig.get("/admin/get_startup").then((response) => {
       const rowData = response.data.data;
+      console.log(rowData);
       this.setState({ rowData });
     });
   };

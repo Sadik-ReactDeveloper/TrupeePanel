@@ -44,7 +44,7 @@ class EditFnoEquity extends React.Component {
       expiryDate: "",
       type: "Equity",
       status: "",
-      // cstmMsg: "",
+      cstmMsg: "",
       t6_type: false,
       T6: "",
       T7: "",
@@ -91,7 +91,7 @@ class EditFnoEquity extends React.Component {
           t7_type: response.data.data.t7_type,
           type: response.data.data.type,
           status: response.data.data.tradeStatus,
-          // cstmMsg: response.data.data.cstmMsg,
+          cstmMsg: response.data.data.cstmMsg,
           // tradeStatus: this.state.tradeStatus,
         });
       })
@@ -526,18 +526,28 @@ class EditFnoEquity extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-
+                <Col lg="6" md="6" className="my-2">
+                  <Label>Trade Alert</Label>
+                  <Input
+                    type="text"
+                    placeholder="Keep booking or trailing stop loss"
+                    name="cstmMsg"
+                    value={this.state.cstmMsg}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
                 <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">Call Status</Label>
+                  <Label className="mb-1">Trade Status Change</Label>
                   <div
                     className="form-label-group"
-                    onChange={(e) => this.changeHandler6(e)}
+                    onChange={this.changeHandler6}
                   >
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
                       value="Active"
+                      defaultChecked
                     />
                     <span style={{ marginRight: "20px" }}>Active</span>
                     <input
@@ -549,17 +559,6 @@ class EditFnoEquity extends React.Component {
                     <span style={{ marginRight: "3px" }}>Completed</span>
                   </div>
                 </Col>
-
-                {/* <Col lg="6" md="6" className="my-2">
-                  <Label>Trade Alert</Label>
-                  <Input
-                    type="text"
-                    placeholder="Keep booking or trailing stop loss"
-                    name="cstmMsg"
-                    value={this.state.cstmMsg}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
               </Row>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">

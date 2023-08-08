@@ -90,7 +90,7 @@ class GeneralNotifList extends React.Component {
         width: 300,
         cellRendererFramework: (params) => {
           return (
-            <div className=" ">
+            <div className="">
               {params.data.img[0] ? (
                 <img
                   className="w-50  rounded-0"

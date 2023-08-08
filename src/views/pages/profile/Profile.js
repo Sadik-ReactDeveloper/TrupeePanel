@@ -150,32 +150,31 @@ class Profile extends React.Component {
                     </CardTitle>
                     <Row className="m-0">
                       <Col sm="12" className="p-0">
-                        <Form action="/">
-                          <Label>Name</Label>
-                          <Input
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            value={this.state.name}
-                            onChange={this.changeHandler}
-                          />
-                          <Label>Email</Label>
-                          <Input
-                            type="email"
-                            name="email"
-                            placeholder="email"
-                            value={this.state.email}
-                            onChange={this.changeHandler}
-                          />
-                          <Label>Mobile No.</Label>
-                          <Input
-                            type="number"
-                            name="mobile"
-                            placeholder="Mobile No."
-                            value={this.state.mobile}
-                            onChange={this.changeHandler}
-                          />
-                          <Label>Password</Label>
+                        <Label>Name</Label>
+                        <Input
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          value={this.state.name}
+                          onChange={this.changeHandler}
+                        />
+                        <Label>Email</Label>
+                        <Input
+                          type="email"
+                          name="email"
+                          placeholder="email"
+                          value={this.state.email}
+                          onChange={this.changeHandler}
+                        />
+                        <Label>Mobile No.</Label>
+                        <Input
+                          type="number"
+                          name="mobile"
+                          placeholder="Mobile No."
+                          value={this.state.mobile}
+                          onChange={this.changeHandler}
+                        />
+                        {/* <Label>Password</Label>
                           <Input
                             type="password"
                             name="password"
@@ -190,26 +189,25 @@ class Profile extends React.Component {
                             placeholder="Reset password"
                             value={this.state.cnfmPassword}
                             onChange={this.changeHandler}
-                          />
-                          <Label>User Image</Label>
-                          <Input
-                            className="form-control"
-                            type="file"
-                            name="adminimg"
-                            onChange={this.onChangeHandler}
-                          />
-                          <CheckBoxesVuexy
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label=" I accept the terms & conditions."
-                            defaultChecked={true}
-                          />
-                          <div className="d-flex justify-content-between">
-                            <Button.Ripple color="primary" type="submit">
-                              Submit
-                            </Button.Ripple>
-                          </div>
-                        </Form>
+                          /> */}
+                        <Label>User Image</Label>
+                        <Input
+                          className="form-control"
+                          type="file"
+                          name="adminimg"
+                          onChange={this.onChangeHandler}
+                        />
+                        <CheckBoxesVuexy
+                          color="primary"
+                          icon={<Check className="vx-icon" size={16} />}
+                          label=" I accept the terms & conditions."
+                          defaultChecked={true}
+                        />
+                        <div className="d-flex justify-content-between">
+                          <Button.Ripple color="primary" type="submit">
+                            Submit
+                          </Button.Ripple>
+                        </div>
                       </Col>
                     </Row>
                   </div>

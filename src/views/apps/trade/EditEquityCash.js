@@ -197,7 +197,7 @@ class EditEquityCash extends React.Component {
       t3_type: this.state.t3_type,
       t4_typ: this.state.t4_type,
       T4: this.state.T4,
-      // cstmMsg: this.state.cstmMsg,
+      cstmMsg: this.state.cstmMsg,
       tradeStatus: this.state.tradeStatus,
       status: this.state.status,
     };
@@ -253,7 +253,6 @@ class EditEquityCash extends React.Component {
                     value={this.state.cash_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>select script</option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -519,7 +518,7 @@ class EditEquityCash extends React.Component {
                     </span>
                   </div>
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="4" className="mb-2">
                   <Label>T5</Label>
                   <Input
                     type="number"
@@ -529,7 +528,7 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="4" className="mb-2">
                   <Label>T6</Label>
                   <Input
                     type="number"
@@ -539,7 +538,7 @@ class EditEquityCash extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="3" md="3" className="mb-2">
+                <Col lg="4" md="4" className="mb-2">
                   <Label>T7</Label>
                   <Input
                     type="number"
@@ -550,7 +549,7 @@ class EditEquityCash extends React.Component {
                   />
                 </Col>
 
-                {/* <Col lg="3" md="3" className="mb-2">
+                <Col lg="6" md="6" className="mb-2">
                   <Label>Trade Alert</Label>
                   <Input
                     type="text"
@@ -559,26 +558,25 @@ class EditEquityCash extends React.Component {
                     value={this.state.cstmMsg}
                     onChange={this.changeHandler}
                   />
-                </Col> */}
-                <Col lg="3" md="3" sm="3" className="mb-3 mt-1">
-                  <Label className="mb-1">Call Status</Label>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="">
+                  <Label className="mb-1">Trade Status Change</Label>
                   <div
                     className="form-label-group"
-                    onChange={(e) => this.changeHandler6(e)}
+                    onChange={this.changeHandler6}
                   >
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
-                      checked={this.state.status === "Active" ? true : false}
                       name="status"
                       value="Active"
+                      defaultChecked
                     />
                     <span style={{ marginRight: "20px" }}>Active</span>
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      checked={this.state.status === "Closed" ? true : false}
                       value="Closed"
                     />
                     <span style={{ marginRight: "3px" }}>Completed</span>
