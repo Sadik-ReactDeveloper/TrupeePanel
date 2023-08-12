@@ -14,7 +14,7 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
+import { Edit, ChevronDown } from "react-feather";
 import swal from "sweetalert";
 import { history } from "../../../history";
 import { Route } from "react-router-dom";
@@ -45,9 +45,7 @@ class FaqList extends React.Component {
       {
         headerName: "Title",
         field: "title",
-        // filter: true,
         width: 250,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -59,9 +57,7 @@ class FaqList extends React.Component {
       {
         headerName: "Descripiton",
         field: "desc",
-        // filter: true,
         width: 500,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -74,7 +70,6 @@ class FaqList extends React.Component {
         headerName: "Actions",
         field: "sortorder",
         width: 150,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">

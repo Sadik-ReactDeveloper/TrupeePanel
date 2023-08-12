@@ -61,7 +61,7 @@ class StartUp extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{ReactHtmlParser(params.data.desc)}</span>
+              <span className="pt-1">{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },

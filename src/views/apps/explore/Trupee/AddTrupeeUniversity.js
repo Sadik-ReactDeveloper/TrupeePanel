@@ -35,7 +35,6 @@ export default class AddTU extends Component {
     };
   }
   onEditorStateChange = (editorState) => {
-    console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -50,11 +49,9 @@ export default class AddTU extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(this.state);
     axiosConfig
       .post("/admin/add_Tuniversity", this.state)
       .then((response) => {
-        console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/explore/Trupee/trupeeUniversity");
       })
@@ -86,10 +83,8 @@ export default class AddTU extends Component {
         </Row>
         <Card>
           <Row className="m-2">
-            <Col>
-              <h1 col-sm-6 className="float-left">
-                Add Trupee University
-              </h1>
+            <Col className="col-sm-6">
+              <h1 className="float-left">Add Trupee University</h1>
             </Col>
             <Col>
               <Route
@@ -109,7 +104,7 @@ export default class AddTU extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="6" md="6" sm="12" className="mb-2">
                   <Label>Title</Label>
                   <Input
                     required
@@ -140,7 +135,7 @@ export default class AddTU extends Component {
                     onChange={this.onChangeHandler}
                   />
                 </Col> */}
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="6" md="6" sm="12" className="mb-2">
                   <Label>Video Link</Label>
                   <Input
                     type="text"
@@ -161,7 +156,7 @@ export default class AddTU extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col> */}
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="12" md="12" sm="12" className="mb-2">
                   <Label>Descripition</Label>
                   <Editor
                     toolbarClassName="demo-toolbar-absolute"

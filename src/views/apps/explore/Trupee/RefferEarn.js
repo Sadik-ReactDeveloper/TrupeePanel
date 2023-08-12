@@ -12,7 +12,6 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../../axiosConfig";
-// import { history } from "../../../history";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2 } from "react-feather";
@@ -41,9 +40,9 @@ class RefferEarn extends React.Component {
         filter: true,
       },
       {
-        headerName: "Name",
+        headerName: "Name By",
         field: "firstname",
-        width: 150,
+        width: 180,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -55,9 +54,9 @@ class RefferEarn extends React.Component {
         },
       },
       {
-        headerName: "Mobile",
+        headerName: "Mobile By",
         field: "mobile",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -66,27 +65,41 @@ class RefferEarn extends React.Component {
           );
         },
       },
-
       {
-        headerName: "Email ID",
-        field: "email",
-        width: 120,
+        headerName: "MRP Amount",
+        field: "amount",
+        width: 250,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.userid?.email}</span>
+              3000
+              {/* <span>{params.data.refer_from?.amount}</span> */}
             </div>
           );
         },
       },
+
+      // {
+      //   headerName: "Email ID",
+      //   field: "email",
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data.userid?.email}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
-        headerName: "Amount",
+        headerName: "Refferal Wallet Amount",
         field: "amount",
-        width: 110,
+        width: 250,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.refer_from?.amount}</span>
+              300
+              {/* <span>{params.data.refer_from?.amount}</span> */}
             </div>
           );
         },
@@ -116,7 +129,21 @@ class RefferEarn extends React.Component {
         },
       },
       {
-        headerName: "Mobile",
+        headerName: "Refferal Name To",
+        field: "firstname",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>
+                {params.data.userid?.firstname} {params.data.userid?.lastname}
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Mobile To",
         field: "mobile",
         width: 120,
         cellRendererFramework: (params) => {
@@ -128,9 +155,9 @@ class RefferEarn extends React.Component {
         },
       },
       {
-        headerName: "Date",
+        headerName: "Refferal Date",
         field: "createdAt",
-        width: 100,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">

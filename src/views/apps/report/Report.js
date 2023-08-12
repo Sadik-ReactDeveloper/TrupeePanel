@@ -77,19 +77,6 @@ class Report extends React.Component {
         },
       },
 
-      // {
-      //   headerName: "Expiry Date",
-      //   field: "expDate",
-      //   width: 140,
-      //   // pinned: window.innerWidth > 992 ? "left" : false,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex  align-items-center cursor-pointer">
-      //         <span>{params.data.expiryDate?.expDate}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         headerName: "Trade Type",
         field: "type",
@@ -255,7 +242,6 @@ class Report extends React.Component {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{moment(params.data.updatedAt).format("ll")} </span>
-              {/* <span>{params.data.date}</span> */}
             </div>
           );
         },
@@ -452,11 +438,13 @@ class Report extends React.Component {
             params?.data?.trl_type === "true" ||
             params?.data?.t5_type === "true" ? (
             <div className="badge badge-pill badge-success">
-              {params?.data?.tradeStatus}
+              Completed
+              {/* {params?.data?.tradeStatus} */}
             </div>
           ) : params?.data?.sl_type === "true" ? (
             <div className="badge badge-pill badge-danger">
-              {params?.data?.tradeStatus}
+              {/* {params?.data?.tradeStatus} */}
+              Completed
             </div>
           ) : null;
         },
@@ -470,27 +458,6 @@ class Report extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Eye
-                className="mr-50"
-                color="green"
-                size={20}
-                onClick={() =>
-                  history.push(`/app/size/viewSize/${params.data._id}`)
-                }
-              /> */}
-              {/* <Route
-                render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(`/app/trade/editAllTrade/${params.data._id}`)
-                    }
-                  />
-                )}
-              /> */}
-
               <Trash2
                 size={20}
                 color="red"
@@ -519,7 +486,24 @@ class Report extends React.Component {
   alltradeList = () => {
     axiosConfig.get(`/admin/tradelist`).then((response) => {
       console.log(response.data.data);
-      const rowData = response.data.data;
+      const rowDataList = response.data.data;
+      const rowData = rowDataList.filter((value) => {
+        if (
+          value.FT1_type === "true" ||
+          value?.FT2_type === "true" ||
+          value?.FT3_type === "true" ||
+          value?.t1_type === "true" ||
+          value?.t2_type === "true" ||
+          value?.t3_type === "true" ||
+          value?.t4_type === "true" ||
+          value?.trl_type === "true" ||
+          value?.t5_type === "true" ||
+          value?.sl_type === "true"
+        ) {
+          return value;
+        }
+      });
+      console.log("NewList", rowData);
       const list = response.data.data;
       this.setState({ rowData });
       this.setState({ list });
@@ -594,7 +578,7 @@ class Report extends React.Component {
         <Col sm="12">
           <Card>
             <h1 col-sm-6 className="float-left p-2">
-              Filter Data
+              Report List
             </h1>
             <Row className="m-2">
               <Col lg="4" md="3" sm="6" className="mb-2">
@@ -603,7 +587,6 @@ class Report extends React.Component {
                   type="date"
                   name="StartDate"
                   required
-                  // value={this.state.fnoindex_scrpt_name}
                   onChange={this.changeHandlerStartDate}
                 ></Input>
               </Col>
@@ -614,8 +597,6 @@ class Report extends React.Component {
                   name="EndDate"
                   required
                   onChange={this.changeHandlerEndDate}
-                  // value={this.state.fnoindex_scrpt_name}
-                  // onChange={this.changeHandler}
                 ></Input>
               </Col>
               <Col lg="4" md="3" sm="6" className="mt-1">

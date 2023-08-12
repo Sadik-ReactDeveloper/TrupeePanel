@@ -174,22 +174,7 @@ class Profile extends React.Component {
                           value={this.state.mobile}
                           onChange={this.changeHandler}
                         />
-                        {/* <Label>Password</Label>
-                          <Input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={this.changeHandler}
-                          />
-                          <Label>Confirm Password</Label>
-                          <Input
-                            type="password"
-                            name="cnfmPassword"
-                            placeholder="Reset password"
-                            value={this.state.cnfmPassword}
-                            onChange={this.changeHandler}
-                          /> */}
+
                         <Label>User Image</Label>
                         <Input
                           className="form-control"

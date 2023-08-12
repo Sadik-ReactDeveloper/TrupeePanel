@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardBody,
   Row,
   Col,
@@ -28,7 +26,6 @@ export default class AddStartUp extends Component {
       title: "",
       image: "",
       video_link: "",
-      selectedName: "",
       selectedFile: null,
       editorState: EditorState.createEmpty(),
       desc: "",
@@ -59,7 +56,6 @@ export default class AddStartUp extends Component {
   }
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
-    console.log(event.target.files[0]);
   };
 
   changeHandler = (e) => {
@@ -67,16 +63,16 @@ export default class AddStartUp extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(this.state);
     const data = new FormData();
     data.append("title", this.state.title);
     data.append("desc", this.state.desc);
     data.append("video_link", this.state.video_link);
-    data.append("image", this.state.selectedFile, this.state.selectedName);
-
+    if (this.state.selectedFile !== null) {
+      data.append("image", this.state.selectedFile);
+    }
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/edit_startup/${id}`, data)
+      .post(`/admin/edit_startup/${id}`, data)
       .then((response) => {
         console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");

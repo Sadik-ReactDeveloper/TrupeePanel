@@ -12,8 +12,8 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
 import { Route } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 import swal from "sweetalert";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -35,6 +35,7 @@ export default class EditFaq extends Component {
     axiosConfig
       .get(`/admin/getoneFaq/${id}`)
       .then((response) => {
+        console.log(response.data.data.desc);
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,
@@ -56,6 +57,7 @@ export default class EditFaq extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
+    console.log("Desc", this.state.desc);
     let { id } = this.props.match.params;
     axiosConfig
       .post(`admin/edit_faq/${id}`, this.state)
@@ -126,6 +128,7 @@ export default class EditFaq extends Component {
                     editorClassName="demo-editor"
                     editorState={this.state.editorState}
                     onEditorStateChange={this.onEditorStateChange}
+                    defaultContentState={ReactHtmlParser(this.state.desc)}
                     toolbar={{
                       options: [
                         "inline",
@@ -160,14 +163,6 @@ export default class EditFaq extends Component {
                       },
                     }}
                   />
-                  {/* <Input
-                    required
-                    type="text"
-                    name="desc"
-                    placeholder="Edit Service"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input> */}
                 </Col>
               </Row>
               <Row>

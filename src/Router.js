@@ -418,9 +418,7 @@ const ExportSelected = lazy(() =>
 );
 
 const Login = lazy(() => import("./views/pages/authentication/login/Login"));
-// const ChangePassword = lazy(() =>
-//   import("./views/pages/authentication/ChangePassword")
-// );
+
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 );

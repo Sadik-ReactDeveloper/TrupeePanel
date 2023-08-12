@@ -45,7 +45,6 @@ export default class EditTruUni extends Component {
     axiosConfig
       .get(`/admin/getone_Tuniversity/${id}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,
@@ -147,7 +146,6 @@ export default class EditTruUni extends Component {
                 <Col lg="6" md="4" sm="12" className="mb-2">
                   <Label>Video Link</Label>
                   <Input
-                    required
                     type="text"
                     name="video_link"
                     placeholder="Video Link"
