@@ -46,9 +46,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>
-                {params.data.userid?.firstname} {params.data.userid?.lastname}
-              </span>
+              <span>{params.data.refer_from_id.firstname}</span>
             </div>
           );
         },
@@ -60,7 +58,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.userid?.mobile}</span>
+              <span>{params.data.refer_to_id.mobile}</span>
             </div>
           );
         },
@@ -68,38 +66,25 @@ class RefferEarn extends React.Component {
       {
         headerName: "MRP Amount",
         field: "amount",
-        width: 250,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              3000
-              {/* <span>{params.data.refer_from?.amount}</span> */}
+              <span>{params.data.membership.mrp_price}</span>
             </div>
           );
         },
       },
 
-      // {
-      //   headerName: "Email ID",
-      //   field: "email",
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         <span>{params.data.userid?.email}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         headerName: "Refferal Wallet Amount",
         field: "amount",
-        width: 250,
+        width: 220,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              300
-              {/* <span>{params.data.refer_from?.amount}</span> */}
+              {/* 300 */}
+              <span>{params.data.refer_to_id.amount}</span>
             </div>
           );
         },
@@ -111,7 +96,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.planId?.pack_name}</span>
+              <span>{params.data.membership.pack_name}</span>
             </div>
           );
         },
@@ -123,7 +108,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.refral_Code}</span>
+              <span>{params.data.refer_from_id.refral_Code}</span>
             </div>
           );
         },
@@ -135,9 +120,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>
-                {params.data.userid?.firstname} {params.data.userid?.lastname}
-              </span>
+              <span>{params.data.refer_to_id.firstname}</span>
             </div>
           );
         },
@@ -149,7 +132,7 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.refer_from.mobile}</span>
+              <span>{params.data.refer_to_id.mobile}</span>
             </div>
           );
         },
@@ -170,7 +153,7 @@ class RefferEarn extends React.Component {
       {
         headerName: "Expiry",
         field: "updatedAt",
-        width: 105,
+        width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">

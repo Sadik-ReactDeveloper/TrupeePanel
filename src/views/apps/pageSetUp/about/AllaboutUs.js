@@ -19,6 +19,7 @@ import { ChevronDown, Edit, Trash2 } from "react-feather";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import swal from "sweetalert";
+import ReactHtmlParser from "react-html-parser";
 class AllaboutUs extends React.Component {
   state = {
     rowData: [],
@@ -45,11 +46,11 @@ class AllaboutUs extends React.Component {
       {
         headerName: "Descriptions",
         field: "desc",
-        width: 700,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
