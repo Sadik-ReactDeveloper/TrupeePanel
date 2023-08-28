@@ -234,7 +234,7 @@ class EditFnoEquity extends React.Component {
                   <Label>Script Name</Label>
                   <CustomInput
                     type="select"
-                    disabled
+                    // disabled
                     name="fnoequty_scrpt_name"
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
@@ -251,7 +251,7 @@ class EditFnoEquity extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
-                    disabled
+                    // disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -268,7 +268,7 @@ class EditFnoEquity extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
-                    disabled
+                    // disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
@@ -281,7 +281,7 @@ class EditFnoEquity extends React.Component {
                   <Input
                     id="exampleSelect1"
                     name="call_type"
-                    disabled
+                    // disabled
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
@@ -304,7 +304,7 @@ class EditFnoEquity extends React.Component {
                     type="text"
                     placeholder="Enter Active Value"
                     name="active_value"
-                    disabled
+                    // disabled
                     value={this.state.active_value}
                     onChange={this.changeHandler}
                   />
@@ -313,7 +313,7 @@ class EditFnoEquity extends React.Component {
                   <Label>Range Value</Label>
                   <Input
                     type="number"
-                    disabled
+                    // disabled
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
                     value={this.state.active_value2}
@@ -327,6 +327,28 @@ class EditFnoEquity extends React.Component {
                     type="text"
                     placeholder="Enter Stop Loss"
                     value={this.state.SL}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Quantity</Label>
+                  <Input
+                    type="text"
+                    name="qty"
+                    // disabled
+                    placeholder="Enter Quantity"
+                    value={this.state.qty}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Number Of Lot</Label>
+                  <Input
+                    type="text"
+                    name="no_of_lots"
+                    // disabled
+                    placeholder="Enter Number Of Lot"
+                    value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -367,28 +389,6 @@ class EditFnoEquity extends React.Component {
                     placeholder="Enter Target 4"
                     name="T4"
                     value={this.state.T4}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="text"
-                    name="qty"
-                    disabled
-                    placeholder="Enter Quantity"
-                    value={this.state.qty}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Number Of Lot</Label>
-                  <Input
-                    type="text"
-                    name="no_of_lots"
-                    disabled
-                    placeholder="Enter Number Of Lot"
-                    value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
                 </Col>

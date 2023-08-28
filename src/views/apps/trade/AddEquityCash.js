@@ -153,12 +153,14 @@ export class AddEquityCash extends Component {
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
-                    // valid={true}
-                    // invalid={true}
+                    required
+                    defaultValue=""
                     value={this.state.cash_scrpt_name}
                     onChange={this.changeHandler1}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -192,11 +194,14 @@ export class AddEquityCash extends Component {
                     name="script_type"
                     type="select"
                     required
+                    defaultValue=""
                     // valid={true}
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -208,11 +213,13 @@ export class AddEquityCash extends Component {
                     name="call_type"
                     type="select"
                     required
-                    resource=""
+                    defaultValue=""
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Call Type</option>
+                    <option value="" disabled>
+                      Select Call Type
+                    </option>
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -224,27 +231,6 @@ export class AddEquityCash extends Component {
                     <option>Intraday (Hero-Zero)</option>
                   </Input>
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <div>
-                    <Label>P&L</Label>
-                    <Input
-                      type="select"
-                      name="pl_type"
-                      value={this.state.pl_type}
-                      onChange={this.changeHandler}
-                    >
-                      <option value="Option 1">Select Option</option>
-                      <option value="Option 2">Profit</option>
-                      <option value="Option 3">Loss</option>
-                    </Input>
-                    <Input
-                      type="number"
-                      name="profit_loss_amt"
-                      value={this.state.profit_loss_amt}
-                      onChange={this.changeHandler}
-                    />
-                  </div>
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Active Value*</Label>
                   <Input
@@ -260,7 +246,7 @@ export class AddEquityCash extends Component {
                   <Label>Range Value*</Label>
                   <Input
                     type="number"
-                    placeholder="Enter Max. Value Price"
+                    placeholder="Enter Max. Value "
                     name="active_value2"
                     required
                     value={this.state.active_value2}

@@ -17,30 +17,12 @@ import FileSaver from "file-saver";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import {
-  Edit,
-  Trash2,
-  ChevronDown,
-  Smartphone,
-  View,
-  Eye,
-} from "react-feather";
-//import classnames from "classnames";
-// import { history } from "../../../history";
+import { Edit, Trash2, ChevronDown, View, Eye } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
-const images = [
-  "https://unsplash.com/photos/Bkci_8qcdvQ",
-  "https://unsplash.com/photos/hS46bsAASwQ",
-  "https://unsplash.com/photos/2VDa8bnLM8c",
-  "https://unsplash.com/photos/_LuLiJc1cdo",
-  "https://unsplash.com/photos/1Z2niiBPg5A",
-  "https://unsplash.com/photos/pHANr-CpbYM",
-  "https://unsplash.com/photos/pQMM63GE7fo",
-  "https://unsplash.com/photos/2VDa8bnLM8c",
-  "https://unsplash.com/photos/MBkQKiH14ng",
-];
+const images =
+  "https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png";
 class PnLSheetList extends React.Component {
   state = {
     rowData: [],
@@ -70,9 +52,22 @@ class PnLSheetList extends React.Component {
         width: 200,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {/* {params.data.pnlimg[0]} */}
-              <img src={params.data.pnlimg[0]} alt="P&L" height={200} />
+            <div className="">
+              {params.data.pnlimg[0] && params.data.pnlimg[0] !== undefined ? (
+                <img
+                  className="w-50  rounded-0"
+                  src={params.data.pnlimg[0]}
+                  width="100%"
+                  alt="No img"
+                />
+              ) : (
+                <img
+                  className="w-50  rounded-0"
+                  src={images}
+                  alt="No img"
+                  width="100%"
+                />
+              )}
             </div>
           );
         },
@@ -180,6 +175,7 @@ class PnLSheetList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig.get(`/admin/getPnlSheet`).then((response) => {
+      console.log(response.data.data);
       this.setState({ down: response.data.data[0].pnlimg[0] });
       const rowData = response.data.data;
       this.setState({ rowData });
@@ -187,7 +183,7 @@ class PnLSheetList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltPnlsheet/${id}`).then(
+    await axiosConfig.get(`/admin/dltPnlsheet/${id}`).then(
       (response) => {
         console.log(response);
       },
@@ -196,48 +192,7 @@ class PnLSheetList extends React.Component {
       }
     );
   }
-  handleDownload = () => {
-    const imageUrl = "https://example.com/image.jpg"; // Replace with the actual image URL
 
-    // Create a temporary anchor element to trigger the download
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    link.download = "image.jpg"; // Set the desired image name
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  // sayHello = (img) => {
-  //   var blob = new Blob([img], {
-  //     type: "image/jpeg",
-  //   });
-  //   FileSaver.saveAs(blob, "trupee.png");
-  //   const link = document.createElement("a");
-  //   link.href = img;
-
-  //   // Set the filename for the downloaded image (you can modify this as needed).
-  //   link.download = "dynamic-image.jpg";
-
-  //   // Programmatically click the anchor element to trigger the download.
-  //   link.click();
-  // };
-  sayHello = (url, name) => {
-    fetch(url)
-      .then((resp) => resp.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        // a.style.display = 'none';
-        a.href = url;
-        // the filename you want
-        a.download = name;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(() => alert("An error sorry"));
-  };
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -266,7 +221,6 @@ class PnLSheetList extends React.Component {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       <Row className="app-user-list">
-        <Col sm="12"></Col>
         <Col sm="12">
           <Card>
             <Row className="m-2">

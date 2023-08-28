@@ -59,7 +59,7 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
-        console.log(response.data.data.status);
+        console.log(response.data.data);
         this.setState({
           expiryDate: response.data.data.expiryDate,
           script_type: response.data.data.script_type,
@@ -257,7 +257,7 @@ class EditFnoIndex extends React.Component {
                   <CustomInput
                     type="select"
                     name="fnoindex_scrpt_name"
-                    disabled
+                    // disabled
                     value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -273,7 +273,7 @@ class EditFnoIndex extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
-                    disabled
+                    // disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -290,7 +290,7 @@ class EditFnoIndex extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
-                    disabled
+                    // disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
@@ -305,7 +305,7 @@ class EditFnoIndex extends React.Component {
                     id="exampleSelect"
                     name="trade_type"
                     type="select"
-                    disabled
+                    // disabled
                     value={this.state.trade_type}
                     onChange={this.changeHandler}
                   >
@@ -319,7 +319,7 @@ class EditFnoIndex extends React.Component {
                   <Input
                     id="exampleSelect"
                     name="call_type"
-                    disabled
+                    // disabled
                     type="select"
                     value={this.state.call_type}
                     onChange={this.changeHandler}
@@ -339,16 +339,15 @@ class EditFnoIndex extends React.Component {
                   <Label>Active Value</Label>
                   <Input
                     type="number"
-                    disabled
+                    // disabled
                     placeholder="Enter Active Value"
                     name="active_value"
                     value={this.state.active_value}
                     onChange={this.changeHandler}
                   />
                 </Col>
-
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Number Of Lots</Label>
+                {/* <Col lg="6" md="6" className="mb-2">
+                  <Label>Range Value</Label>
                   <Input
                     type="number"
                     name="no_of_lots"
@@ -357,15 +356,26 @@ class EditFnoIndex extends React.Component {
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
-                  <Label>TRAIL</Label>
+                  <Label>Range Value</Label>
                   <Input
                     type="number"
-                    disabled
-                    placeholder="Enter TRAIL"
+                    // disabled
+                    // placeholder="Enter TRAIL"
                     name="trl"
                     value={this.state.trl}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Number Of Lots</Label>
+                  <Input
+                    type="number"
+                    name="no_of_lots"
+                    // disabled
+                    placeholder="Enter Lots Price"
+                    value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
                 </Col>

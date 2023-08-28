@@ -48,7 +48,7 @@ class PerformanceSheet extends React.Component {
         headerName: "Month",
         field: "month",
         // filter: true,
-        width: 180,
+        width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
@@ -62,7 +62,7 @@ class PerformanceSheet extends React.Component {
         headerName: "Year",
         field: "year",
         // filter: true,
-        width: 180,
+        width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
@@ -76,7 +76,7 @@ class PerformanceSheet extends React.Component {
         headerName: "Discount Price",
         field: "dst_price",
         // filter: true,
-        width: 180,
+        width: 185,
 
         cellRendererFramework: (params) => {
           return (
@@ -90,7 +90,7 @@ class PerformanceSheet extends React.Component {
         headerName: "MRP",
         field: "mrp",
         // filter: true,
-        width: 180,
+        width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (

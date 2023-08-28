@@ -39,7 +39,7 @@ class StartUp extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 120,
       },
 
       {
@@ -69,12 +69,13 @@ class StartUp extends React.Component {
       {
         headerName: "Upload Image",
         field: "image",
-        width: 300,
+        width: 200,
         height: 250,
         cellRendererFramework: (params) => {
+          console.log(params.data.image[0]);
           return (
             <div className="setUp">
-              {params.data.image[0] ? (
+              {params.data.image[0] && params.data.image[0] !== undefined ? (
                 <img
                   className=" rounded-0"
                   src={params.data.image[0]}
@@ -93,7 +94,7 @@ class StartUp extends React.Component {
         headerName: "Video",
         field: "video_link",
         // filter: true,
-        width: 200,
+        width: 120,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (

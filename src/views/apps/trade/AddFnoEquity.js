@@ -125,12 +125,16 @@ export class AddFnoEquity extends Component {
                   <CustomInput
                     type="select"
                     name="fnoequty_scrpt_name"
+                    required
+                    defaultValue=""
                     // valid={this.state.fnoequty_scrpt_name ? true : false}
                     // invalid={this.state.fnoequty_scrpt_name ? false : true}
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -143,12 +147,16 @@ export class AddFnoEquity extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    required
+                    defaultValue=""
                     // valid={this.state.expiryDate ? true : false}
                     // invalid={this.state.expiryDate ? false : true}
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    <option>Expiry Date</option>
+                    <option value="" disabled>
+                      Select Expiry Date
+                    </option>
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}
@@ -161,13 +169,17 @@ export class AddFnoEquity extends Component {
                   <Input
                     id="exampleSelect"
                     name="script_type"
+                    required
+                    defaultValue=""
                     type="select"
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                     // valid={this.state.script_type ? true : false}
                     // invalid={this.state.script_type ? false : true}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -178,12 +190,16 @@ export class AddFnoEquity extends Component {
                     id="exampleSelect"
                     name="call_type"
                     type="select"
+                    defaultValue=""
+                    required
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                     // valid={this.state.call_type ? true : false}
                     // invalid={this.state.call_type ? false : true}
                   >
-                    <option>Select Call Type</option>
+                    <option value="" disabled>
+                      Select Call Type
+                    </option>
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -229,12 +245,43 @@ export class AddFnoEquity extends Component {
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
+                  <Label>Quantity</Label>
+                  <Input
+                    type="text"
+                    name="qty"
+                    required
+                    placeholder="Enter Quantity"
+                    value={this.state.qty}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                {/* <Col lg="6" md="6" className="mb-2">
+                  <Label>Investment Amount</Label>
+                  <Input
+                    name="investment_amt"
+                    type="text"
+                    placeholder="Enter Investment Amount"
+                    value={this.state.investment_amt}
+                    onChange={this.changeHandler}
+                  />
+                </Col> */}
+                <Col lg="6" md="6" className="mb-2">
+                  <Label>Number Of Lots</Label>
+                  <Input
+                    type="text"
+                    name="no_of_lots"
+                    required
+                    placeholder="Enter Number Of Lots"
+                    value={this.state.no_of_lots}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-2">
                   <Label>T₹ 1 </Label>
                   <Input
                     type="text"
                     placeholder="Enter Target 1"
                     name="T1"
-                    required
                     value={this.state.T1}
                     onChange={this.changeHandler}
                   />
@@ -266,36 +313,6 @@ export class AddFnoEquity extends Component {
                     placeholder="Enter Target 4"
                     name="T4"
                     value={this.state.T4}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="text"
-                    name="qty"
-                    placeholder="Enter Quantity"
-                    value={this.state.qty}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Investment Amount</Label>
-                  <Input
-                    name="investment_amt"
-                    type="text"
-                    placeholder="Enter Investment Amount"
-                    value={this.state.investment_amt}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Number Of Lots</Label>
-                  <Input
-                    type="text"
-                    name="no_of_lots"
-                    placeholder="Enter Number Of Lots"
-                    value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
                 </Col>

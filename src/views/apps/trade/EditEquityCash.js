@@ -249,7 +249,7 @@ class EditEquityCash extends React.Component {
                   <CustomInput
                     type="select"
                     name="cash_scrpt_name"
-                    disabled
+                    // disabled
                     value={this.state.cash_scrpt_name}
                     onChange={this.changeHandler}
                   >
@@ -265,7 +265,7 @@ class EditEquityCash extends React.Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
-                    disabled
+                    // disabled
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
@@ -282,7 +282,7 @@ class EditEquityCash extends React.Component {
                     id="exampleSelect"
                     name="script_type"
                     type="select"
-                    disabled
+                    // disabled
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
@@ -296,7 +296,7 @@ class EditEquityCash extends React.Component {
                     id="exampleSelect"
                     name="call_type"
                     type="select"
-                    disabled
+                    // disabled
                     value={this.state.call_type}
                     onChange={this.changeHandler}
                   >
@@ -317,7 +317,7 @@ class EditEquityCash extends React.Component {
                     type="number"
                     placeholder="Enter Active Value"
                     name="active_value"
-                    disabled
+                    // disabled
                     value={this.state.active_value || ""}
                     onChange={this.changeHandler}
                   />
@@ -328,7 +328,7 @@ class EditEquityCash extends React.Component {
                     type="number"
                     placeholder="Enter Max. Value Price"
                     name="active_value2"
-                    disabled
+                    // disabled
                     value={this.state.active_value2}
                     onChange={this.changeHandler}
                   />
@@ -338,7 +338,7 @@ class EditEquityCash extends React.Component {
                   <Input
                     type="number"
                     name="qty"
-                    disabled
+                    // disabled
                     placeholder="Enter Quantity"
                     value={this.state.qty}
                     onChange={this.changeHandler}

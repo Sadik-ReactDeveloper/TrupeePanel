@@ -41,7 +41,7 @@ class ExpDateList extends React.Component {
       {
         headerName: "Expiry Date",
         field: "expDate",
-        width: 150,
+        width: 500,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -54,7 +54,7 @@ class ExpDateList extends React.Component {
       {
         headerName: "Actions",
         field: "sortorder",
-        width: 120,
+        width: 500,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">

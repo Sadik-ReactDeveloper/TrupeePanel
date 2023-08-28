@@ -42,7 +42,7 @@ export class AddFnoIndex extends Component {
     axiosConfig
       .get("/admin/getFnoScript")
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         this.setState({
           scriptN: response.data.data,
         });
@@ -109,27 +109,21 @@ export class AddFnoIndex extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Exp. Date</Label>
-                  <Input
-                    type="date"
-                    name="expiryDate"
-                    value={this.state.expiryDate}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Script Name</Label>
                   <CustomInput
                     type="select"
+                    required
+                    defaultValue=""
                     name="fnoindex_scrpt_name"
                     // valid={this.state.fnoindex_scrpt_name ? true : false}
                     // invalid={this.state.fnoindex_scrpt_name ? false : true}
                     value={this.state.fnoindex_scrpt_name}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     {this.state.scriptN?.map((allScript) => (
                       <option value={allScript?._id} key={allScript?._id}>
                         {allScript?.scriptName}
@@ -142,12 +136,16 @@ export class AddFnoIndex extends Component {
                   <CustomInput
                     type="select"
                     name="expiryDate"
+                    required
+                    defaultValue=""
                     // valid={this.state.expiryDate ? true : false}
                     // invalid={this.state.expiryDate ? false : true}
                     value={this.state.expiryDate}
                     onChange={this.changeHandler}
                   >
-                    <option>Expiry Date</option>
+                    <option value="" disabled>
+                      Expiry Date
+                    </option>
                     {this.state.expdateI?.map((allExpDate) => (
                       <option value={allExpDate?._id} key={allExpDate?._id}>
                         {allExpDate?.expDate}
@@ -161,12 +159,16 @@ export class AddFnoIndex extends Component {
                     // id="exampleSelect"
                     name="script_type"
                     type="select"
+                    required
+                    defaultValue=""
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                     // valid={this.state.script_type ? true : false}
                     // invalid={this.state.script_type ? false : true}
                   >
-                    <option>Select Script</option>
+                    <option value="" disabled>
+                      Select Script
+                    </option>
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -174,6 +176,8 @@ export class AddFnoIndex extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Trade Type</Label>
                   <Input
+                    required
+                    defaultValue=""
                     id="exampleSelect"
                     name="trade_type"
                     type="select"
@@ -182,7 +186,9 @@ export class AddFnoIndex extends Component {
                     // valid={this.state.trade_type ? true : false}
                     // invalid={this.state.trade_type ? false : true}
                   >
-                    <option>Select Trade</option>
+                    <option value="" disabled>
+                      Select Trade
+                    </option>
                     <option value="BankNifty">BANK NIFTY</option>
                     <option value="Nifty">NIFTY</option>
                   </Input>
@@ -191,6 +197,8 @@ export class AddFnoIndex extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect">Call Type</Label>
                   <Input
+                    required
+                    defaultValue=""
                     id="exampleSelect"
                     name="call_type"
                     type="select"
@@ -200,7 +208,9 @@ export class AddFnoIndex extends Component {
                     // valid={this.state.call_type ? true : false}
                     // invalid={this.state.call_type ? false : true}
                   >
-                    {/* <option>Select Call Type</option> */}
+                    <option value="" disabled>
+                      Select Call Type
+                    </option>
                     <option>Intraday</option>
                     <option>BTST</option>
                     <option>Short Term</option>
@@ -230,121 +240,22 @@ export class AddFnoIndex extends Component {
                     name="t5"
                     type="number"
                     required
-                    placeholder="Enter T5 "
+                    placeholder="Enter Range value"
                     value={this.state.t5}
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Tiral</Label>
-                  <Input
-                    name="trl"
-                    type="text"
-                    placeholder="Enter Tiral "
-                    value={this.state.t5}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>T1</Label>
-                  <Input
-                    name="FT1"
-                    type="text"
-                    placeholder="Enter T1 "
-                    value={this.state.FT1}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>T2</Label>
-                  <Input
-                    name="FT1"
-                    type="text"
-                    placeholder="Enter T2 "
-                    value={this.state.FT2}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>T3</Label>
-                  <Input
-                    name="FT3"
-                    type="text"
-                    placeholder="Enter T3 "
-                    value={this.state.FT3}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="number"
-                    name="qty"
-                    placeholder="Enter Quantity"
-                    value={this.state.qty}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Number Of Lots</Label>
                   <Input
                     type="number"
+                    required
                     name="no_of_lots"
-                    placeholder="Enter Lots Price"
+                    placeholder="Enter Number Of Lots"
                     value={this.state.no_of_lots}
                     onChange={this.changeHandler}
                   />
                 </Col>
-
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label> Type </Label>
-                  <Input
-                    type="select"
-                    name="type"
-                    placeholder="Enter Trade Type"
-                    value={this.state.type}
-                    onChange={this.changeHandler}
-                  >
-                    <option>Select type</option>
-                    <option>Index</option>
-                  </Input>
-                </Col> */}
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Trade Alert</Label>
-                  <Input
-                    type="text"
-                    placeholder="Keep booking or trailing stop loss"
-                    name="cstmMsg"
-                    value={this.state.cstmMsg}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col> */}
-                {/* <span>
-                    <b> We will type 210+ Keep booking or trailing stop loss</b>
-                  </span> */}
               </Row>
               <Row>
                 <Button.Ripple

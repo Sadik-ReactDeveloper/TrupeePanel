@@ -37,13 +37,13 @@ class Opportunity extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 120,
       },
 
       {
         headerName: "Title",
         field: "title",
-        width: 250,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -62,7 +62,7 @@ class Opportunity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className=" ">
-              {params.data.img[0] ? (
+              {params.data.img[0] && params.data.img[0] !== "null" ? (
                 <img
                   // className="w-50  rounded-0"
                   src={params.data.img[0]}
@@ -92,8 +92,7 @@ class Opportunity extends React.Component {
       {
         headerName: "Actions",
         field: "sortorder",
-        width: 250,
-        // pinned: window.innerWidth > 992 ? "right" : false,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
