@@ -29,8 +29,6 @@ class LoginJWT extends React.Component {
       .post("/admin/adminlogin", this.state)
 
       .then((response) => {
-        console.log(response.data);
-
         if (response.data.status === true) {
           this.setState({ ad_token: response.data.token });
           swal(response.data.msg);

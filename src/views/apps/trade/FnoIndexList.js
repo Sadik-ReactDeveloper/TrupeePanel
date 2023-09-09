@@ -502,9 +502,9 @@ class FnoIndexList extends React.Component {
   componentDidMount() {
     this.fnoindexList();
   }
-
   fnoindexList = () => {
     axiosConfig.get(`/admin/fnoIndexlist`).then((response) => {
+      console.log(response.data.data);
       const rowData = response.data.data;
       this.setState({ rowData });
     });
@@ -610,7 +610,7 @@ class FnoIndexList extends React.Component {
                   FNO Index List
                 </h1>
               </Col>
-              <Col className="pt-4">
+              <Col className="">
                 <Route
                   render={({ history }) => (
                     <Button

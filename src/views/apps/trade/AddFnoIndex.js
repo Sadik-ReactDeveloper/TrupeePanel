@@ -22,6 +22,7 @@ export class AddFnoIndex extends Component {
       script_type: "",
       fnoindex_scrpt_name: "",
       active_value: "",
+      active_value2: "",
       call_type: "",
       qty: "",
       investment_amt: "",
@@ -70,7 +71,7 @@ export class AddFnoIndex extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    console.log("type", this.state);
+    // console.log("type", this.state);
     axiosConfig
       .post("/admin/add_fnoIndex", this.state)
       .then((response) => {
@@ -237,11 +238,11 @@ export class AddFnoIndex extends Component {
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Range value*</Label>
                   <Input
-                    name="t5"
+                    name="active_value2"
                     type="number"
                     required
                     placeholder="Enter Range value"
-                    value={this.state.t5}
+                    value={this.state.active_value2}
                     onChange={this.changeHandler}
                   />
                 </Col>

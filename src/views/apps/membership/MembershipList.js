@@ -34,18 +34,28 @@ class MembershipList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 80,
+        width: 100,
       },
       {
-        headerName: "User Name",
+        headerName: "First Name",
         field: "firstname",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>
-                {params.data.userid?.firstname} {params.data.userid?.lastname}
-              </span>
+              <span>{params.data.userid?.firstname}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Last Name",
+        field: "lastname",
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.userid?.lastname}</span>
             </div>
           );
         },
@@ -79,7 +89,7 @@ class MembershipList extends React.Component {
       {
         headerName: "Date Of Birth",
         field: "dob",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -103,7 +113,7 @@ class MembershipList extends React.Component {
       {
         headerName: "Membership",
         field: "pack_name",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -115,7 +125,7 @@ class MembershipList extends React.Component {
       {
         headerName: "Start Date",
         field: "date",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -127,7 +137,7 @@ class MembershipList extends React.Component {
       {
         headerName: "Expire Date",
         field: "expdate",
-        width: 120,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -208,6 +218,7 @@ class MembershipList extends React.Component {
   membershipDataList = () => {
     axiosConfig.get("/admin/allmembership").then((response) => {
       const rowData = response.data.data;
+      console.log(rowData);
       this.setState({ rowData });
     });
   };

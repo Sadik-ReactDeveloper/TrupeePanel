@@ -26,11 +26,11 @@ export default class EditMembership extends Component {
       pack_name: "",
       expdate: "",
       status: "",
-      firstnameU: [],
-      mobileU: [],
+      firstname: "",
+      mobile: "",
       emailU: "",
-      lastnameU: [],
-      dobU: [],
+      lastname: "",
+      dobU: "",
       genderU: "",
       pack_nameM: [],
       membership: "",
@@ -43,13 +43,13 @@ export default class EditMembership extends Component {
     axiosConfig
       .get(`/admin/viewonemembership/${id}`)
       .then((response) => {
-        console.log("OneMember", response.data);
+        console.log("OneMember", response.data.getdetail.userid.firstname);
         this.setState({ getdetail: response.data.getdetail });
         this.setState({
-          firstnameU: response.data.getdetail.userid.firstname,
-          mobileU: response.data.getdetail.userid.mobile,
+          firstname: response.data.getdetail.userid.firstname,
+          lastname: response.data.getdetail.userid.lastname,
+          mobile: response.data.getdetail.userid.mobile,
           emailU: response.data.getdetail.userid.email,
-          lastnameU: response.data.data,
           dobU: response.data.data,
           gender: response.data.getdetail.userid.gender,
           expdate: response.data.getdetail.userid.expdate,
@@ -121,13 +121,23 @@ export default class EditMembership extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>User Name</Label>
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>First Name</Label>
                   <Input
                     type="text"
-                    name="firstnameU"
-                    placeholder="User Name"
-                    value={this.state.firstnameU}
+                    name="firstname"
+                    placeholder="First Name"
+                    value={this.state.firstname}
+                    onChange={this.changeHandler}
+                  ></Input>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>Last Name</Label>
+                  <Input
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                    value={this.state.lastname}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
@@ -137,8 +147,8 @@ export default class EditMembership extends Component {
                   <Input
                     type="number"
                     placeholder="Mobile"
-                    name="mobileU"
-                    value={this.state.mobileU}
+                    name="mobile"
+                    value={this.state.mobile}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
@@ -177,6 +187,13 @@ export default class EditMembership extends Component {
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Membership Plan</Label>
+                  {/* <Input
+                    type="email"
+                    name="emailU"
+                    placeholder="Email"
+                    value={this.state.emailU}
+                    onChange={this.changeHandler}
+                  ></Input> */}
                   <CustomInput
                     type="select"
                     name="membership"
@@ -207,11 +224,12 @@ export default class EditMembership extends Component {
                     // type="date"
                     type="dd/mm/yyyy"
                     name="expdate"
+                    disabled
                     placeholder="dd/mm/yyyy"
                     value={this.state.expdate}
                     onChange={this.changeHandler}
                   ></Input>
-                </Col> */}
+                </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
                     <Label className="mb-1">Status</Label>

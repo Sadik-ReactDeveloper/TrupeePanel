@@ -189,8 +189,37 @@ class EditFnoEquity extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
+
+    const payload = {
+      script_type: this.state.script_type,
+      fnoequty_scrpt_name: this.state.fnoequty_scrpt_name,
+      active_value: this.state.active_value,
+      active_value2: this.state.active_value2,
+      call_type: this.state.call_type,
+      SL: this.state.SL,
+      qty: this.state.qty,
+      no_of_lots: this.state.no_of_lots,
+      expiryDate: this.state.expiryDate,
+      T1: this.state.T1,
+      t1_type: this.state.t1_type,
+      T2: this.state.T2,
+      t2_type: this.state.t2_type,
+      T3: this.state.T3,
+      t3_type: this.state.t3_type,
+      T4: this.state.T4,
+      t4_type: this.state.t4_type,
+      T5: this.state.T5,
+      t5_type: this.state.t5_type,
+      status: this.state.status,
+      cstmMsg: this.state.cstmMsg,
+      t6_type: this.state.t6_type,
+      T6: this.state.T6,
+      T7: this.state.T7,
+      t7_type: this.state.t7_type,
+      tradeStatus: this.state.tradeStatus,
+    };
     axiosConfig
-      .post(`/admin/editfnoOption/${id}`, this.state)
+      .post(`/admin/editfnoOption/${id}`, payload)
       .then((response) => {
         console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");

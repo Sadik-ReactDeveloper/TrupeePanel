@@ -37,9 +37,7 @@ const NavbarUser = () => {
       try {
         const data = await axiosConfig.get(`/admin/viewoneadmin/${adminId}`);
         setAdminimg(data.data.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     getNotifications();
   }, []);

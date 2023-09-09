@@ -61,6 +61,7 @@ class EditEquityCash extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
+        console.log("cash_scrpt_name", response.data.data.cash_scrpt_name);
         this.setState({
           script_type: response.data.data.script_type,
           cash_scrpt_name: response.data.data.cash_scrpt_name,
@@ -70,16 +71,16 @@ class EditEquityCash extends React.Component {
           SL: response.data.data.SL,
           sl_type: response.data.data.sl_type,
           T1: response.data.data.T1,
-          t1_type: response.data.data.t1_type,
           T2: response.data.data.T2,
-          t2_type: response.data.data.t2_type,
           T3: response.data.data.T3,
-          t3_type: response.data.data.t3_type,
           T4: response.data.data.T4,
-          t4_type: response.data.data.t4_type,
           T5: response.data.data.T5,
           T6: response.data.data.T6,
           T7: response.data.data.T7,
+          t1_type: response.data.data.t1_type,
+          t2_type: response.data.data.t2_type,
+          t3_type: response.data.data.t3_type,
+          t4_type: response.data.data.t4_type,
           t5_type: response.data.data.t5_type,
           t6_type: response.data.data.t6_type,
           t7_type: response.data.data.t7_type,
@@ -188,22 +189,38 @@ class EditEquityCash extends React.Component {
     let { id } = this.props.match.params;
 
     let payload = {
-      // SL: this.state.SL,
-      sl_type: this.state.sl_type,
+      script_type: this.state.script_type,
+      active_value: this.state.active_value,
+      active_value2: this.state.active_value2,
+      call_type: this.state.call_type,
+      t4_type: this.state.t4_type,
+      t5_type: this.state.t5_type,
+      t6_type: this.state.t6_type,
+      t7_type: this.state.t7_type,
+      qty: this.state.qty,
+      SL: this.state.SL,
+      no_of_lots: this.state.no_of_lots,
+      expiryDate: this.state.expiryDate,
+      type: this.state.type,
+      cash_scrpt_name: this.state.cash_scrpt_name,
       T1: this.state.T1,
+      T2: this.state.T2,
+      T3: this.state.T3,
+      T4: this.state.T4,
+      sl_type: this.state.sl_type,
+      T5: this.state.T5,
+      T6: this.state.T6,
+      T7: this.state.T7,
       t1_type: this.state.t1_type,
       t2_type: this.state.t2_type,
-      T2: this.state.T2,
       t3_type: this.state.t3_type,
       t4_typ: this.state.t4_type,
-      T4: this.state.T4,
       cstmMsg: this.state.cstmMsg,
       tradeStatus: this.state.tradeStatus,
       status: this.state.status,
     };
-    console.log("payload", payload);
     axiosConfig
-      .post(`/admin/editCash/${id}`, this.state)
+      .post(`/admin/editCash/${id}`, payload)
       .then((response) => {
         console.log(response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");

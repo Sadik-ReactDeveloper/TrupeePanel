@@ -19,12 +19,13 @@ class EditFnoIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fnoindex_scrpt_name: "",
       trl_type: false,
       trl: "",
       expiryDate: "",
       script_type: "",
-      fnoindex_scrpt_name: "",
       active_value: "",
+      active_value2: "",
       call_type: "",
       no_of_lots: "",
       trade_type: "",
@@ -59,13 +60,14 @@ class EditFnoIndex extends React.Component {
     axiosConfig
       .get(`/admin/viewonetrades/${id}`)
       .then((response) => {
-        console.log(response.data.data);
+        console.log("RangetValue", response.data.data);
         this.setState({
           expiryDate: response.data.data.expiryDate,
           script_type: response.data.data.script_type,
           fnoindex_scrpt_name: response.data.data.fnoindex_scrpt_name,
           call_type: response.data.data.call_type,
           active_value: response.data.data.active_value,
+          active_value2: response.data.data.active_value2,
           T1: response.data.data.T1,
           T2: response.data.data.T2,
           T3: response.data.data.T3,
@@ -188,12 +190,23 @@ class EditFnoIndex extends React.Component {
     }
   };
   changeHandler = (e) => {
+    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
 
   submitHandler = (e) => {
     e.preventDefault();
+    // debugger;
+    let { id } = this.props.match.params;
+
     let obj = {
+      active_value: this.state.active_value,
+      active_value2: this.state.active_value2,
+      expiryDate: this.state.expiryDate,
+      script_type: this.state.script_type,
+      no_of_lots: this.state.no_of_lots,
+      fnoindex_scrpt_name: this.state.fnoindex_scrpt_name,
+      call_type: this.state.call_type,
       trade_type: this.state.trade_type,
       trl_type: this.state.trl_type,
       FT1_type: this.state.FT1_type,
@@ -203,17 +216,17 @@ class EditFnoIndex extends React.Component {
       FT5: this.state.FT5,
       FT6: this.state.FT6,
       FT7: this.state.FT7,
+      t5: this.state.t5,
       status: this.state.status,
       cstmMsg: this.state.cstmMsg,
       sl_type: this.state.sl_type,
       tradeStatus: this.state.tradeStatus,
     };
-    console.log(obj);
-    let { id } = this.props.match.params;
+
     axiosConfig
       .post(`/admin/editFnoindex/${id}`, obj)
       .then((response) => {
-        console.log("EditFNOIndex", response.data.data);
+        console.log("EditFNOIndex", response.data.data.active_value2);
         swal("Success!", "Submitted SuccessFull!", "success");
       })
       .catch((error) => {
@@ -250,7 +263,7 @@ class EditFnoIndex extends React.Component {
             </Col>
           </Row>
           <CardBody>
-            <Form className="m-1" onSubmit={this.submitHandler}>
+            <Form className="m-1" onSubmit={(e) => this.submitHandler(e)}>
               <Row className="mb-2">
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Script Name</Label>
@@ -294,7 +307,6 @@ class EditFnoIndex extends React.Component {
                     value={this.state.script_type}
                     onChange={this.changeHandler}
                   >
-                    <option>Select Script</option>
                     <option>BUY</option>
                     <option>SELL</option>
                   </Input>
@@ -305,7 +317,7 @@ class EditFnoIndex extends React.Component {
                     id="exampleSelect"
                     name="trade_type"
                     type="select"
-                    // disabled
+                    disabled
                     value={this.state.trade_type}
                     onChange={this.changeHandler}
                   >
@@ -346,25 +358,14 @@ class EditFnoIndex extends React.Component {
                     onChange={this.changeHandler}
                   />
                 </Col>
-                {/* <Col lg="6" md="6" className="mb-2">
-                  <Label>Range Value</Label>
-                  <Input
-                    type="number"
-                    name="no_of_lots"
-                    disabled
-                    placeholder="Enter Lots Price"
-                    value={this.state.no_of_lots}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
+
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Range Value</Label>
                   <Input
                     type="number"
-                    // disabled
                     // placeholder="Enter TRAIL"
-                    name="trl"
-                    value={this.state.trl}
+                    name="active_value2"
+                    value={this.state.active_value2}
                     onChange={this.changeHandler}
                   />
                 </Col>
