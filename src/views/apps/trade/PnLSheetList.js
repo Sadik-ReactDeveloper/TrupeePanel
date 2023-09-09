@@ -11,13 +11,10 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import swal from "sweetalert";
-import FileSaver from "file-saver";
-// import { ImageGroup, Image } from "react-fullscreen-image";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Edit, Trash2, ChevronDown, View, Eye } from "react-feather";
+import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
@@ -73,29 +70,6 @@ class PnLSheetList extends React.Component {
         },
       },
 
-      // {
-      //   headerName: "Download",
-      //   field: "download",
-      //   width: 200,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="cursor-pointer">
-      //         <button
-      //           onClick={
-      //             () =>
-      //               this.sayHello(
-      //                 "https://trupee.s3.amazonaws.com/64b7ecabbc633e04629eed06.image.jpg",
-      //                 "Images.jpg"
-      //               )
-      //             // this.sayHello(` ${params.data?.pnlimg?.[0]}`, "Images.png")
-      //           }
-      //         >
-      //           download
-      //         </button>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         headerName: "User Name",
         field: "firstname",
@@ -175,7 +149,6 @@ class PnLSheetList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig.get(`/admin/getPnlSheet`).then((response) => {
-      console.log(response.data.data);
       this.setState({ down: response.data.data[0].pnlimg[0] });
       const rowData = response.data.data;
       this.setState({ rowData });
@@ -184,9 +157,7 @@ class PnLSheetList extends React.Component {
   async runthisfunction(id) {
     console.log(id);
     await axiosConfig.get(`/admin/dltPnlsheet/${id}`).then(
-      (response) => {
-        console.log(response);
-      },
+      (response) => {},
       (error) => {
         console.log(error);
       }

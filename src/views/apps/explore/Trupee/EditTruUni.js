@@ -34,7 +34,6 @@ export default class EditTruUni extends Component {
     };
   }
   onEditorStateChange = (editorState) => {
-    console.log(editorState);
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -99,9 +98,11 @@ export default class EditTruUni extends Component {
                   Home
                 </BreadcrumbItem>
                 <BreadcrumbItem href="/app/explore/Trupee/startUp" tag="a">
-                  Trupee University List
+                  Tradeking University List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Edit StartUp</BreadcrumbItem>
+                <BreadcrumbItem active>
+                  Edit Tradeking University
+                </BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -110,7 +111,7 @@ export default class EditTruUni extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Edit Trupee University
+                Edit Tradeking University
               </h1>
             </Col>
             <Col>
@@ -153,17 +154,7 @@ export default class EditTruUni extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Descripition</Label>
-                  <Input
-                    required
-                    type="textarea"
-                    name="desc"
-                    placeholder="Descripition"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col> */}
+
                 <Col lg="12" md="4" sm="12" className="mb-2">
                   <Label>Edit Paid Service</Label>
                   <Editor

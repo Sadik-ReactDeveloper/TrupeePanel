@@ -74,9 +74,9 @@ export default class AddTU extends Component {
                   href="/app/explore/Trupee/trupeeUniversity"
                   tag="a"
                 >
-                  Trupee University List
+                  Tradeking University List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>Add Trupee University</BreadcrumbItem>
+                <BreadcrumbItem active>Add Tradeking University</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -84,7 +84,7 @@ export default class AddTU extends Component {
         <Card>
           <Row className="m-2">
             <Col className="col-sm-6">
-              <h1 className="float-left">Add Trupee University</h1>
+              <h1 className="float-left">Add Tradeking University</h1>
             </Col>
             <Col>
               <Route
@@ -115,26 +115,7 @@ export default class AddTU extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Image</Label>
-                  <Input
-                    // required
-                    type="text"
-                    name="image"
-                    placeholder=""
-                    value={this.state.image}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col> */}
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Image</Label>
-                  <Input
-                    required
-                    type="file"
-                    name="image"
-                    onChange={this.onChangeHandler}
-                  />
-                </Col> */}
+
                 <Col lg="6" md="6" sm="12" className="mb-2">
                   <Label>Video Link</Label>
                   <Input
