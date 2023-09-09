@@ -6,9 +6,7 @@ import {
   Col,
   Form,
   Label,
-  FormGroup,
   Input,
-  CustomInput,
   Button,
 } from "reactstrap";
 import swal from "sweetalert";
@@ -28,7 +26,7 @@ export default class EditMembership extends Component {
       status: "",
       firstname: "",
       mobile: "",
-      emailU: "",
+      email: "",
       lastname: "",
       dobU: "",
       genderU: "",
@@ -43,20 +41,19 @@ export default class EditMembership extends Component {
     axiosConfig
       .get(`/admin/viewonemembership/${id}`)
       .then((response) => {
-        console.log("OneMember", response.data.getdetail.userid.firstname);
         this.setState({ getdetail: response.data.getdetail });
         this.setState({
-          firstname: response.data.getdetail.userid.firstname,
-          lastname: response.data.getdetail.userid.lastname,
-          mobile: response.data.getdetail.userid.mobile,
-          emailU: response.data.getdetail.userid.email,
-          dobU: response.data.data,
-          gender: response.data.getdetail.userid.gender,
-          expdate: response.data.getdetail.userid.expdate,
-          dob: response.data.getdetail.userid.dob,
-          startDate: response.data.getdetail.userid.start_date,
-          membership: response.data.getdetail.userid.pack_name,
-          status: response.data.getdetail.userid.status,
+          firstname: response.data.getdetail.userid?.firstname,
+          lastname: response.data.getdetail.userid?.lastname,
+          mobile: response.data.getdetail.userid?.mobile,
+          email: response.data.getdetail.userid?.email,
+          dobU: response.data?.data,
+          gender: response.data.getdetail.userid?.gender,
+          expdate: response.data.getdetail.userid?.expdate,
+          dob: response.data.getdetail.userid?.dob,
+          startDate: response.data.getdetail.userid?.start_date,
+          membership: response.data.getdetail.planId?.pack_name,
+          status: response.data.getdetail.userid?.status,
         });
       })
       .catch((error) => {
@@ -77,10 +74,8 @@ export default class EditMembership extends Component {
     let { id } = this.props.match.params;
     axiosConfig
       .post(`/admin/updatemembership/${id}`, this.state)
-      .then((response) => {
-        console.log(response.data.data);
+      .then(() => {
         swal("Success!", "Submitted SuccessFull!", "success");
-        // this.props.history.push(`/app/membership/MembershipList`);
       })
 
       .catch((error) => {
@@ -156,9 +151,9 @@ export default class EditMembership extends Component {
                   <Label>Email Id</Label>
                   <Input
                     type="email"
-                    name="emailU"
+                    name="email"
                     placeholder="Email"
-                    value={this.state.emailU}
+                    value={this.state.email}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
@@ -180,6 +175,7 @@ export default class EditMembership extends Component {
                   <Input
                     type="dd/mm/yyyy"
                     name="dob"
+                    // disabled
                     value={this.state.dob}
                     placeholder="dd/mm/yyyy"
                     onChange={this.changeHandler}
@@ -187,32 +183,21 @@ export default class EditMembership extends Component {
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Membership Plan</Label>
-                  {/* <Input
-                    type="email"
-                    name="emailU"
-                    placeholder="Email"
-                    value={this.state.emailU}
-                    onChange={this.changeHandler}
-                  ></Input> */}
-                  <CustomInput
-                    type="select"
+                  <Input
+                    type="text"
                     name="membership"
+                    placeholder="Membership Plan"
+                    disabled
                     value={this.state.membership}
                     onChange={this.changeHandler}
-                  >
-                    {this.state.pack_nameM?.map((planmemship) => (
-                      <option value={planmemship?._id} key={planmemship?._id}>
-                        {planmemship?.pack_name}
-                      </option>
-                    ))}
-                  </CustomInput>
+                  ></Input>
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Start Date</Label>
                   <Input
-                    // type="date"
                     type="dd/mm/yyyy"
                     name="startDate"
+                    disabled
                     placeholder="dd/mm/yyyy"
                     value={this.state.startDate}
                     onChange={this.changeHandler}
@@ -221,7 +206,6 @@ export default class EditMembership extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Expiry Date</Label>
                   <Input
-                    // type="date"
                     type="dd/mm/yyyy"
                     name="expdate"
                     disabled
@@ -242,7 +226,6 @@ export default class EditMembership extends Component {
                         type="radio"
                         name="status"
                         value="Active"
-                        // checked="checked"
                       />
                       <span style={{ marginRight: "20px" }}>Active</span>
                       <input
