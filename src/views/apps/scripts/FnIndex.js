@@ -40,9 +40,6 @@ class FnIndex extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
@@ -58,40 +55,13 @@ class FnIndex extends React.Component {
         },
       },
 
-      // {
-      //   headerName: "Status",
-      //   field: "status",
-      //   filter: true,
-      //   width: 250,
-      //   cellRendererFramework: (params) => {
-      //     return params.value === "Active" ? (
-      //       <div className="badge badge-pill badge-success">
-      //         {params.data.status}
-      //       </div>
-      //     ) : params.value === "Deactive" ? (
-      //       <div className="badge badge-pill badge-warning">
-      //         {params.data.status}
-      //       </div>
-      //     ) : null;
-      //   },
-      // },
-
       {
         headerName: "Actions",
         field: "sortorder",
         width: 250,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Eye
-                className="mr-50"
-                color="green"
-                size={20}
-                onClick={() =>
-                  history.push(`/app/size/viewSize/${params.data._id}`)
-                }
-              /> */}
               <Route
                 render={({ history }) => (
                   <Edit
@@ -111,9 +81,7 @@ class FnIndex extends React.Component {
                 size={20}
                 color="red"
                 onClick={() => {
-                  // let selectedData = this.gridApi.getSelectedRows();
                   this.runthisfunction(params.data._id);
-                  // this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
             </div>

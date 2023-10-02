@@ -15,7 +15,6 @@ import axiosConfig from "../../../../axiosConfig";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
 import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
@@ -40,17 +39,11 @@ class TradingViewCharts extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 100,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Charts",
         field: "chart_type",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -62,9 +55,7 @@ class TradingViewCharts extends React.Component {
       {
         headerName: "Title",
         field: "title",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -76,9 +67,7 @@ class TradingViewCharts extends React.Component {
       {
         headerName: "Descripiton",
         field: "desc",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -218,18 +207,6 @@ class TradingViewCharts extends React.Component {
                 <h1 sm="6" className="float-left">
                   Trading View Charts List
                 </h1>
-              </Col>
-              <Col>
-                <Route
-                  render={({ history }) => (
-                    <Button
-                      className="btn btn-success float-right"
-                      onClick={() => history.push("/app/explore/Trupee/addTVC")}
-                    >
-                      Add
-                    </Button>
-                  )}
-                />
               </Col>
             </Row>
             <CardBody>

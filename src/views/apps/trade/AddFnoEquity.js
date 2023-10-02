@@ -127,8 +127,6 @@ export class AddFnoEquity extends Component {
                     name="fnoequty_scrpt_name"
                     required
                     defaultValue=""
-                    // valid={this.state.fnoequty_scrpt_name ? true : false}
-                    // invalid={this.state.fnoequty_scrpt_name ? false : true}
                     value={this.state.fnoequty_scrpt_name}
                     onChange={this.changeHandler}
                   >

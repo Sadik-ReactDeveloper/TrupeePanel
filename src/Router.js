@@ -545,10 +545,10 @@ class AppRouter extends React.Component {
               component={ViewFeedback}
             />
             {/* Premium */}
-            <AppRoute
+            {/* <AppRoute
               path="/app/premium/paidServiceList"
               component={PaidServiceList}
-            />
+            /> */}
             <AppRoute
               path="/app/premium/addPaidService"
               component={AddPaidService}

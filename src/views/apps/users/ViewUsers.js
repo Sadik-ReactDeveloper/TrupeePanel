@@ -12,7 +12,6 @@ import { history } from "../../../history";
 import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import "../../../assets/scss/pages/users.scss";
 import axiosConfig from "../../../axiosConfig";
-import axios from "axios";
 import { Route } from "react-router-dom";
 class ViewUsers extends React.Component {
   constructor(props) {
@@ -79,25 +78,7 @@ class ViewUsers extends React.Component {
               <Row className="ml-4">
                 <Col sm="9" md="12" lg="12">
                   <div className="users-page-view-table">
-                    <div className="d-flex user-info">
-                      {/* <div className="user-info-title font-weight-bold">
-                        Users Name
-                      </div>
-                      <div className="text-truncate">
-                        <span>
-                          {this.state.data.firstname} {this.state.data.lastname}
-                        </span>
-                      </div> */}
-
-                      {/* </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                       Last Name
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.userid?.lastname}</span>
-                      </div> */}
-                    </div>
+                    <div className="d-flex user-info"></div>
                     <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Mobile
@@ -106,54 +87,6 @@ class ViewUsers extends React.Component {
                         <span>{this.state.data.mobile}</span>
                       </div>
                     </div>
-                    {/* <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Email
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.email}</span>
-                      </div>
-                    </div> */}
-                    {/* <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Date Of Birth
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.dob}</span>
-                      </div>
-                    </div> */}
-                    {/* <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Gender
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.gender}</span>
-                      </div>
-                    </div> */}
-                    {/* <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Membership Plan
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.planId?.pack_name}</span>
-                      </div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Start Date
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.date}</span>
-                      </div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        Expiry Date
-                      </div>
-                      <div className="text-truncate">
-                        <span>{this.state.data.expdate}</span>
-                      </div>
-                    </div> */}
                     <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Status

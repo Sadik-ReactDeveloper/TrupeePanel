@@ -38,7 +38,7 @@ const navigationConfig = [
   },
   {
     id: "expDateList",
-    title: "Trade Expiry Date",
+    title: "TRADE EXPRITY DATE",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
@@ -81,7 +81,7 @@ const navigationConfig = [
   },
   {
     id: "usersList",
-    title: "USER LIST",
+    title: "User List",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
@@ -162,14 +162,14 @@ const navigationConfig = [
     groupTitle: "App Page Setup",
   },
 
-  {
-    id: "paidServiceList",
-    title: "Premium Service ",
-    type: "item",
-    icon: <Icon.ArrowRight size={12} />,
-    permissions: ["admin", "editor"],
-    navLink: "/app/premium/paidServiceList",
-  },
+  // {
+  //   id: "paidServiceList",
+  //   title: "Premium Service ",
+  //   type: "item",
+  //   icon: <Icon.ArrowRight size={12} />,
+  //   permissions: ["admin", "editor"],
+  //   navLink: "/app/premium/paidServiceList",
+  // },
   // {
   //   id: "userSpreedSheet",
   //   title: "User Spreed Sheet ",
@@ -181,7 +181,7 @@ const navigationConfig = [
   // },
   {
     id: "faqList",
-    title: "FAQ",
+    title: "Faq",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],

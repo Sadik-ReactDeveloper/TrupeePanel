@@ -65,7 +65,7 @@ class UsersList extends React.Component {
       },
 
       {
-        headerName: "WaslletID",
+        headerName: "WalletId",
         field: "walletid",
         width: 150,
         cellRendererFramework: (params) => {
@@ -76,19 +76,6 @@ class UsersList extends React.Component {
           );
         },
       },
-
-      // {
-      //   headerName: "Verification",
-      //   field: "userverified",
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         <span>{params.data.userverified}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
         headerName: "Amount",
         field: "amount",
@@ -101,32 +88,6 @@ class UsersList extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "Membership plan",
-      //   field: "pack_name",
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         <span>{params.data.planId?.pack_name}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
-      // {
-      //   headerName: "Start Date",
-      //   field: "date",
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         {/* <span>{moment(params.data.createdAt).format("ll")} </span> */}
-      //         <span>{params.data.date}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
-
       {
         headerName: "Status",
         field: "status",

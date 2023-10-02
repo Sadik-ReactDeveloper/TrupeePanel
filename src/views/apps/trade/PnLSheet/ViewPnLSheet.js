@@ -2,22 +2,17 @@
 import React, { Component } from "react";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardBody,
   Row,
   Col,
   Form,
   Label,
   Input,
-  CustomInput,
   Button,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
 import axiosConfig from "../../../../axiosConfig";
-// import { history } from "../../../../history";
-import swal from "sweetalert";
 import { Route } from "react-router-dom";
 
 export default class PnLViewSheet extends Component {
@@ -39,10 +34,7 @@ export default class PnLViewSheet extends Component {
     axiosConfig
       .get(`/admin/getonePnlSheet/${id}`)
       .then((response) => {
-        console.log(response.data.data);
         this.setState({
-          //   title: response.data.data.title,
-          //   desc: response.data.data.desc,
           image: response.data.data.pnlimg[0],
           userMobile: response.data.data.userId?.mobile,
           fullName:
@@ -84,7 +76,7 @@ export default class PnLViewSheet extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                View PnLSheet
+                View P&LSheet
               </h1>
             </Col>
             <Col>
@@ -109,8 +101,8 @@ export default class PnLViewSheet extends Component {
                     required
                     type="text"
                     disabled
-                    name="fullName"
-                    value={this.state.fullName}
+                    name="userName"
+                    value={this.state.userName}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
@@ -138,8 +130,7 @@ export default class PnLViewSheet extends Component {
                   <img
                     src={this.state.image}
                     alt="no image"
-                    // width="100%"
-                    // height="100%"
+                    style={{ width: "200px" }}
                   />
                 </Col>
               </Row>

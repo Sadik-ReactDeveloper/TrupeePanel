@@ -8,6 +8,9 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
+  Row,
+  Col,
+  Label,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
 import { AgGridReact } from "ag-grid-react";
@@ -218,11 +221,14 @@ class MembershipList extends React.Component {
   membershipDataList = () => {
     axiosConfig.get("/admin/allmembership").then((response) => {
       const rowData = response.data.data;
-      console.log(rowData);
+      // console.log(rowData);
       this.setState({ rowData });
     });
   };
 
+  changeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   runthisfunction(id) {
     swal(
       `Do You Want To Delete Permanently`,
@@ -283,25 +289,38 @@ class MembershipList extends React.Component {
         />
 
         <Card className="overflow-hidden agGrid-card">
-          {/* <Row className="m-2">
-                <Col>
-                  <h1 sm="6" className="float-left">
-                   Membership List
-                  </h1>
-                </Col>
-                <Col className="pt-4">
-                  <Route
-                    render={({ history }) => (
-                      <Button
-                        className=" btn btn-success float-right"
-                        onClick={() => history.push("/app/membership/AddMembership")}
-                      >
-                        Add Membership
-                      </Button>
-                    )}
-                  />
-                </Col>
-              </Row> */}
+          <Row className="m-2">
+            <Col lg="2" md="2" sm="2" className="">
+              Filter Plan
+            </Col>
+            <Col lg="4" md="4" sm="4" className="">
+              <Input
+                type="select"
+                name="plan"
+                required
+                // value={this.state.data.gender}
+                onChange={this.changeHandler}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select Plan
+                </option>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
+              </Input>
+            </Col>
+            <Col lg="4" md="3" sm="6" className="">
+              <Button
+                className="float-right btn btn-success"
+                // onClick={(e) => this.submitHandler(e)}
+              >
+                Filter Data
+              </Button>
+            </Col>
+            {/* <Col sm="6">
+              <h1 className="float-left">Membership List</h1>
+            </Col> */}
+          </Row>
           <CardBody className="py-0">
             {this.state.rowData === null ? null : (
               <div className="ag-theme-material w-100 my-2 ag-grid-table">

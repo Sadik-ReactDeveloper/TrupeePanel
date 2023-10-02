@@ -46,7 +46,7 @@ class PnLSheetList extends React.Component {
       {
         headerName: "P&L Image",
         field: "pnlimg",
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="">
@@ -73,7 +73,7 @@ class PnLSheetList extends React.Component {
       {
         headerName: "User Name",
         field: "firstname",
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex  align-items-center cursor-pointer">
@@ -88,7 +88,7 @@ class PnLSheetList extends React.Component {
       {
         headerName: "Email Id",
         field: "email",
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -100,7 +100,7 @@ class PnLSheetList extends React.Component {
       {
         headerName: "Moblie",
         field: "mobile",
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">

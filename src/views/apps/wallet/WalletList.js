@@ -34,20 +34,14 @@ class Wallet extends React.Component {
     },
 
     columnDefs: [
-      
       {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 150,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
-     
-      
-     
+
       {
         headerName: "First Name",
         field: "first_name",
@@ -61,7 +55,7 @@ class Wallet extends React.Component {
           );
         },
       },
-    
+
       {
         headerName: "Last Name",
         field: "last_name",
@@ -75,7 +69,7 @@ class Wallet extends React.Component {
           );
         },
       },
-      
+
       {
         headerName: "Wallet Balance",
         field: "wallet_balance",
@@ -102,7 +96,6 @@ class Wallet extends React.Component {
           );
         },
       },
-  
 
       // {
       //   headerName: "Status",
@@ -125,7 +118,7 @@ class Wallet extends React.Component {
       {
         headerName: "Actions",
         field: "sortorder",
-     
+
         // field: "transactions",
         width: 150,
         cellRendererFramework: (params) => {
@@ -196,10 +189,7 @@ class Wallet extends React.Component {
       console.log(rowData),
       (
         <Row className="app-user-list">
-          <Col sm="12">
-            
-            
-          </Col>
+          <Col sm="12"></Col>
           <Col sm="12">
             <Card>
               <Row className="m-2">
