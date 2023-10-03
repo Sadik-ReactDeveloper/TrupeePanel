@@ -15,7 +15,12 @@ import axiosConfig from "../../../axiosConfig";
 import { Route } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import swal from "sweetalert";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  ContentState,
+  EditorState,
+  convertFromHTML,
+  convertToRaw,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -35,10 +40,16 @@ export default class EditFaq extends Component {
     axiosConfig
       .get(`/admin/getoneFaq/${id}`)
       .then((response) => {
-        console.log(response.data.data.desc);
+        const description = response.data.data.desc;
+        const contentState = ContentState.createFromBlockArray(
+          convertFromHTML(description)
+        );
+        // Create EditorState with ContentState
+        const editorState = EditorState.createWithContent(contentState);
         this.setState({
           title: response.data.data.title,
-          desc: response.data.data.desc,
+          desc: description,
+          editorState: editorState,
         });
       })
       .catch((error) => {

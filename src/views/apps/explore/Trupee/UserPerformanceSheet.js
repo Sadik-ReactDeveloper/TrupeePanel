@@ -11,14 +11,12 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import { Route } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
 import axiosConfig from "../../../../axiosConfig";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import swal from "sweetalert";
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
 
 class UserPerformanceSheet extends React.Component {
   state = {
@@ -39,17 +37,11 @@ class UserPerformanceSheet extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 100,
-        // filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "User Name",
         field: "firstname",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -63,9 +55,7 @@ class UserPerformanceSheet extends React.Component {
       {
         headerName: "Email ",
         field: "email",
-        // filter: true,
         width: 180,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -77,13 +67,10 @@ class UserPerformanceSheet extends React.Component {
       {
         headerName: "Plan Month",
         field: "month",
-        // filter: true,
         width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <span>{params.data.plan[0]?.pack_name}</span> */}
               <span>{params.data.plan?.month}</span>
             </div>
           );
@@ -93,67 +80,20 @@ class UserPerformanceSheet extends React.Component {
       {
         headerName: "Date",
         field: "createdAt",
-        // filter: true,
         width: 180,
-        // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.createdAt}</span>
+              <span>{new Date(params.data.createdAt).toLocaleString()}</span>
             </div>
           );
         },
       },
-      //   {
-      //     headerName: "Start Date",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 200,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Expiry Date",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 200,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Status",
-      //     field: "completed",
-      //     // filter: completed,
-      //     width: 200,
-      //     cellRendererFramework: (params) => {
-      //       return params.value === "Active" ? (
-      //         <div className="badge badge-pill badge-success">
-      //           {params.data.completed}
-      //         </div>
-      //       ) : params.value === "Inactive" ? (
-      //         <div className="badge badge-pill badge-warning">
-      //           {params.data.completed}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
+
       {
         headerName: "Actions",
         field: "sortorder",
         width: 150,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">

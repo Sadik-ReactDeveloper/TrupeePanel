@@ -216,16 +216,27 @@ class MembershipList extends React.Component {
     ],
   };
   componentDidMount() {
+    //43.205.127.63:5000/admin/memberByType/Free
+    // http:
     this.membershipDataList();
   }
   membershipDataList = () => {
     axiosConfig.get("/admin/allmembership").then((response) => {
       const rowData = response.data.data;
-      // console.log(rowData);
       this.setState({ rowData });
     });
   };
-
+  submitHandler = (e) => {
+    axiosConfig
+      .get(`/admin/memberByType/${this.state.plan}`)
+      .then((resp) => {
+        this.setState({ rowData: resp.data.data });
+        console.log(resp.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -298,7 +309,6 @@ class MembershipList extends React.Component {
                 type="select"
                 name="plan"
                 required
-                // value={this.state.data.gender}
                 onChange={this.changeHandler}
                 defaultValue=""
               >
@@ -312,7 +322,7 @@ class MembershipList extends React.Component {
             <Col lg="4" md="3" sm="6" className="">
               <Button
                 className="float-right btn btn-success"
-                // onClick={(e) => this.submitHandler(e)}
+                onClick={(e) => this.submitHandler(e)}
               >
                 Filter Data
               </Button>

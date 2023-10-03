@@ -34,12 +34,12 @@ export default class PnLViewSheet extends Component {
     axiosConfig
       .get(`/admin/getonePnlSheet/${id}`)
       .then((response) => {
+        const resp = response.data.data;
         this.setState({
-          image: response.data.data.pnlimg[0],
-          userMobile: response.data.data.userId?.mobile,
-          fullName:
-            response.data.data.userId?.firstname +
-            response.data.data.userId?.lastname,
+          image: resp?.pnlimg[0],
+          userMobile: resp?.userId?.mobile,
+          email: resp?.userId?.email,
+          fullName: resp?.userId?.firstname + resp.userId?.lastname,
         });
       })
       .catch((error) => {
@@ -95,44 +95,54 @@ export default class PnLViewSheet extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                <Col lg="4" md="6" sm="6" className="mb-2">
-                  <Label>UserName</Label>
-                  <Input
-                    required
-                    type="text"
-                    disabled
-                    name="userName"
-                    value={this.state.userName}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col>
-                <Col lg="4" md="6" sm="6" className="mb-2">
-                  <Label>Mobile</Label>
-                  <Input
-                    type="text"
-                    disabled
-                    name="userMobile"
-                    value={this.state.userMobile}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col>
-                <Col lg="4" md="6" sm="6" className="mb-2">
-                  <Label>Email</Label>
-                  <Input
-                    type="email"
-                    disabled
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col>
-                <Col lg="12" md="12" sm="6" className="mb-2">
-                  <img
-                    src={this.state.image}
-                    alt="no image"
-                    style={{ width: "200px" }}
-                  />
-                </Col>
+                {this.state.fullName != NaN ? (
+                  <Col lg="6" md="6" sm="6" className="mb-2">
+                    <Label>UserName</Label>
+                    <Input
+                      required
+                      type="text"
+                      disabled
+                      name="fullName"
+                      value={this.state.fullName}
+                      onChange={this.changeHandler}
+                    ></Input>
+                  </Col>
+                ) : null}
+
+                {this.state.userMobile ? (
+                  <Col lg="6" md="6" sm="6" className="mb-2">
+                    <Label>Mobile</Label>
+                    <Input
+                      type="text"
+                      disabled
+                      name="userMobile"
+                      value={this.state.userMobile}
+                      onChange={this.changeHandler}
+                    ></Input>
+                  </Col>
+                ) : null}
+
+                {this.state.email ? (
+                  <Col lg="6" md="6" sm="6" className="mb-2">
+                    <Label>Email</Label>
+                    <Input
+                      type="email"
+                      disabled
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                    ></Input>
+                  </Col>
+                ) : null}
+                {this.state.image ? (
+                  <Col lg="6" md="6" sm="6" className="mb-2">
+                    <img
+                      src={this.state.image}
+                      alt="no image"
+                      style={{ width: "200px" }}
+                    />
+                  </Col>
+                ) : null}
               </Row>
             </Form>
           </CardBody>

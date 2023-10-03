@@ -105,7 +105,7 @@ export default class EditDate extends Component {
                   <Label>Expiry Date</Label>
                   <Input
                     required
-                    type="dd/mm/yyyy"
+                    type="date"
                     name="expDate"
                     placeholder="dd/mm/yyyy"
                     value={this.state.expDate}

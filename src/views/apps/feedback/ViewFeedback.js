@@ -1,28 +1,18 @@
 import React, { Component } from "react";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardBody,
   Row,
   Col,
   Form,
   Label,
   Input,
-  CustomInput,
   Button,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../../history";
-import swal from "sweetalert";
 import { Route } from "react-router-dom";
-// import { EditorState, convertToRaw } from "draft-js";
-// import { Editor } from "react-draft-wysiwyg";
-// import draftToHtml from "draftjs-to-html";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-// import "../../../../assets/scss/plugins/extensions/editor.scss";
 export default class ViewFeedback extends Component {
   constructor(props) {
     super(props);
@@ -36,12 +26,7 @@ export default class ViewFeedback extends Component {
       desc: "",
     };
   }
-  //   onEditorStateChange = (editorState) => {
-  //     this.setState({
-  //       editorState,
-  //       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-  //     });
-  //   };
+
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig

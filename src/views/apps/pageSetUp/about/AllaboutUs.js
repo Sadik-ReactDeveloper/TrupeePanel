@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 import { Route } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
-// import { history } from "../../../history";
 import axiosConfig from "../../../../axiosConfig";
 import { ChevronDown, Edit, Trash2 } from "react-feather";
 import { ContextLayout } from "../../../../utility/context/Layout";
@@ -39,14 +38,11 @@ class AllaboutUs extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Descriptions",
         field: "desc",
-        width: 200,
+        width: 250,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
@@ -55,28 +51,11 @@ class AllaboutUs extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "Status",
-      //   field: "userverified",
-      //   // filter: true,
-      //   width: 150,
-      //   cellRendererFramework: (params) => {
-      //     return params.value === "Active" ? (
-      //       <div className="badge badge-pill badge-success">
-      //         {params.data.userverified}
-      //       </div>
-      //     ) : params.value === "Inactive" ? (
-      //       <div className="badge badge-pill badge-warning">
-      //         {params.data.userverified}
-      //       </div>
-      //     ) : null;
-      //   },
-      // },
+
       {
         headerName: "Actions",
         field: "sortorder",
         width: 200,
-        // pinned: window.innerWidth > 992 ? "right" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -175,9 +154,7 @@ class AllaboutUs extends React.Component {
         <Card className="overflow-hidden agGrid-card">
           <Row className="m-1">
             <Col>
-              <h1 col-sm-6 className="float-left">
-                AboutUs List
-              </h1>
+              <h1 className="float-left">AboutUs List</h1>
             </Col>
           </Row>
           <Col className="pt-4">

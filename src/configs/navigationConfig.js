@@ -243,7 +243,7 @@ const navigationConfig = [
   },
   {
     id: "trupeeUniversity",
-    title: "Tradeking University List ",
+    title: "Tradlogy University List ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],

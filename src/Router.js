@@ -141,9 +141,6 @@ const FnoIndexList = lazy(() => import("./views/apps/trade/FnoIndexList"));
 const AddFnoIndex = lazy(() => import("./views/apps/trade/AddFnoIndex"));
 const EditFnoIndex = lazy(() => import("./views/apps/trade/EditFnoIndex"));
 
-// const BankNiftyList = lazy(() => import("./views/apps/trade/BankNiftyList"));
-
-// const NiftyList = lazy(() => import("./views/apps/trade/NiftyList"));
 const GeneralNotifList = lazy(() =>
   import("./views/apps/trade/GeneralNotifList")
 );

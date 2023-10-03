@@ -438,14 +438,6 @@ class AllTradeList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Eye
-                className="mr-50"
-                color="green"
-                size={20}
-                onClick={() =>
-                  history.push(`/app/size/viewSize/${params.data._id}`)
-                }
-              /> */}
               <Trash2
                 size={20}
                 color="red"

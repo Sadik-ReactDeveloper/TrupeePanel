@@ -16,7 +16,12 @@ import { Route, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import EmojiPicker, { EmojiStyle, Emoji } from "emoji-picker-react";
 import "react-toastify/dist/ReactToastify.css";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  ContentState,
+  EditorState,
+  convertFromHTML,
+  convertToRaw,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -26,11 +31,12 @@ function EditNotification() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [desc, setDesc] = useState("");
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const param = useParams();
   console.log(param.id);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
+  // const [editorState, setEditorState] = useState(() =>
+  //   EditorState.createEmpty()
+  // );
   const onEditorStateChange = (editorState) => {
     return setEditorState(editorState);
   };
@@ -39,13 +45,18 @@ function EditNotification() {
     setSelectedEmoji(emojiData.unified);
   }
   useEffect(() => {
-    // 35.154.252.162:5000/admin/getone_notification/64b7780a017c3f51775db992
     axiosConfig
       .get(`/admin/getone_notification/${param.id}`)
       .then((response) => {
+        const description = response.data.data.desc;
         setTitle(response.data.data.title);
         setSelectedEmoji(response.data.data.emoji);
         setDesc(response.data.data.desc);
+        const contentState = ContentState.createFromBlockArray(
+          convertFromHTML(description)
+        );
+        const editorState = EditorState.createWithContent(contentState);
+        setEditorState(editorState);
         setSelectedImage(response.data.data.img[0]);
         console.log(response.data.data.emoji);
       })

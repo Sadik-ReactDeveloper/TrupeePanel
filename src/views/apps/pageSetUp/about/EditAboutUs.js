@@ -11,46 +11,61 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
-// import { data } from "jquery";
-// import swal from "sweetalert";
+
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 import { Route } from "react-router-dom";
-// import { history } from "../../../history";
 import axiosConfig from "../../../../axiosConfig";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  convertFromHTML,
+  convertToRaw,
+  ContentState,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../assets/scss/plugins/extensions/editor.scss";
+import swal from "sweetalert";
 export default class EditAboutUs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dealer: "",
       desc: "",
+      editorState: EditorState.createEmpty(),
     };
   }
+
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
       .get(`/admin/getone_aboutus/${id}`)
       .then((response) => {
-        console.log(response);
-        this.setState({
-          desc: response.data.data.desc,
+        const description = response.data.data.desc;
 
-          //   dealer: response.data.data.dealer,
+        const contentState = ContentState.createFromBlockArray(
+          convertFromHTML(description)
+        );
+        // Create EditorState with ContentState
+        const editorState = EditorState.createWithContent(contentState);
+        this.setState({
+          desc: description,
+          editorState: editorState,
         });
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   }
+
   onEditorStateChange = (editorState) => {
     this.setState({
       editorState,
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
   };
+
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -61,8 +76,7 @@ export default class EditAboutUs extends Component {
       .post(`/admin/edit_aboutus/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        // swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push(`/app/pageSetUp/about/AllaboutUs`);
+        swal("Success!", "Submitted SuccessFull!", "success");
       })
       .catch((error) => {
         console.log(error.response);
@@ -111,15 +125,12 @@ export default class EditAboutUs extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-              {/* <Col lg="12" md="12" sm="12" className="mb-2">
-                <Label>Descriptions</Label>
-                <Input
-                  type="textarea"
-                  name="desc"
-                  value={this.state.desc}
-                  onChange={this.changeHandler}
-                ></Input>
-              </Col> */}
+              {/* <Editor
+                editorState={this.state.editorState}
+                onEditorStateChange={this.onEditorStateChange}
+                // ...other props
+              /> */}
+
               <Col lg="6" md="6" sm="6" className="mb-2">
                 <Label>Descripition</Label>
                 <Editor
