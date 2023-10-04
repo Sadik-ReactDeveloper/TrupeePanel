@@ -14,7 +14,12 @@ import {
 import axiosConfig from "../../../../axiosConfig";
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  ContentState,
+  EditorState,
+  convertFromHTML,
+  convertToRaw,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -43,6 +48,18 @@ export default class AddStartUp extends Component {
     axiosConfig
       .get(`/admin/getone_startup/${id}`)
       .then((response) => {
+        const description = response.data.data.desc;
+
+        const contentState = ContentState.createFromBlockArray(
+          convertFromHTML(description)
+        );
+        // Create EditorState with ContentState
+        const editorState = EditorState.createWithContent(contentState);
+        this.setState({
+          desc: description,
+          editorState: editorState,
+        });
+
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,

@@ -86,7 +86,7 @@ class TrupeeUniversity extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.createdAt}</span>
+              <span>{new Date(params.data.createdAt).toLocaleString()}</span>
             </div>
           );
         },
