@@ -327,9 +327,7 @@ class MembershipList extends React.Component {
                 Filter Data
               </Button>
             </Col>
-            {/* <Col sm="6">
-              <h1 className="float-left">Membership List</h1>
-            </Col> */}
+         
           </Row>
           <CardBody className="py-0">
             {this.state.rowData === null ? null : (

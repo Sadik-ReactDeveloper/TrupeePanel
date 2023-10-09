@@ -41,7 +41,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Name By",
-        field: "firstname",
+        field: "refer_from_id.firstname",
         width: 180,
         cellRendererFramework: (params) => {
           return (
@@ -53,7 +53,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Mobile By",
-        field: "mobile",
+        field: "refer_to_id.mobile",
         width: 150,
         cellRendererFramework: (params) => {
           return (
@@ -65,7 +65,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "MRP Amount",
-        field: "amount",
+        field: "membership.mrp_price",
         width: 200,
         cellRendererFramework: (params) => {
           return (
@@ -78,7 +78,7 @@ class RefferEarn extends React.Component {
 
       {
         headerName: "Refferal Wallet Amount",
-        field: "amount",
+        field: "refer_to_id.amount",
         width: 220,
         cellRendererFramework: (params) => {
           return (
@@ -91,7 +91,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Membership plan",
-        field: "pack_name",
+        field: "membership.pack_name",
         width: 180,
         cellRendererFramework: (params) => {
           return (
@@ -103,7 +103,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Refferal Code",
-        field: "refral_Code",
+        field: "refer_from_id.refral_Code",
         width: 150,
         cellRendererFramework: (params) => {
           return (
@@ -115,7 +115,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Refferal Name To",
-        field: "firstname",
+        field: "refer_to_id.firstname",
         width: 200,
         cellRendererFramework: (params) => {
           return (
@@ -127,7 +127,7 @@ class RefferEarn extends React.Component {
       },
       {
         headerName: "Mobile To",
-        field: "mobile",
+        field: "refer_to_id.mobile",
         width: 120,
         cellRendererFramework: (params) => {
           return (
@@ -157,30 +157,13 @@ class RefferEarn extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <span>{params.data.expdate}</span> */}
               <span>{moment(params.data.updatedAt).format("ll")} </span>
             </div>
           );
         },
       },
 
-      // {
-      //   headerName: "Status",
-      //   field: "status",
-      //   filter: true,
-      //   width: 100,
-      //   cellRendererFramework: (params) => {
-      //     return params.value === "Success" ? (
-      //       <div className="badge badge-pill badge-success">
-      //         {params.data.status}
-      //       </div>
-      //     ) : params.value === "Pending" ? (
-      //       <div className="badge badge-pill badge-warning">
-      //         {params.data.status}
-      //       </div>
-      //     ) : null;
-      //   },
-      // },
+    
       {
         headerName: "Actions",
         field: "sortorder",
@@ -264,7 +247,7 @@ class RefferEarn extends React.Component {
           <Card>
             <Row className="m-2">
               <Col>
-                <h1 col-sm-6 className="float-left">
+                <h1 col-sm-6="true" className="float-left">
                   Refferal&Earn List
                 </h1>
               </Col>

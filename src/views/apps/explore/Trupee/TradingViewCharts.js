@@ -16,6 +16,7 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
 import { history } from "../../../../history";
+import ReactHtmlParser from "react-html-parser";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
@@ -71,7 +72,7 @@ class TradingViewCharts extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
+              <span>{ReactHtmlParser(params.data.desc)}</span>
             </div>
           );
         },
@@ -208,6 +209,19 @@ class TradingViewCharts extends React.Component {
                   Trading View Charts List
                 </h1>
               </Col>
+              <Col className="pt-4">
+            <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-success float-right"
+                    onClick={() =>
+                      history.push("/app/explore/Trupee/AddTradingViewCharts")}
+                  >
+                    Add TradeView
+                    </Button>
+                )}
+              />
+          </Col>
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (

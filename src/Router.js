@@ -244,6 +244,9 @@ const AddOppor = lazy(() => import("./views/apps/explore/Trupee/AddOppor"));
 const TradingViewCharts = lazy(() =>
   import("./views/apps/explore/Trupee/TradingViewCharts")
 );
+const AddTradingViewCharts = lazy(() =>
+  import("./views/apps/explore/Trupee/AddTradingViewCharts")
+);
 const AddTVC = lazy(() => import("./views/apps/explore/Trupee/AddTVC"));
 const EditTVC = lazy(() => import("./views/apps/explore/Trupee/EditTVC"));
 // const RefferEarn = lazy(() => import("./views/apps/explore/Trupee/RefferEarn"));
@@ -748,6 +751,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/explore/Trupee/tradingViewCharts"
               component={TradingViewCharts}
+            />
+            <AppRoute
+              path="/app/explore/Trupee/AddTradingViewCharts"
+              component={AddTradingViewCharts}
             />
             <AppRoute
               path="/app/explore/Trupee/performanceSheet"

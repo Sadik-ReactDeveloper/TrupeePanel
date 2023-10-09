@@ -71,23 +71,36 @@ class PnLSheetList extends React.Component {
       },
 
       {
-        headerName: "User Name",
-        field: "firstname",
+        headerName: "First Name",
+        field: "userId.firstname",
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex  align-items-center cursor-pointer">
               <span>
-                {params.data.userId?.firstname} {params.data.userId?.lastname}
+                {params.data.userId?.firstname}
               </span>
             </div>
           );
         },
       },
-
       {
+        headerName: "Last Name",
+        field: "userId.lastname",
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>
+                {params.data.userId?.lastname}
+              </span>
+            </div>
+          );
+        },
+      },
+{
         headerName: "Email Id",
-        field: "email",
+        field: "userId.email",
         width: 150,
         cellRendererFramework: (params) => {
           return (
@@ -99,7 +112,7 @@ class PnLSheetList extends React.Component {
       },
       {
         headerName: "Moblie",
-        field: "mobile",
+        field: "userId.mobile",
         width: 150,
         cellRendererFramework: (params) => {
           return (

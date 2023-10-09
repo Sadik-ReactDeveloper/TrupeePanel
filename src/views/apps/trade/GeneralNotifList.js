@@ -72,7 +72,7 @@ class GeneralNotifList extends React.Component {
         },
       },
       {
-        headerName: "Description ",
+        headerName: "Description",
         field: "desc",
         filter: true,
         width: 300,
@@ -105,8 +105,7 @@ class GeneralNotifList extends React.Component {
           );
         },
       },
-
-      {
+ {
         headerName: "Actions",
         field: "sortorder",
         width: 200,
@@ -178,6 +177,7 @@ class GeneralNotifList extends React.Component {
     });
   }
   onGridReady = (params) => {
+    console.log(params)
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -186,6 +186,7 @@ class GeneralNotifList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
+
 
   updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);

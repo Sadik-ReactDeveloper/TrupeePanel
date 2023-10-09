@@ -45,7 +45,7 @@ class FnoIndexList extends React.Component {
 
       {
         headerName: "Script Name",
-        field: "scriptName",
+        field: "fnoindex_scrpt_name.scriptName",
         width: 140,
         cellRendererFramework: (params) => {
           return (
@@ -264,7 +264,7 @@ class FnoIndexList extends React.Component {
       },
       {
         headerName: "Expiry Date ",
-        field: "expDate",
+        field: "expiryDate?.expDate",
         width: 140,
         cellRendererFramework: (params) => {
           return (

@@ -11,6 +11,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
+import moment from 'moment';
 import { AgGridReact } from "ag-grid-react";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { ChevronDown, Trash2, Edit } from "react-feather";
@@ -37,17 +38,19 @@ class UserPerformanceSheet extends React.Component {
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
         width: 100,
+        filter: true,
       },
       {
-        headerName: "User Name",
-        field: "firstname",
+        headerName: "FirstName",
+        field: "userId.firstname",
+        filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div >
               <span>
-                {params.data.userId?.firstname} {params.data.userId?.lastname}
-              </span>
+                {params.data.userId?.firstname}
+               </span>
             </div>
           );
         },
@@ -55,10 +58,11 @@ class UserPerformanceSheet extends React.Component {
       {
         headerName: "Email ",
         field: "email",
+        filter: true,
         width: 180,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div>
               <span>{params.data.email}</span>
             </div>
           );
@@ -70,21 +74,20 @@ class UserPerformanceSheet extends React.Component {
         width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div>
               <span>{params.data.plan?.month}</span>
             </div>
           );
         },
       },
-
-      {
+ {
         headerName: "Date",
         field: "createdAt",
-        width: 180,
+        width: 250,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{new Date(params.data.createdAt).toLocaleString()}</span>
+            <div className="cursor-pointer">
+              <span>{moment(params.data.createdAt).format('DD-MM-YYYY, h:mm:ss a') }</span>
             </div>
           );
         },
@@ -97,23 +100,7 @@ class UserPerformanceSheet extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
-                render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(
-                        
-                        `/app/about/EditAboutUs/${params.data._id}`
-                      )
-                    }
-                  />
-                )}
-              /> */}
-
-              <Trash2
+     <Trash2
                 className="mr-50"
                 size="25px"
                 color="red"
@@ -129,6 +116,23 @@ class UserPerformanceSheet extends React.Component {
   };
   componentDidMount() {
     this.userperformance();
+  }
+
+   DateFormatter =({ dateString })=> {
+    const formatDate = (inputDateString) => {
+      const date = new Date(inputDateString);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+      const year = date.getFullYear();
+  
+      return `${day}-${month}-${year}`;
+    };
+  
+    const formattedDate = formatDate(dateString);
+  
+    return (
+      <span>{formattedDate}</span>
+    );
   }
   userperformance = () => {
     axiosConfig
